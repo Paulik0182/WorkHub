@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#AC0606</color>
+
+    <!-- bottom nav menu -->
+    <color name="item_icon_tint">#670A20</color>
+    <color name="item_text">#670A20</color>
+    <color name="bnv_default">#059EE4</color>
+
 </resources>

@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">WorkHub</string>
+
+    <!-- bottom nav menu -->
+    <string name="settings">Настройки</string>
+    <string name="my_offer">Предложения</string>
+    <string name="search">Поиск</string>
+    <string name="saved">Сохранено</string>
+    <string name="documents">Документы</string>
+    <string name="profile">Пользователь</string>
+    <string name="notification">Уведомление</string>
+    <string name="more">Больше</string>
+    <string name="close_two_nav">Закрыть</string>
+
+
+    <string name="search_offer_fragment">Search Offer Fragment</string>
+    <string name="save_offer_fragment">Save Offer Fragment</string>
+    <string name="documents_user_fragment">Documents User Fragment</string>
+    <string name="notification_offer_fragment">Notification Offer Fragment</string>
+    <string name="settings_fragment">Settings Fragment</string>
+    <string name="user_profile_fragment">User Profile Fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/my_offer_item"
+        android:icon="@drawable/list_recycler_view_24"
+        android:title="@string/my_offer" />
+
+    <item
+        android:id="@+id/search_item"
+        android:icon="@drawable/baseline_search_24"
+        android:title="@string/search" />
+
+    <item
+        android:id="@+id/saved_item"
+        android:icon="@drawable/sharp_asterisk_24"
+        android:title="@string/saved" />
+
+    <item
+        android:id="@+id/more_item"
+        android:icon="@drawable/ellipsis_24"
+        android:title="@string/more" />
+
+</menu>
