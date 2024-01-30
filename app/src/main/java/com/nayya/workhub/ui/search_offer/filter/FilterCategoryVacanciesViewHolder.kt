@@ -7,7 +7,8 @@ import com.nayya.workhub.R
 import com.nayya.workhub.domain.entity.filter_category.CategoryVacanciesEntity
 
 class FilterCategoryVacanciesViewHolder(
-    initView: View
+    initView: View,
+    val listener: (String, Boolean) -> Unit
 ) : RecyclerView.ViewHolder(initView) {
 
     private val checkBox = initView.findViewById<CheckBox>(R.id.check_box)
@@ -16,8 +17,8 @@ class FilterCategoryVacanciesViewHolder(
         checkBox.text = categoryVacancies.first.categoryName
         checkBox.isChecked = categoryVacancies.second
 
-//        checkBox.setOnCheckedChangeListener { _, isChecked ->
-//            categoryVacancies.isChecked = isChecked
-//        }
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            listener(categoryVacancies.first.id, isChecked)
+        }
     }
 }

@@ -30,4 +30,8 @@ class CategorySelectionInteractorImpl(
             }
         }
     }
+
+    override fun setSelection(id: String, selection: Boolean) {
+        categorySelectionRepo.setSelection(id, selection)
+    }
 }

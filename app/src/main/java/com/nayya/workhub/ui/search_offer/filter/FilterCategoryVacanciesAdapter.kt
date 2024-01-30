@@ -8,7 +8,8 @@ import com.nayya.workhub.R
 import com.nayya.workhub.domain.entity.filter_category.CategoryVacanciesEntity
 
 class FilterCategoryVacanciesAdapter(
-    private var data: List<Pair<CategoryVacanciesEntity, Boolean>> = mutableListOf()
+    private var data: List<Pair<CategoryVacanciesEntity, Boolean>> = mutableListOf(),
+    val listener: (String, Boolean) -> Unit
 ) : RecyclerView.Adapter<FilterCategoryVacanciesViewHolder>() {
 
     fun getSelectedCategories(): List<Pair<CategoryVacanciesEntity, Boolean>> {
@@ -31,7 +32,8 @@ class FilterCategoryVacanciesAdapter(
             LayoutInflater.from(parent.context)
                 .inflate(
                     R.layout.item_check_box, parent, false
-                )
+                ),
+            listener
         )
     }
 

@@ -24,6 +24,7 @@ class FilterCategoryVacanciesFragment : ViewBindingFragment<FragmentFilterCatego
 //        findNavController().currentBackStackEntry?.savedStateHandle ?:
 //        throw IllegalStateException("ViewLifecycleOwner doesn't have a SavedStateHandle")
 //    }
+
     private val savedStateHandle = SavedStateHandle()
 
     private val viewModel: FilterCategoryVacanciesViewModel by lazy {
@@ -53,7 +54,9 @@ class FilterCategoryVacanciesFragment : ViewBindingFragment<FragmentFilterCatego
     private fun initView() {
         recyclerView = binding.categoryVacanciesListRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = FilterCategoryVacanciesAdapter()
+        adapter = FilterCategoryVacanciesAdapter { id, selection ->
+            categorySelectionInteractor.setSelection(id, selection)
+        }
         recyclerView.adapter = adapter
     }
 
