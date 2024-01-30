@@ -14,6 +14,7 @@ import com.nayya.workhub.ui.documents_user.DocumentsUserFragment
 import com.nayya.workhub.ui.notification_offer.NotificationOfferFragment
 import com.nayya.workhub.ui.save_offer.SaveOfferFragment
 import com.nayya.workhub.ui.search_offer.SearchOfferFragment
+import com.nayya.workhub.ui.search_offer.filter.FilterCategoryVacanciesFragment
 import com.nayya.workhub.ui.settings.SettingsFragment
 import com.nayya.workhub.ui.user_profile.UserProfileFragment
 
@@ -29,9 +30,10 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
     DocumentsUserFragment.Controller,
     UserProfileFragment.Controller,
     NotificationOfferFragment.Controller,
-    SettingsFragment.Controller {
+    SettingsFragment.Controller,
+    FilterCategoryVacanciesFragment.Controller {
 
-    private var positionSlaveDeviceBnb = false
+    private var isSlaveBnbVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,26 +121,30 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
         swapFragmentBackStack(fragment)
     }
 
+    override fun openFilterCategoryVacancies() {
+        val fragment = FilterCategoryVacanciesFragment.newInstance()
+        swapFragmentBackStack(fragment)
+    }
+
     private fun movementSlaveDeviceBottomNavBar() {
-        if (!positionSlaveDeviceBnb) {
+        if (!isSlaveBnbVisible) {
             showSlaveDeviceBottomNavigationView()
         } else {
             hideSlaveDeviceBottomNavigationView()
 
-//            if (binding.slaveDeviceBottomNavBar.getVisibility() == View.GONE) {
-//                positionSlaveDeviceBnb = true
-//                binding.slaveDeviceBottomNavBar.setVisibility(View.VISIBLE)
-//                binding.slaveDeviceBottomNavBar.startAnimation(animalSlide(R.anim.slave_device_nav_in))
-//            } else {
-//                positionSlaveDeviceBnb = false
-//                binding.slaveDeviceBottomNavBar.setVisibility(View.GONE)
-//                binding.slaveDeviceBottomNavBar.startAnimation(animalSlide(R.anim.slave_device_nav_out))
-//            }
+//        if (isSlaveBnbVisible) {
+//            binding.bnvLinearLayout.setVisibility(View.GONE)
+//            binding.bnvLinearLayout.startAnimation(animalSlide(R.anim.slave_device_nav_out))
+//        } else {
+//            binding.slaveDeviceBottomNavBar.setVisibility(View.VISIBLE)
+//            binding.bnvLinearLayout.startAnimation(animalSlide(R.anim.slave_device_nav_in))
+//        }
+//        isSlaveBnbVisible = !isSlaveBnbVisible
         }
     }
 
     private fun hideSlaveDeviceBottomNavigationView() {
-        val menu: Menu = binding.rootBottomNavBar.getMenu()
+        val menu: Menu = binding.rootBottomNavBar.menu
         val menuItem = menu.findItem(R.id.more_item)
 
         val translationY = binding.slaveDeviceBottomNavBar.height.toFloat()
@@ -157,7 +163,7 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
 
             }
             .start()
-        positionSlaveDeviceBnb = false
+        isSlaveBnbVisible = false
 
         // Изменение иконки
         menuItem.setIcon(R.drawable.ellipsis_24)
@@ -167,7 +173,7 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
     }
 
     private fun showSlaveDeviceBottomNavigationView() {
-        val menu: Menu = binding.rootBottomNavBar.getMenu()
+        val menu: Menu = binding.rootBottomNavBar.menu
         val menuItem = menu.findItem(R.id.more_item)
 
         binding.slaveDeviceBottomNavBar.animate()
@@ -189,7 +195,7 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
             .setDuration(300)
             .start()
 
-        positionSlaveDeviceBnb = true
+        isSlaveBnbVisible = true
 
         // Изменение иконки
         menuItem.setIcon(R.drawable.close_nav_24)

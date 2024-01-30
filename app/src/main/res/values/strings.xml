@@ -12,6 +12,9 @@
     <string name="more">Больше</string>
     <string name="close_two_nav">Закрыть</string>
 
+    <!-- bottom  -->
+    <string name="filter_category_bottom">Фильтер</string>
+
 
     <string name="search_offer_fragment">Search Offer Fragment</string>
     <string name="save_offer_fragment">Save Offer Fragment</string>

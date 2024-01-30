@@ -1,8 +1,12 @@
 package com.nayya.workhub.utils
 
 import com.google.gson.GsonBuilder
+import com.nayya.workhub.data.CategorySelectionRepoImpl
+import com.nayya.workhub.data.CategoryVacanciesRepoImpl
 import com.nayya.workhub.data.VacanciesTypeRepoImpl
 import com.nayya.workhub.data.retrofit.ApiService
+import com.nayya.workhub.domain.repo.CategorySelectionRepo
+import com.nayya.workhub.domain.repo.CategoryVacanciesRepo
 import com.nayya.workhub.domain.repo.VacanciesTypeRepo
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -20,6 +24,13 @@ class MyDiy {
 
     private val interceptor = HttpLoggingInterceptor().apply {
         this.setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
+    val categoryVacanciesRepo: CategoryVacanciesRepo by lazy {
+        CategoryVacanciesRepoImpl()
+    }
+    val categorySelectionRepo: CategorySelectionRepo by lazy {
+        CategorySelectionRepoImpl()
     }
 
     private val client = OkHttpClient.Builder().addInterceptor(interceptor).build()

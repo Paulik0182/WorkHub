@@ -18,7 +18,6 @@ class VacanciesListFragment : ViewBindingFragment<FragmentWorkHubBinding>(
         app.collectionVacanciesInteractor
     }
 
-    //    private val viewModel: WorkHubViewModel by viewModels()
     private val viewModel: VacanciesListViewModel by lazy {
         ViewModelProvider(
             this,
