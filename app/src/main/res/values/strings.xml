@@ -4,7 +4,7 @@
     <!-- bottom nav menu -->
     <string name="settings">Настройки</string>
     <string name="my_offer">Предложения</string>
-    <string name="search">Поиск</string>
+    <string name="filter">Фильтер</string>
     <string name="saved">Сохранено</string>
     <string name="documents">Документы</string>
     <string name="profile">Пользователь</string>

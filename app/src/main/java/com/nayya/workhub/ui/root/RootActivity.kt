@@ -1,11 +1,12 @@
 package com.nayya.workhub.ui.root
 
+import android.animation.ValueAnimator
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.view.animation.LinearInterpolator
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nayya.workhub.R
 import com.nayya.workhub.databinding.ActivityRootBinding
@@ -19,6 +20,8 @@ import com.nayya.workhub.ui.settings.SettingsFragment
 import com.nayya.workhub.ui.user_profile.UserProfileFragment
 
 private const val TAG_ROOT_CONTAINER_FRAGMENT = "TAG_ROOT_CONTAINER_FRAGMENT"
+private const val ANIMATION_TIME_BOTTOM_NAV_BAR = 500L
+private const val CLOSING_DELAY_TIME_BOTTOM_NAV_BAR = 500L
 
 class RootActivity : ViewBindingActivity<ActivityRootBinding>(
     ActivityRootBinding::inflate
@@ -131,15 +134,6 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
             showSlaveDeviceBottomNavigationView()
         } else {
             hideSlaveDeviceBottomNavigationView()
-
-//        if (isSlaveBnbVisible) {
-//            binding.bnvLinearLayout.setVisibility(View.GONE)
-//            binding.bnvLinearLayout.startAnimation(animalSlide(R.anim.slave_device_nav_out))
-//        } else {
-//            binding.slaveDeviceBottomNavBar.setVisibility(View.VISIBLE)
-//            binding.bnvLinearLayout.startAnimation(animalSlide(R.anim.slave_device_nav_in))
-//        }
-//        isSlaveBnbVisible = !isSlaveBnbVisible
         }
     }
 
@@ -147,22 +141,30 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
         val menu: Menu = binding.rootBottomNavBar.menu
         val menuItem = menu.findItem(R.id.more_item)
 
-        val translationY = binding.slaveDeviceBottomNavBar.height.toFloat()
+        val bottomBarHeight = binding.slaveDeviceBottomNavBar.height.toFloat()
+        val linearLayout = binding.slaveDeviceBottomNavBar
+        val shiftView = binding.shiftView
 
-        binding.rootBottomNavBar.animate()
-            .translationY(translationY)
-            .setInterpolator(LinearInterpolator())
-            .setDuration(300)
-            .start()
+        val marginAnimator = ValueAnimator.ofInt(0, -bottomBarHeight.toInt())
 
-        binding.slaveDeviceBottomNavBar.animate()
-            .translationY(translationY)
-            .setInterpolator(LinearInterpolator())
-            .setDuration(300)
-            .withEndAction {
+        marginAnimator.addUpdateListener { animator ->
+            val value = animator.animatedValue as Int
+            val layoutParams = linearLayout.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(
+                layoutParams.leftMargin,
+                layoutParams.topMargin,
+                layoutParams.rightMargin,
+                value
+            )
+            linearLayout.requestLayout()
 
+            shiftView.layoutParams = shiftView.layoutParams.apply {
+                height = bottomBarHeight.toInt() * 2 + value
             }
-            .start()
+        }
+        marginAnimator.duration = ANIMATION_TIME_BOTTOM_NAV_BAR
+        marginAnimator.start()
+
         isSlaveBnbVisible = false
 
         // Изменение иконки
@@ -170,30 +172,40 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
 
         // Изменение текста
         menuItem.setTitle(R.string.more)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.slaveDeviceBottomNavBar.visibility = View.GONE
+        }, CLOSING_DELAY_TIME_BOTTOM_NAV_BAR)
     }
 
     private fun showSlaveDeviceBottomNavigationView() {
         val menu: Menu = binding.rootBottomNavBar.menu
         val menuItem = menu.findItem(R.id.more_item)
 
-        binding.slaveDeviceBottomNavBar.animate()
-            .withStartAction {
-                binding.slaveDeviceBottomNavBar.setVisibility(View.VISIBLE)
-                binding.slaveDeviceBottomNavBar.startAnimation(animalSlide(R.anim.slave_device_nav_in))
-            }
-            .translationY(0f)
-            .setInterpolator(LinearInterpolator())
-            .setDuration(300)
-            .start()
+        val bottomBarHeight = binding.slaveDeviceBottomNavBar.height.toFloat()
+        val linearLayout = binding.slaveDeviceBottomNavBar
+        val shiftView = binding.shiftView
 
-        binding.rootBottomNavBar.animate()
-            .withStartAction {
-                binding.rootBottomNavBar.startAnimation(animalSlide(R.anim.slave_device_nav_in))
+        val marginAnimator = ValueAnimator.ofInt(0, bottomBarHeight.toInt())
+
+        marginAnimator.addUpdateListener { animator ->
+            val value = animator.animatedValue as Int
+            val layoutParams = linearLayout.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(
+                layoutParams.leftMargin,
+                layoutParams.topMargin,
+                layoutParams.rightMargin,
+                value - bottomBarHeight.toInt()
+            )
+            linearLayout.requestLayout()
+
+            shiftView.layoutParams = shiftView.layoutParams.apply {
+                height = bottomBarHeight.toInt() + value
             }
-            .translationY(0f)
-            .setInterpolator(LinearInterpolator())
-            .setDuration(300)
-            .start()
+        }
+        binding.slaveDeviceBottomNavBar.visibility = View.VISIBLE
+        marginAnimator.duration = ANIMATION_TIME_BOTTOM_NAV_BAR
+        marginAnimator.start()
 
         isSlaveBnbVisible = true
 
@@ -202,12 +214,5 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
 
         // Изменение текста
         menuItem.setTitle(R.string.close_two_nav)
-    }
-
-    private fun animalSlide(slaveDeviceNavIn: Int): Animation {
-        return AnimationUtils.loadAnimation(
-            applicationContext,
-            slaveDeviceNavIn
-        )
     }
 }

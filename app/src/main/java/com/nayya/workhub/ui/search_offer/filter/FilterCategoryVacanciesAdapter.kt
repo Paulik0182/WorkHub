@@ -12,16 +12,10 @@ class FilterCategoryVacanciesAdapter(
     val listener: (String, Boolean) -> Unit
 ) : RecyclerView.Adapter<FilterCategoryVacanciesViewHolder>() {
 
-    fun getSelectedCategories(): List<Pair<CategoryVacanciesEntity, Boolean>> {
-        return data
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     fun setData(categoryVacancies: List<Pair<CategoryVacanciesEntity, Boolean>>) {
         data = categoryVacancies
         notifyDataSetChanged()
-//        notifyItemChanged()
-//        notifyItemRangeChanged()
     }
 
     override fun onCreateViewHolder(

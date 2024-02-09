@@ -1,25 +1,31 @@
 package com.nayya.workhub.data
 
+import android.content.Context
 import com.nayya.workhub.domain.repo.CategorySelectionRepo
 
-class CategorySelectionRepoImpl : CategorySelectionRepo {
+private const val CATEGORY_VACANCIES_PREFERENCES_KEY = "CATEGORY_VACANCIES_PREFERENCES_KEY"
 
-    private val selectionSet = HashSet<String>()
+class CategorySelectionRepoImpl(
+    private val context: Context
+) : CategorySelectionRepo {
 
     override fun getCategorySelectionIds(callback: (List<String>) -> Unit) {
-        val fakeData = getSelection()
-        callback(fakeData)
+        val data = getSelection()
+        callback(data)
     }
 
     override fun setSelection(id: String, selection: Boolean) {
-        if (selection) {
-            selectionSet.add(id)
-        } else {
-            selectionSet.remove(id)
-        }
+        val sharedPreferences =
+            context.getSharedPreferences(CATEGORY_VACANCIES_PREFERENCES_KEY, Context.MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean(id, selection).apply()
     }
 
     private fun getSelection(): List<String> {
-        return selectionSet.toList()
+        val sharedPreferences =
+            context.getSharedPreferences(CATEGORY_VACANCIES_PREFERENCES_KEY, Context.MODE_PRIVATE)
+
+        return sharedPreferences.all.filter {
+            it.value is Boolean && it.value == true
+        }.keys.toList() // все значения с true и достаем ключи выбраных
     }
 }

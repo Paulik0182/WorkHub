@@ -4,19 +4,16 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import com.nayya.workhub.data.CategorySelectionInteractorImpl
-import com.nayya.workhub.data.CategoryVacanciesRepoImpl
 import com.nayya.workhub.data.CollectionVacanciesInteractorImpl
 import com.nayya.workhub.data.retrofit.VacanciesRepoImpl
 import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
-import com.nayya.workhub.domain.repo.CategoryVacanciesRepo
 import com.nayya.workhub.domain.repo.VacanciesRepo
 import com.nayya.workhub.utils.MyDiy
 
-
 class App : Application() {
 
-    private val myDiy: MyDiy = MyDiy()
+    private val myDiy: MyDiy = MyDiy(this)
 
     private val vacanciesRepo: VacanciesRepo by lazy {
         VacanciesRepoImpl(myDiy.imdbApi)
@@ -28,10 +25,6 @@ class App : Application() {
             vacanciesRepo = vacanciesRepo,
             context = this
         )
-    }
-
-    val categoryVacanciesRepo: CategoryVacanciesRepo by lazy {
-        CategoryVacanciesRepoImpl()
     }
 
     val categorySelectionInteractor: CategorySelectionInteractor by lazy {

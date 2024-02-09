@@ -19,12 +19,6 @@ class FilterCategoryVacanciesFragment : ViewBindingFragment<FragmentFilterCatego
         app.categorySelectionInteractor
     }
 
-    //    private val savedStateHandle: SavedStateHandle by viewModels()
-//    private val savedStateHandle: SavedStateHandle by lazy {
-//        findNavController().currentBackStackEntry?.savedStateHandle ?:
-//        throw IllegalStateException("ViewLifecycleOwner doesn't have a SavedStateHandle")
-//    }
-
     private val savedStateHandle = SavedStateHandle()
 
     private val viewModel: FilterCategoryVacanciesViewModel by lazy {
@@ -44,31 +38,23 @@ class FilterCategoryVacanciesFragment : ViewBindingFragment<FragmentFilterCatego
         super.onViewCreated(view, savedInstanceState)
         initView()
 
+
         viewModel.categoryVacanciesLiveData.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
-
-        restoreStare()
     }
 
     private fun initView() {
         recyclerView = binding.categoryVacanciesListRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = FilterCategoryVacanciesAdapter { id, selection ->
-            categorySelectionInteractor.setSelection(id, selection)
-        }
+
+        adapter = FilterCategoryVacanciesAdapter(
+            listener = { id, selection ->
+                categorySelectionInteractor.setSelection(id, selection)
+                viewModel.refresh()
+            }
+        )
         recyclerView.adapter = adapter
-    }
-
-    private fun saveState() {
-//        viewModel.saveSelectedCategories(adapter.getSelectedCategories())
-    }
-
-    private fun restoreStare() {
-        val savedCategories = viewModel.getSelectedCategories()
-        savedCategories?.let {
-//            adapter.setData(savedCategories)
-        }
     }
 
     private fun getController(): Controller = activity as Controller
@@ -80,11 +66,6 @@ class FilterCategoryVacanciesFragment : ViewBindingFragment<FragmentFilterCatego
     override fun onAttach(context: Context) {
         super.onAttach(context)
         getController()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        saveState()
     }
 
     companion object {

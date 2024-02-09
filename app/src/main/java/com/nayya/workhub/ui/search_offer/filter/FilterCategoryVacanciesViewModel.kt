@@ -33,19 +33,16 @@ class FilterCategoryVacanciesViewModel(
         MutableLiveData()
 
     init {
-        categorySelectionInteractor.getCategories {
-            categoryVacanciesLiveData.mutable().postValue(it)
-        }
-    }
-
-    fun saveSelectedCategories(selectedCategories: List<CategoryVacanciesEntity>) {
-        savedStateHandle.set<List<CategoryVacanciesEntity>>(
-            SELECTED_CATEGORIES_KEY,
-            selectedCategories
-        )
+        refresh()
     }
 
     fun getSelectedCategories(): List<CategoryVacanciesEntity>? {
         return savedStateHandle.get<List<CategoryVacanciesEntity>>(SELECTED_CATEGORIES_KEY)
+    }
+
+    fun refresh() {
+        categorySelectionInteractor.getCategories {
+            categoryVacanciesLiveData.mutable().postValue(it)
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.nayya.workhub.utils
 
+import android.content.Context
 import com.google.gson.GsonBuilder
 import com.nayya.workhub.data.CategorySelectionRepoImpl
 import com.nayya.workhub.data.CategoryVacanciesRepoImpl
@@ -16,7 +17,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val BASE_URL = "https://api.hh.ru/"
 private const val API_KEY = "1api"
 
-class MyDiy {
+class MyDiy(
+    private val context: Context
+) {
 
     val vacanciesTypeRepo: VacanciesTypeRepo by lazy {
         VacanciesTypeRepoImpl()
@@ -29,8 +32,9 @@ class MyDiy {
     val categoryVacanciesRepo: CategoryVacanciesRepo by lazy {
         CategoryVacanciesRepoImpl()
     }
+
     val categorySelectionRepo: CategorySelectionRepo by lazy {
-        CategorySelectionRepoImpl()
+        CategorySelectionRepoImpl(context)
     }
 
     private val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
@@ -44,5 +48,4 @@ class MyDiy {
     }
 
     val imdbApi: ApiService by lazy { retrofit.create(ApiService::class.java) }
-
 }

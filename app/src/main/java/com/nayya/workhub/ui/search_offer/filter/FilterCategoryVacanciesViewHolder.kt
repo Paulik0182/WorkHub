@@ -15,6 +15,7 @@ class FilterCategoryVacanciesViewHolder(
 
     fun bind(categoryVacancies: Pair<CategoryVacanciesEntity, Boolean>) {
         checkBox.text = categoryVacancies.first.categoryName
+        checkBox.setOnCheckedChangeListener(null)
         checkBox.isChecked = categoryVacancies.second
 
         checkBox.setOnCheckedChangeListener { _, isChecked ->

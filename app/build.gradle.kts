@@ -83,7 +83,10 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
     //    kapt 'androidx.room:room-compiler:2.5.0'
-    kapt("org.xerial:sqlite-jdbc:3.36.0") // для процессоров М1
+    kapt("org.xerial:sqlite-jdbc:3.41.2.2") // для процессоров М1
+
+    // SharedPreferences
+    implementation("androidx.preference:preference-ktx:1.2.1")
 
     // Test
     testImplementation("junit:junit:4.13.2")
