@@ -1,7 +1,9 @@
 package com.nayya.workhub.utils
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import java.text.SimpleDateFormat
 
 /**
  * экстеншен (расширение обычной чужой функции). Можно указать mutable расширение и оно вернет
@@ -11,3 +13,6 @@ import androidx.lifecycle.MutableLiveData
 fun <T> LiveData<T>.mutable(): MutableLiveData<T> {
     return this as MutableLiveData
 }
+
+@SuppressLint("SimpleDateFormat")
+var bpDataFormatter = SimpleDateFormat("dd MMMM yyyy")

@@ -5,14 +5,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nayya.workhub.R
-import com.nayya.workhub.domain.entity.VacancyEntity
+import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
 
 class VacanciesListAdapter(
-    private var data: List<VacancyEntity> = mutableListOf()
+    private var data: List<VacancyJobEntity> = mutableListOf(),
+    private var onDetailsJobListener: (VacancyJobEntity) -> Unit = {}
 ) : RecyclerView.Adapter<VacanciesListViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(work: List<VacancyEntity>) {
+    fun setData(work: List<VacancyJobEntity>) {
         data = work
         notifyDataSetChanged()
     }
@@ -21,8 +22,9 @@ class VacanciesListAdapter(
         return VacanciesListViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(
-                    R.layout.item_value, parent, false
-                )
+                    R.layout.item_value2, parent, false
+                ),
+            onDetailsJobListener
         )
     }
 
@@ -30,7 +32,7 @@ class VacanciesListAdapter(
         holder.bind(getItem(position))
     }
 
-    private fun getItem(position: Int): VacancyEntity {
+    private fun getItem(position: Int): VacancyJobEntity {
         return data[position]
     }
 

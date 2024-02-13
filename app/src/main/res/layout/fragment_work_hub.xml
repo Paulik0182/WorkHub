@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/gray_white"
         android:orientation="vertical">
 
         <TextView
@@ -24,7 +24,7 @@
             android:padding="5dp"
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical"
-            tools:listitem="@layout/item_value" />
+            tools:listitem="@layout/item_value2" />
     </LinearLayout>
 
 </FrameLayout>

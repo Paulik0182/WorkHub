@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.nayya.workhub.domain.entity.VacancyEntity
+import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
 import com.nayya.workhub.utils.mutable
 
@@ -19,11 +19,16 @@ class VacanciesListViewModel(
         }
     }
 
-    val vacanciesLiveData: LiveData<List<VacancyEntity>> = MutableLiveData()
+    val vacanciesLiveData: LiveData<List<VacancyJobEntity>> = MutableLiveData()
+    val selectedVacancyJobLiveData: LiveData<VacancyJobEntity> = MutableLiveData()
 
     init {
         collectionVacanciesInteractor.getCollectionVacancies {
             vacanciesLiveData.mutable().postValue(it)
         }
+    }
+
+    fun onVacancyJobClick(vacancyJobEntity: VacancyJobEntity) {
+        selectedVacancyJobLiveData.mutable().postValue(vacancyJobEntity)
     }
 }

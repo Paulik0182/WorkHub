@@ -18,14 +18,14 @@ class RootFragment : ViewBindingFragment<FragmentRootBinding>(
     private fun initButton() {
 
         binding.workHubButton.setOnClickListener {
-            getController().openWorkHub()
+//            getController().openWorkHub()
         }
     }
 
     private fun getController(): Controller = activity as Controller
 
     interface Controller {
-        fun openWorkHub()
+//        fun openWorkHub()
     }
 
     override fun onAttach(context: Context) {

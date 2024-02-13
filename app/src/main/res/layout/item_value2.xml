@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/item_margin"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/label_company_upkeep_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/label_company_upkeep_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="@dimen/default_margin"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/fragment_job_look" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/title_vacancies_upkeep_text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_vacancies_upkeep_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_vacancies"
+                android:textSize="@dimen/for_list_header"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mame_company_upkeep_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mini_margin"
+                android:text="@string/mame_company"
+                android:textSize="@dimen/for_list_header" />
+
+            <LinearLayout
+                android:id="@+id/country_city_upkeep_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mini_margin"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/country_city_upkeep_image"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/fragment_job_look" />
+
+                <TextView
+                    android:id="@+id/country_city_upkeep_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/country_city"
+                    android:textSize="@dimen/for_lists_text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contract_option_upkeep_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/contract_option_upkeep_image"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/fragment_job_look" />
+
+                <TextView
+                    android:id="@+id/contract_option_upkeep_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contract_option"
+                    android:textSize="@dimen/for_lists_text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/financial_proposal_upkeep_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/financial_proposal_upkeep_image"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/fragment_job_look" />
+
+                <TextView
+                    android:id="@+id/financial_proposal_upkeep_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/financial_proposal"
+                    android:textSize="@dimen/for_lists_text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/getting_started_upkeep_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/getting_started_upkeep_image"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/fragment_job_look" />
+
+                <TextView
+                    android:id="@+id/getting_started_upkeep_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/getting_started"
+                    android:textSize="@dimen/for_lists_text" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/selection_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="@dimen/mini_margin"
+        android:background="@color/gray" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/button_upkeep_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/close_button"
+            style="@style/MyButtonFilterFragmentJobLook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_close_24"
+            android:text="@string/close_element_bottom"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/for_lists_text"
+            app:layout_constraintBottom_toBottomOf="@+id/button_upkeep_layout"
+            app:layout_constraintStart_toStartOf="@+id/button_upkeep_layout"
+            app:layout_constraintTop_toTopOf="@+id/button_upkeep_layout" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/favorite_button"
+            style="@style/MyButtonFilterFragmentJobLook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_emergency_24"
+            android:text="@string/favorite_element_bottom"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/for_lists_text"
+            app:layout_constraintBottom_toBottomOf="@+id/button_upkeep_layout"
+            app:layout_constraintEnd_toEndOf="@+id/button_upkeep_layout"
+            app:layout_constraintTop_toTopOf="@+id/button_upkeep_layout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
