@@ -23,7 +23,8 @@ class App : Application() {
         CollectionVacanciesInteractorImpl(
             vacanciesTypeRepo = myDiy.vacanciesTypeRepo,
             vacanciesRepo = vacanciesRepo,
-            context = this
+            context = this,
+            categorySelectionInteractor = categorySelectionInteractor
         )
     }
 

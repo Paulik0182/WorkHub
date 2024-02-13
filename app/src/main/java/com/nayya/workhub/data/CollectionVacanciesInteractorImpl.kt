@@ -12,6 +12,7 @@ import com.nayya.workhub.domain.entity.vacancy.ContractOptionEntity
 import com.nayya.workhub.domain.entity.vacancy.CountryEntity
 import com.nayya.workhub.domain.entity.vacancy.FinancialProposalEntity
 import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
+import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
 import com.nayya.workhub.domain.repo.VacanciesRepo
 import com.nayya.workhub.domain.repo.VacanciesTypeRepo
@@ -20,7 +21,8 @@ import java.util.Calendar
 class CollectionVacanciesInteractorImpl(
     private val vacanciesTypeRepo: VacanciesTypeRepo,
     private val vacanciesRepo: VacanciesRepo,
-    private val context: Context
+    private val context: Context,
+    private val categorySelectionInteractor: CategorySelectionInteractor
 ) : CollectionVacanciesInteractor {
 
     override fun getCollectionVacancies(callback: (List<VacancyJobEntity>) -> Unit) {
@@ -39,8 +41,23 @@ class CollectionVacanciesInteractorImpl(
                 }
             }, 1_000)
         } else {
-            val fakeData = getFakeData()
-            callback(fakeData)
+            categorySelectionInteractor.getCategories { categories ->
+                val selectedCategories = categories
+                    .filter { it.second } // Фильтруем только выбранные категории
+                    .map { it.first.categoryName } // Получаем список выбранных категорий
+
+                val filteredVacancies = if (selectedCategories.isNotEmpty()) {
+                    getFakeData().filter { vacancyJob ->
+                        vacancyJob.categoryVacanciesList.any { category ->
+                            category.categoryName in selectedCategories
+                        }
+                    }
+                } else {
+                    getFakeData()
+                }
+
+                callback(filteredVacancies)
+            }
         }
     }
 
