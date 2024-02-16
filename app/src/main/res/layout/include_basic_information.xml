@@ -50,8 +50,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/financial_proposal_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/default_margin"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/financial_proposal_layout"
@@ -63,7 +63,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/financial_proposal_text_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:gravity="center_vertical"
             android:text="@string/financial_proposal"
@@ -82,8 +82,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/country_city_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/default_margin"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/country_city_layout"
@@ -95,7 +95,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/country_city_text_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:gravity="center_vertical"
             android:text="@string/country_city"
@@ -114,40 +114,52 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/information_about_end_offer_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/default_margin"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/information_about_end_offer_layout"
-            app:layout_constraintEnd_toStartOf="@+id/information_about_end_offer_text_view"
+            app:layout_constraintEnd_toStartOf="@+id/information_full_about_end_offer_layout"
             app:layout_constraintStart_toStartOf="@+id/information_about_end_offer_layout"
             app:layout_constraintTop_toTopOf="@+id/information_about_end_offer_layout"
             app:srcCompat="@drawable/fragment_job_look" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/information_about_end_offer_text_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/information_full_about_end_offer_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="@string/information_about_end_offer"
-            android:textSize="@dimen/default_text"
-            app:layout_constraintBottom_toTopOf="@+id/information_about_end_offer_date_text_view"
-            app:layout_constraintEnd_toEndOf="@+id/information_about_end_offer_layout"
-            app:layout_constraintStart_toEndOf="@+id/information_about_end_offer_image"
-            app:layout_constraintTop_toTopOf="@+id/information_about_end_offer_layout" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/information_about_end_offer_date_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="@string/information_about_end_offer_date"
-            android:textSize="@dimen/default_text"
+            android:layout_margin="@dimen/default_margin"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/information_about_end_offer_layout"
             app:layout_constraintEnd_toEndOf="@+id/information_about_end_offer_layout"
             app:layout_constraintStart_toEndOf="@+id/information_about_end_offer_image"
-            app:layout_constraintTop_toBottomOf="@+id/information_about_end_offer_text_view" />
+            app:layout_constraintTop_toTopOf="@+id/information_about_end_offer_layout">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/information_about_end_offer_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/information_about_end_offer"
+                android:textSize="@dimen/default_text"
+                app:layout_constraintBottom_toTopOf="@+id/information_about_end_offer_date_text_view"
+                app:layout_constraintEnd_toEndOf="@+id/information_full_about_end_offer_layout"
+                app:layout_constraintStart_toStartOf="@+id/information_full_about_end_offer_layout"
+                app:layout_constraintTop_toTopOf="@+id/information_full_about_end_offer_layout" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/information_about_end_offer_date_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/information_about_end_offer_date"
+                android:textSize="@dimen/default_text"
+                app:layout_constraintBottom_toBottomOf="@+id/information_full_about_end_offer_layout"
+                app:layout_constraintEnd_toEndOf="@+id/information_full_about_end_offer_layout"
+                app:layout_constraintStart_toStartOf="@+id/information_full_about_end_offer_layout"
+                app:layout_constraintTop_toBottomOf="@+id/information_about_end_offer_text_view" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -158,8 +170,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/contract_option_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/default_margin"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/contract_option_layout"
@@ -171,7 +183,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/contract_option_text_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:gravity="center_vertical"
             android:text="@string/contract_option"
@@ -190,8 +202,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/employment_rate_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/default_margin"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/employment_rate_layout"
@@ -203,7 +215,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/employment_rate_text_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:gravity="center_vertical"
             android:text="@string/employment_rate"
@@ -222,8 +234,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/specialist_level_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/default_margin"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/specialist_level_layout"
@@ -235,7 +247,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/specialist_level_text_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:gravity="center_vertical"
             android:text="@string/specialist_level"
@@ -254,8 +266,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/type_work_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/default_margin"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/type_work_layout"
@@ -267,7 +279,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/type_work_text_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:gravity="center_vertical"
             android:text="@string/type_work"
@@ -286,8 +298,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/getting_started_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/default_margin"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/getting_started_layout"
@@ -299,7 +311,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/getting_started_text_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:gravity="center_vertical"
             android:text="@string/getting_started"
@@ -318,8 +330,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/information_about_interview_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/default_margin"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/information_about_interview_layout"
@@ -331,7 +343,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/information_about_interview_text_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:gravity="center_vertical"
             android:text="@string/information_about_interview"
@@ -342,4 +354,37 @@
             app:layout_constraintTop_toTopOf="@+id/information_about_interview_layout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/share_button_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_share_24"
+            android:gravity="center"
+            android:padding="@dimen/default_button_text_view_padding"
+            android:paddingEnd="@dimen/bottom_edit_text_padding"
+            android:text="@string/share_element_bottom"
+            android:textColor="@color/black"
+            android:textSize="@dimen/for_lists_text" />
+
+        <TextView
+            android:id="@+id/favorite_button_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_emergency_24"
+            android:gravity="center"
+            android:padding="@dimen/default_button_text_view_padding"
+            android:paddingEnd="@dimen/bottom_edit_text_padding"
+            android:text="@string/favorite_element_bottom"
+            android:textColor="@color/black"
+            android:textSize="@dimen/for_lists_text" />
+    </LinearLayout>
 </LinearLayout>

@@ -15,8 +15,10 @@
     <!-- bottom  -->
     <string name="filter_category_bottom">Фильтер</string>
     <string name="perform_search_bottom">Искать</string>
+    <!-- bottom TextView -->
     <string name="close_element_bottom">Не интересует</string>
     <string name="favorite_element_bottom">В изброное</string>
+    <string name="share_element_bottom">Поделится</string>
 
 
     <string name="search_offer_fragment">Search Offer Fragment</string>

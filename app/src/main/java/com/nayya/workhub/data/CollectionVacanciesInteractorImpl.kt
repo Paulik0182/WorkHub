@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Handler
 import android.os.Looper
-import com.nayya.workhub.domain.entity.VacancyEntity
+import android.widget.Toast
 import com.nayya.workhub.domain.entity.filter_category.CategoryVacanciesEntity
 import com.nayya.workhub.domain.entity.vacancy.CityEntity
 import com.nayya.workhub.domain.entity.vacancy.ContractOptionEntity
@@ -24,6 +24,8 @@ class CollectionVacanciesInteractorImpl(
     private val context: Context,
     private val categorySelectionInteractor: CategorySelectionInteractor
 ) : CollectionVacanciesInteractor {
+
+    private val fakeData = getFakeData().toMutableList()
 
     override fun getCollectionVacancies(callback: (List<VacancyJobEntity>) -> Unit) {
 
@@ -47,13 +49,13 @@ class CollectionVacanciesInteractorImpl(
                     .map { it.first.categoryName } // Получаем список выбранных категорий
 
                 val filteredVacancies = if (selectedCategories.isNotEmpty()) {
-                    getFakeData().filter { vacancyJob ->
+                    fakeData.filter { vacancyJob ->
                         vacancyJob.categoryVacanciesList.any { category ->
                             category.categoryName in selectedCategories
                         }
                     }
                 } else {
-                    getFakeData()
+                    fakeData
                 }
 
                 callback(filteredVacancies)
@@ -67,10 +69,21 @@ class CollectionVacanciesInteractorImpl(
             // todo
 
         } else {
-            val fakeData = getFakeData().first {
+            val fakeData = fakeData.first {
                 it.key == id
             }
             callback(fakeData)
+        }
+    }
+
+    override fun delete(jobId: String) {
+
+        val itemToDelete = fakeData.firstOrNull { it.key == jobId }
+
+        if (itemToDelete != null) {
+            fakeData.remove(itemToDelete)
+        } else {
+            Toast.makeText(context, "Нет элемента", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -82,18 +95,6 @@ class CollectionVacanciesInteractorImpl(
             .getNetworkCapabilities(network)
         return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
             ?: false
-    }
-
-    private fun getFakeData2(): List<VacancyEntity> {
-        return listOf(
-            VacancyEntity("1", "IT"),
-            VacancyEntity("2", "Android"),
-            VacancyEntity("3", "Java"),
-            VacancyEntity("4", "IT"),
-            VacancyEntity("5", "IT"),
-            VacancyEntity("6", "Android"),
-            VacancyEntity("7", "Java")
-        )
     }
 
     private fun getFakeData(): List<VacancyJobEntity> {

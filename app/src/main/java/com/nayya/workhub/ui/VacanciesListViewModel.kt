@@ -31,4 +31,11 @@ class VacanciesListViewModel(
     fun onVacancyJobClick(vacancyJobEntity: VacancyJobEntity) {
         selectedVacancyJobLiveData.mutable().postValue(vacancyJobEntity)
     }
+
+    fun onDeleteVacancy(jobId: String) {
+        collectionVacanciesInteractor.delete(jobId)
+        collectionVacanciesInteractor.getCollectionVacancies {
+            vacanciesLiveData.mutable().postValue(it)
+        }
+    }
 }

@@ -33,9 +33,7 @@ class VacanciesListFragment : ViewBindingFragment<FragmentWorkHubBinding>(
         super.onViewCreated(view, savedInstanceState)
         initView()
 
-        viewModel.vacanciesLiveData.observe(viewLifecycleOwner) {
-            adapter.setData(it)
-        }
+        updateView()
 
         viewModel.selectedVacancyJobLiveData.observe(viewLifecycleOwner) {
             getController().openDetailsVacancyJob(it)
@@ -49,9 +47,17 @@ class VacanciesListFragment : ViewBindingFragment<FragmentWorkHubBinding>(
             data = emptyList(),
             onDetailsJobListener = {
                 viewModel.onVacancyJobClick(it)
-            }
+            },
+            context = requireContext(),
+            viewModel = viewModel
         )
         recyclerView.adapter = adapter
+    }
+
+    private fun updateView() {
+        viewModel.vacanciesLiveData.observe(viewLifecycleOwner) {
+            adapter.setData(it)
+        }
     }
 
     private fun getController(): Controller = activity as Controller

@@ -6,4 +6,5 @@ interface CollectionVacanciesInteractor {
 
     fun getCollectionVacancies(callback: (List<VacancyJobEntity>) -> Unit)
     fun getVacancyJob(id: String, callback: (VacancyJobEntity?) -> Unit)
+    fun delete(jobId: String)
 }

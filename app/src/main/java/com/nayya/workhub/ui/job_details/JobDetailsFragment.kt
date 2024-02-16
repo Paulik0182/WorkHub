@@ -2,9 +2,12 @@ package com.nayya.workhub.ui.job_details
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.nayya.workhub.R
 import com.nayya.workhub.databinding.FragmentJobDetailsBinding
 import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
@@ -13,10 +16,13 @@ import com.nayya.workhub.utils.bpDataFormatter
 
 private const val DETAILS_JPB_KEY = "DETAILS_JPB_KEY"
 private const val DAY_IN_MS = 24 * 60 * 60 * 1000L
+private const val MESSAGE_KEY = "Отправить вакансию через"
 
 class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
     FragmentJobDetailsBinding::inflate
 ) {
+
+    private var flag = true
 
     private val collectionVacanciesInteractor: CollectionVacanciesInteractor by lazy {
         app.collectionVacanciesInteractor
@@ -92,6 +98,59 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
 
         binding.basicInformationInclude.informationAboutInterviewTextView.text =
             vacancyJobEntity.interviewMethod
+
+        binding.basicInformationInclude.shareButtonTextView.setOnClickListener {
+            sendMessage()
+        }
+        binding.basicInformationInclude.favoriteButtonTextView.setOnClickListener {
+            setColorFavoriteButtonTv()
+        }
+    }
+
+    private fun sendMessage() {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, MESSAGE_KEY)
+        val chooserIntent = Intent.createChooser(intent, "Отправить вакансию через")
+        startActivity(chooserIntent)
+    }
+
+    private fun setColorFavoriteButtonTv() {
+        val favoriteRedIcon =
+            ContextCompat.getDrawable(requireActivity(), R.drawable.ic_emergency_red_24)
+        val favoriteGrayIcon =
+            ContextCompat.getDrawable(requireActivity(), R.drawable.ic_emergency_24)
+
+        if (!flag) {
+            binding.basicInformationInclude.favoriteButtonTextView.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                favoriteGrayIcon,
+                null,
+                null
+            )
+            binding.basicInformationInclude.favoriteButtonTextView.setTextColor(
+                ContextCompat.getColor(
+                    requireActivity(),
+                    R.color.gray
+                )
+            )
+
+            flag = true
+        } else {
+            binding.basicInformationInclude.favoriteButtonTextView.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                favoriteRedIcon,
+                null,
+                null
+            )
+            binding.basicInformationInclude.favoriteButtonTextView.setTextColor(
+                ContextCompat.getColor(
+                    requireActivity(),
+                    R.color.red
+                )
+            )
+            flag = false
+        }
     }
 
     private fun getController(): Controller = activity as Controller

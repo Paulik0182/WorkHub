@@ -159,26 +159,32 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/close_button"
+        <TextView
+            android:id="@+id/close_button_text_view"
             style="@style/MyButtonFilterFragmentJobLook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_close_24"
             android:text="@string/close_element_bottom"
+            android:clickable="true"
             android:textColor="@color/gray"
+            android:padding="@dimen/default_button_text_view_padding"
+            android:paddingStart="@dimen/bottom_edit_text_padding"
             android:textSize="@dimen/for_lists_text"
             app:layout_constraintBottom_toBottomOf="@+id/button_upkeep_layout"
             app:layout_constraintStart_toStartOf="@+id/button_upkeep_layout"
             app:layout_constraintTop_toTopOf="@+id/button_upkeep_layout" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/favorite_button"
+        <TextView
+            android:id="@+id/favorite_button_text_view"
             style="@style/MyButtonFilterFragmentJobLook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_emergency_24"
             android:text="@string/favorite_element_bottom"
+            android:clickable="true"
+            android:padding="@dimen/default_button_text_view_padding"
+            android:paddingEnd="@dimen/bottom_edit_text_padding"
             android:textColor="@color/gray"
             android:textSize="@dimen/for_lists_text"
             app:layout_constraintBottom_toBottomOf="@+id/button_upkeep_layout"

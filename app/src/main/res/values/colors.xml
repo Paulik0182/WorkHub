@@ -2,9 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="gray">#989494</color>
-    <color name="gray_white">#DDD6D6</color>
+    <color name="gray_white">#EDEAEA</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#AC0606</color>
+    <color name="blue">#114AF3</color>
 
     <!-- bottom nav menu -->
     <color name="item_icon_tint">#670A20</color>
