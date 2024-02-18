@@ -54,6 +54,9 @@ data class VacancyJobEntity(
     val gettingStarted: String?,
 
     @SerializedName("interview_method")
-    val interviewMethod: String?
+    val interviewMethod: String?,
+
+    @SerializedName("duties_employee")
+    val dutiesEmployee: String?
 
 ) : Parcelable

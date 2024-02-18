@@ -120,7 +120,12 @@ class CollectionVacanciesInteractorImpl(
                 specialistLevel = "Junior",
                 typeWork = "Remote work",
                 gettingStarted = "Now",
-                interviewMethod = "Remote recruitment"
+                interviewMethod = "Remote recruitment",
+                dutiesEmployee = "Opracowywanie wymogów funkcjonalnych i technologicznych. " +
+                        "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
+                        "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
+                        "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
             ),
 
             VacancyJobEntity(
@@ -144,7 +149,13 @@ class CollectionVacanciesInteractorImpl(
                 specialistLevel = "Middle",
                 typeWork = "Remote work",
                 gettingStarted = "Now",
-                interviewMethod = "Remote recruitment"
+                interviewMethod = "Remote recruitment",
+                dutiesEmployee = "Opracowywanie wymogów funkcjonalnych i technologicznych. " +
+                        "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
+                        "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
+                        "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
+
             ),
             VacancyJobEntity(
                 key = "3",
@@ -167,7 +178,13 @@ class CollectionVacanciesInteractorImpl(
                 specialistLevel = "Middle",
                 typeWork = "Remote work",
                 gettingStarted = "Now",
-                interviewMethod = "Remote recruitment"
+                interviewMethod = "Remote recruitment",
+                dutiesEmployee = "Opracowywanie wymogów funkcjonalnych i technologicznych. " +
+                        "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
+                        "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
+                        "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
+
             ),
 
             VacancyJobEntity(
@@ -191,7 +208,13 @@ class CollectionVacanciesInteractorImpl(
                 specialistLevel = "Middle",
                 typeWork = "Remote work",
                 gettingStarted = "Now",
-                interviewMethod = "Remote recruitment"
+                interviewMethod = "Remote recruitment",
+                dutiesEmployee = "Opracowywanie wymogów funkcjonalnych i technologicznych. " +
+                        "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
+                        "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
+                        "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
+
             ),
             VacancyJobEntity(
                 key = "5",
@@ -219,7 +242,13 @@ class CollectionVacanciesInteractorImpl(
                 specialistLevel = "Middle",
                 typeWork = "Remote work",
                 gettingStarted = "Now",
-                interviewMethod = "Remote recruitment"
+                interviewMethod = "Remote recruitment",
+                dutiesEmployee = "Opracowywanie wymogów funkcjonalnych i technologicznych. " +
+                        "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
+                        "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
+                        "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
+
             ),
             VacancyJobEntity(
                 key = "6",
@@ -242,7 +271,13 @@ class CollectionVacanciesInteractorImpl(
                 specialistLevel = "Middle",
                 typeWork = "Remote work",
                 gettingStarted = "Now",
-                interviewMethod = "Remote recruitment"
+                interviewMethod = "Remote recruitment",
+                dutiesEmployee = "Opracowywanie wymogów funkcjonalnych i technologicznych. " +
+                        "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
+                        "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
+                        "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
+
             ),
         )
     }

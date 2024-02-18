@@ -47,6 +47,10 @@
     <string name="getting_started">Набор от: </string>
     <string name="information_about_interview">Собеседование удаленно</string>
     <string name="elements">Элемент</string>
+    <string name="text_duties_employee">Текст обязанностей</string>
+
+    <!-- Name Fragment - Include  -->
+    <string name="title_duties_employee">Твои обязанности</string>
 
 
     <string name="recent_requests">Твои последнии запросы</string>
