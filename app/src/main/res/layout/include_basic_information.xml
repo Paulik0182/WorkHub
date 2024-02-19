@@ -19,6 +19,12 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/fragment_job_look" />
 
+        <View
+            android:id="@+id/line_vertical_view"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,6 +48,12 @@
                 android:textSize="@dimen/default_text" />
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:id="@+id/line_horizontal_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/financial_proposal_layout"
@@ -366,6 +378,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:background="@drawable/my_radius_5"
             android:drawableTop="@drawable/ic_share_24"
             android:gravity="center"
             android:padding="@dimen/default_button_text_view_padding"
@@ -381,6 +394,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:drawableTop="@drawable/ic_emergency_24"
+            android:background="@drawable/my_radius_5"
             android:gravity="center"
             android:padding="@dimen/default_button_text_view_padding"
             android:paddingEnd="@dimen/bottom_edit_text_padding"

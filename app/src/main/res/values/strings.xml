@@ -48,9 +48,13 @@
     <string name="information_about_interview">Собеседование удаленно</string>
     <string name="elements">Элемент</string>
     <string name="text_duties_employee">Текст обязанностей</string>
+    <string name="text_requirements">Текст требований</string>
+    <string name="text_optional_benefits">Текст приемущества</string>
 
     <!-- Name Fragment - Include  -->
     <string name="title_duties_employee">Твои обязанности</string>
+    <string name="title_requirements">Наши требования</string>
+    <string name="title_optional_benefits">Будет приемуществом</string>
 
 
     <string name="recent_requests">Твои последнии запросы</string>

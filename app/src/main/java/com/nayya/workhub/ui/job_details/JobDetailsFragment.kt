@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.style.BulletSpan
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -110,37 +108,73 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
             setColorFavoriteButtonTv()
         }
 
-        parsingText4(vacancyJobEntity)
+        VacancyJobParsingText(vacancyJobEntity)
+
+        requirementsParsingText(vacancyJobEntity)
+
+        optionalBenefitsParsingText(vacancyJobEntity)
     }
 
     @SuppressLint("NewApi")
-    private fun parsingText(vacancy: VacancyJobEntity) {
-        var spannableStringBuilder: SpannableStringBuilder
+    private fun requirementsParsingText(vacancy: VacancyJobEntity) {
+        val requirementsList =
+            vacancy.requirementsEntityList?.first()?.requirements ?: return
 
-        // spannableStringBuilder без пересоздания и использования жизненых циклов (работаем с текстом на лету)
-        spannableStringBuilder = SpannableStringBuilder(vacancy.dutiesEmployee)
-        binding.dutiesEmployeeInclude.dutiesEmployeeTextView.setText(
-            spannableStringBuilder,
-            TextView.BufferType.EDITABLE
+        val modificationRequirementsText =
+            requirementsList.toString().removeSurrounding("[", "]")
+
+        val spannableStringBuilder = SpannableStringBuilder()
+
+        val modifiedSpannableStringBuilder =
+            parsingText(modificationRequirementsText, spannableStringBuilder)
+
+        binding.requirementsInclude.ourRequirementsTextView.setText(
+            modifiedSpannableStringBuilder,
+            TextView.BufferType.SPANNABLE
         )
-        spannableStringBuilder =
-            binding.dutiesEmployeeInclude.dutiesEmployeeTextView.text as SpannableStringBuilder
-
-        if (vacancy.dutiesEmployee != null) {
-            for (i in vacancy.dutiesEmployee.indices) {
-                if (vacancy.dutiesEmployee[i] == '.') {
-                    spannableStringBuilder.replace(i, i, ".\n\n")
-                }
-            }
-        }
     }
 
     @SuppressLint("NewApi")
-    private fun parsingText3(vacancy: VacancyJobEntity) {
+    private fun optionalBenefitsParsingText(vacancy: VacancyJobEntity) {
+        val optionalBenefitsList =
+            vacancy.requirementsEntityList?.first()?.optionalBenefits ?: return
+
+        binding.requirementsInclude.optionalBenefitsLayout.visibility = View.VISIBLE
+
+        val modificationOptionalBenefitsListText =
+            optionalBenefitsList.toString().removeSurrounding("[", "]")
+
+        val spannableStringBuilder = SpannableStringBuilder()
+
+        val modifiedSpannableStringBuilder =
+            parsingText(modificationOptionalBenefitsListText, spannableStringBuilder)
+
+        binding.requirementsInclude.optionalBenefitsTextView.setText(
+            modifiedSpannableStringBuilder,
+            TextView.BufferType.SPANNABLE
+        )
+    }
+
+    @SuppressLint("NewApi")
+    private fun VacancyJobParsingText(vacancy: VacancyJobEntity) {
         val fullText = vacancy.dutiesEmployee ?: return
 
         val spannableStringBuilder = SpannableStringBuilder()
-        var startIndex = 0
+
+        val modifiedSpannableStringBuilder =
+            parsingText(fullText, spannableStringBuilder)
+
+        binding.dutiesEmployeeInclude.dutiesEmployeeTextView.setText(
+            modifiedSpannableStringBuilder,
+            TextView.BufferType.SPANNABLE
+        )
+    }
+
+    @SuppressLint("NewApi")
+    private fun parsingText(
+        fullText: String,
+        spannableStringBuilder: SpannableStringBuilder
+    ): SpannableStringBuilder {
 
         for (i in fullText.indices) {
             val currentChar = fullText[i]
@@ -148,44 +182,9 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
 
             if (currentChar == '.') {
                 spannableStringBuilder.append("\n\n")
-                startIndex = spannableStringBuilder.length
-            } else if (currentChar == ' ' && i > startIndex + 1) {
-                val previousChar = fullText[i - 1]
-                if (previousChar.isWhitespace() && !previousChar.isWhitespace()) {
-                    spannableStringBuilder.setSpan(
-                        BulletSpan(),
-                        startIndex,
-                        startIndex + 1,
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                    )
-                }
             }
         }
-
-        binding.dutiesEmployeeInclude.dutiesEmployeeTextView.setText(
-            spannableStringBuilder,
-            TextView.BufferType.SPANNABLE
-        )
-    }
-
-    @SuppressLint("NewApi")
-    private fun parsingText4(vacancy: VacancyJobEntity) {
-        val fullText = vacancy.dutiesEmployee ?: return
-
-        val spannableStringBuilder = SpannableStringBuilder()
-
-        for (i in fullText.indices) {
-            val currentChar = fullText[i]
-            spannableStringBuilder.append(currentChar)
-
-            if (currentChar == '.') {
-                spannableStringBuilder.append("\n\n")
-            }
-        }
-        binding.dutiesEmployeeInclude.dutiesEmployeeTextView.setText(
-            spannableStringBuilder,
-            TextView.BufferType.SPANNABLE
-        )
+        return spannableStringBuilder
     }
 
     private fun sendMessage() {

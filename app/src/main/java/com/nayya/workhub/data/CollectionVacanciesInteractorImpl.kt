@@ -11,6 +11,7 @@ import com.nayya.workhub.domain.entity.vacancy.CityEntity
 import com.nayya.workhub.domain.entity.vacancy.ContractOptionEntity
 import com.nayya.workhub.domain.entity.vacancy.CountryEntity
 import com.nayya.workhub.domain.entity.vacancy.FinancialProposalEntity
+import com.nayya.workhub.domain.entity.vacancy.RequirementsEntity
 import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
 import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
@@ -125,7 +126,23 @@ class CollectionVacanciesInteractorImpl(
                         "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
                         "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
                         "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
-                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi",
+                requirementsEntityList = listOf(
+                    RequirementsEntity(
+                        "1",
+                        requirements = listOf(
+                            "at least 1 year of experience working as Android " +
+                                    "developer. good knowledge of Kotlin or Java. " +
+                                    "good understanding of Android frameworks and guidelines, " +
+                                    "experience in using Jetpack libraries and standard 3rd party " +
+                                    "toolkits. natural attitude to use software craftsmanship patterns. " +
+                                    "familiar with Git version control system. " +
+                                    "able to communicate in both Polish and English. team player with " +
+                                    "an analytical approach and attention to detail"
+                        ),
+                        optionalBenefits = null
+                    )
+                )
             ),
 
             VacancyJobEntity(
@@ -154,7 +171,27 @@ class CollectionVacanciesInteractorImpl(
                         "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
                         "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
                         "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
-                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi",
+                requirementsEntityList = listOf(
+                    RequirementsEntity(
+                        "2",
+                        requirements = listOf(
+                            "at least 1 year of experience working as Android " +
+                                    "developer. good knowledge of Kotlin or Java. " +
+                                    "good understanding of Android frameworks and guidelines, " +
+                                    "experience in using Jetpack libraries and standard 3rd party " +
+                                    "toolkits. natural attitude to use software craftsmanship patterns. " +
+                                    "familiar with Git version control system. " +
+                                    "able to communicate in both Polish and English. team player with " +
+                                    "an analytical approach and attention to detail"
+                        ),
+                        optionalBenefits = listOf(
+                            "familiarity with either Kotlin Coroutines or " +
+                                    "RxJava. understanding of unit testing practices. " +
+                                    "multi-module project experience"
+                        )
+                    )
+                )
 
             ),
             VacancyJobEntity(
@@ -183,7 +220,27 @@ class CollectionVacanciesInteractorImpl(
                         "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
                         "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
                         "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
-                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi",
+                requirementsEntityList = listOf(
+                    RequirementsEntity(
+                        "3",
+                        requirements = listOf(
+                            "at least 1 year of experience working as Android " +
+                                    "developer. good knowledge of Kotlin or Java. " +
+                                    "good understanding of Android frameworks and guidelines, " +
+                                    "experience in using Jetpack libraries and standard 3rd party " +
+                                    "toolkits. natural attitude to use software craftsmanship patterns. " +
+                                    "familiar with Git version control system. " +
+                                    "able to communicate in both Polish and English. team player with " +
+                                    "an analytical approach and attention to detail"
+                        ),
+                        optionalBenefits = listOf(
+                            "familiarity with either Kotlin Coroutines or " +
+                                    "RxJava. understanding of unit testing practices. " +
+                                    "multi-module project experience"
+                        )
+                    )
+                )
 
             ),
 
@@ -213,7 +270,27 @@ class CollectionVacanciesInteractorImpl(
                         "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
                         "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
                         "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
-                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi",
+                requirementsEntityList = listOf(
+                    RequirementsEntity(
+                        "4",
+                        requirements = listOf(
+                            "at least 1 year of experience working as Android " +
+                                    "developer. good knowledge of Kotlin or Java. " +
+                                    "good understanding of Android frameworks and guidelines, " +
+                                    "experience in using Jetpack libraries and standard 3rd party " +
+                                    "toolkits. natural attitude to use software craftsmanship patterns. " +
+                                    "familiar with Git version control system. " +
+                                    "able to communicate in both Polish and English. team player with " +
+                                    "an analytical approach and attention to detail"
+                        ),
+                        optionalBenefits = listOf(
+                            "familiarity with either Kotlin Coroutines or " +
+                                    "RxJava. understanding of unit testing practices. " +
+                                    "multi-module project experience"
+                        )
+                    )
+                )
 
             ),
             VacancyJobEntity(
@@ -247,7 +324,27 @@ class CollectionVacanciesInteractorImpl(
                         "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
                         "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
                         "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
-                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi",
+                requirementsEntityList = listOf(
+                    RequirementsEntity(
+                        "5",
+                        requirements = listOf(
+                            "at least 1 year of experience working as Android " +
+                                    "developer. good knowledge of Kotlin or Java. " +
+                                    "good understanding of Android frameworks and guidelines, " +
+                                    "experience in using Jetpack libraries and standard 3rd party " +
+                                    "toolkits. natural attitude to use software craftsmanship patterns. " +
+                                    "familiar with Git version control system. " +
+                                    "able to communicate in both Polish and English. team player with " +
+                                    "an analytical approach and attention to detail"
+                        ),
+                        optionalBenefits = listOf(
+                            "familiarity with either Kotlin Coroutines or " +
+                                    "RxJava. understanding of unit testing practices. " +
+                                    "multi-module project experience"
+                        )
+                    )
+                )
 
             ),
             VacancyJobEntity(
@@ -276,8 +373,27 @@ class CollectionVacanciesInteractorImpl(
                         "Projektowanie rozwiązań i implementacji nowych funkcjonalności " +
                         "wdrażanego rozwiązania informatycznego. Realizacja testów zapewniających " +
                         "wysoką jakość wdrażanego rozwiązania. Pomoc w rozwiązaniu problemów " +
-                        "związanych z aplikacjami. Integracja z systemami źródłowymi"
-
+                        "związanych z aplikacjami. Integracja z systemami źródłowymi",
+                requirementsEntityList = listOf(
+                    RequirementsEntity(
+                        "6",
+                        requirements = listOf(
+                            "at least 1 year of experience working as Android " +
+                                    "developer. good knowledge of Kotlin or Java. " +
+                                    "good understanding of Android frameworks and guidelines, " +
+                                    "experience in using Jetpack libraries and standard 3rd party " +
+                                    "toolkits. natural attitude to use software craftsmanship patterns. " +
+                                    "familiar with Git version control system. " +
+                                    "able to communicate in both Polish and English. team player with " +
+                                    "an analytical approach and attention to detail"
+                        ),
+                        optionalBenefits = listOf(
+                            "familiarity with either Kotlin Coroutines or " +
+                                    "RxJava. understanding of unit testing practices. " +
+                                    "multi-module project experience"
+                        )
+                    )
+                )
             ),
         )
     }
