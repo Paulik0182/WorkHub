@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nayya.workhub.databinding.FragmentWorkHubBinding
+import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
 import com.nayya.workhub.ui.root.ViewBindingFragment
 
@@ -32,22 +33,37 @@ class VacanciesListFragment : ViewBindingFragment<FragmentWorkHubBinding>(
         super.onViewCreated(view, savedInstanceState)
         initView()
 
-        viewModel.vacanciesLiveData.observe(viewLifecycleOwner) {
-            adapter.setData(it)
+        updateView()
+
+        viewModel.selectedVacancyJobLiveData.observe(viewLifecycleOwner) {
+            getController().openDetailsVacancyJob(it)
         }
     }
 
     private fun initView() {
         recyclerView = binding.workListRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = VacanciesListAdapter()
+        adapter = VacanciesListAdapter(
+            data = emptyList(),
+            onDetailsJobListener = {
+                viewModel.onVacancyJobClick(it)
+            },
+            context = requireContext(),
+            viewModel = viewModel
+        )
         recyclerView.adapter = adapter
+    }
+
+    private fun updateView() {
+        viewModel.vacanciesLiveData.observe(viewLifecycleOwner) {
+            adapter.setData(it)
+        }
     }
 
     private fun getController(): Controller = activity as Controller
 
     interface Controller {
-        //todo
+        fun openDetailsVacancyJob(vacancyJobEntity: VacancyJobEntity)
     }
 
     override fun onAttach(context: Context) {

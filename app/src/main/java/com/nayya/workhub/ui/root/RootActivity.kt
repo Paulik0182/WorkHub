@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nayya.workhub.R
 import com.nayya.workhub.databinding.ActivityRootBinding
+import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
 import com.nayya.workhub.ui.VacanciesListFragment
 import com.nayya.workhub.ui.documents_user.DocumentsUserFragment
+import com.nayya.workhub.ui.job_details.JobDetailsFragment
 import com.nayya.workhub.ui.notification_offer.NotificationOfferFragment
 import com.nayya.workhub.ui.save_offer.SaveOfferFragment
 import com.nayya.workhub.ui.search_offer.SearchOfferFragment
@@ -34,7 +36,8 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
     UserProfileFragment.Controller,
     NotificationOfferFragment.Controller,
     SettingsFragment.Controller,
-    FilterCategoryVacanciesFragment.Controller {
+    FilterCategoryVacanciesFragment.Controller,
+    JobDetailsFragment.Controller {
 
     private var isSlaveBnbVisible = false
 
@@ -54,7 +57,7 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
             title = it.title
             when (it.itemId) {
                 R.id.my_offer_item -> {
-                    swapFragment(RootFragment.newInstance())
+                    swapFragment(VacanciesListFragment.newInstance())
                     hideSlaveDeviceBottomNavigationView()
                 }
 
@@ -119,13 +122,13 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
             .commit()
     }
 
-    override fun openWorkHub() {
-        val fragment = VacanciesListFragment.newInstance()
+    override fun openFilterCategoryVacancies() {
+        val fragment = FilterCategoryVacanciesFragment.newInstance()
         swapFragmentBackStack(fragment)
     }
 
-    override fun openFilterCategoryVacancies() {
-        val fragment = FilterCategoryVacanciesFragment.newInstance()
+    override fun openDetailsVacancyJob(vacancyJobEntity: VacancyJobEntity) {
+        val fragment = JobDetailsFragment.newInstance(vacancyJobEntity.key)
         swapFragmentBackStack(fragment)
     }
 

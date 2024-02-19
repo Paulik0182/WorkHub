@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/label_company_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_vacancies_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_vacancies"
+                android:textSize="@dimen/default_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/name_company_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/mame_company"
+                android:textSize="@dimen/default_text" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/financial_proposal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/financial_proposal_image"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/financial_proposal_layout"
+            app:layout_constraintEnd_toStartOf="@+id/financial_proposal_text_view"
+            app:layout_constraintStart_toStartOf="@+id/financial_proposal_layout"
+            app:layout_constraintTop_toTopOf="@+id/financial_proposal_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/financial_proposal_text_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_vertical"
+            android:text="@string/financial_proposal"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintBottom_toBottomOf="@+id/financial_proposal_layout"
+            app:layout_constraintEnd_toEndOf="@+id/financial_proposal_layout"
+            app:layout_constraintStart_toEndOf="@+id/financial_proposal_image"
+            app:layout_constraintTop_toTopOf="@+id/financial_proposal_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/elements_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/elements_image"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/elements_layout"
+            app:layout_constraintEnd_toStartOf="@+id/elements_text_view"
+            app:layout_constraintStart_toStartOf="@+id/elements_layout"
+            app:layout_constraintTop_toTopOf="@+id/elements_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/elements_text_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_vertical"
+            android:text="@string/elements"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintBottom_toBottomOf="@+id/elements_layout"
+            app:layout_constraintEnd_toEndOf="@+id/elements_layout"
+            app:layout_constraintStart_toEndOf="@+id/elements_image"
+            app:layout_constraintTop_toTopOf="@+id/elements_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

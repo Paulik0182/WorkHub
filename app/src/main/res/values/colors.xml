@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="gray">#989494</color>
+    <color name="gray_white">#EDEAEA</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#AC0606</color>
+    <color name="blue">#114AF3</color>
 
     <!-- bottom nav menu -->
     <color name="item_icon_tint">#670A20</color>
     <color name="item_text">#670A20</color>
     <color name="bnv_default">#059EE4</color>
+
+
+    <!-- bottom -->
+    <color name="not_significantly_red">#51AC0606</color>
+    <color name="not_significantly_white">#88FFFFFF</color>
+
 
 </resources>
