@@ -4,6 +4,7 @@
     <color name="gray">#989494</color>
     <color name="gray_white">#EDEAEA</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_red">#FFEBEB</color>
     <color name="red">#AC0606</color>
     <color name="blue">#114AF3</color>
 

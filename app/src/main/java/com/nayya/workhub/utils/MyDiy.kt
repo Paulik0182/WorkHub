@@ -5,9 +5,11 @@ import com.google.gson.GsonBuilder
 import com.nayya.workhub.data.CategorySelectionRepoImpl
 import com.nayya.workhub.data.CategoryVacanciesRepoImpl
 import com.nayya.workhub.data.VacanciesTypeRepoImpl
+import com.nayya.workhub.data.favorite.OfferFavoriteRepoImpl
 import com.nayya.workhub.data.retrofit.ApiService
 import com.nayya.workhub.domain.repo.CategorySelectionRepo
 import com.nayya.workhub.domain.repo.CategoryVacanciesRepo
+import com.nayya.workhub.domain.repo.OfferFavoriteRepo
 import com.nayya.workhub.domain.repo.VacanciesTypeRepo
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,6 +38,8 @@ class MyDiy(
     val categorySelectionRepo: CategorySelectionRepo by lazy {
         CategorySelectionRepoImpl(context)
     }
+
+    val offerFavoriteRepo: OfferFavoriteRepo = OfferFavoriteRepoImpl()
 
     private val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 

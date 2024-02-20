@@ -64,6 +64,12 @@ class CollectionVacanciesInteractorImpl(
         }
     }
 
+    override fun setFavorite(offerId: String, isFavorite: Boolean) {
+        fakeData.first {
+            it.key == offerId
+        }.isFavorite = !isFavorite
+    }
+
     override fun getVacancyJob(id: String, callback: (VacancyJobEntity?) -> Unit) {
         if (isConnected()) {
 

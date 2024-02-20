@@ -56,6 +56,8 @@
     <string name="title_requirements">Наши требования</string>
     <string name="title_optional_benefits">Будет приемуществом</string>
 
+    <!-- Name Fragment -->
+    <string name="interesting_offers">Interesting offers</string>
 
     <string name="recent_requests">Твои последнии запросы</string>
     <string name="title_fragment_job_look">Какую работу ты ищешь?</string>

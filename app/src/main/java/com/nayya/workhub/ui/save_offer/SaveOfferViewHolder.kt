@@ -1,19 +1,18 @@
-package com.nayya.workhub.ui
+package com.nayya.workhub.ui.save_offer
 
 import android.content.Context
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.nayya.workhub.R
 import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
 
-class VacanciesListViewHolder(
+class SaveOfferViewHolder(
     initView: View,
     onDetailsJobListener: (VacancyJobEntity) -> Unit,
     val context: Context,
-    private val viewModel: VacanciesListViewModel
+    private val viewModel: SaveOfferViewModel
 ) : RecyclerView.ViewHolder(initView) {
 
     private lateinit var jobEntity: VacancyJobEntity
@@ -31,7 +30,6 @@ class VacanciesListViewHolder(
     private val gettingStartedUpkeepTv =
         itemView.findViewById<TextView>(R.id.getting_started_upkeep_text_view)
 
-    private val closeButtonTv = itemView.findViewById<TextView>(R.id.close_button_text_view)
     private val favoriteButtonTv = itemView.findViewById<TextView>(R.id.favorite_button_text_view)
 
     fun bind(work: VacancyJobEntity) {
@@ -60,22 +58,11 @@ class VacanciesListViewHolder(
     }
 
     init {
-        initView.setOnClickListener {
-            onDetailsJobListener.invoke(jobEntity)
-        }
-
-        closeButtonTv.setOnClickListener {
-            onDeleteClick()
-        }
 
         favoriteButtonTv.setOnClickListener {
             setColorFavoriteButtonTv()
-            Toast.makeText(context, "Действие еще не описано", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "Действие еще не описано", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun onDeleteClick() {
-        viewModel.onDeleteVacancy(jobEntity.key)
     }
 
     private fun setColorFavoriteButtonTv() {
@@ -93,7 +80,7 @@ class VacanciesListViewHolder(
             )
             favoriteButtonTv.setTextColor(ContextCompat.getColor(context, R.color.gray))
 
-            jobEntity.isFavorite = true
+//            flag = true
         } else {
             favoriteButtonTv.setCompoundDrawablesWithIntrinsicBounds(
                 favoriteRedIcon,
@@ -102,7 +89,7 @@ class VacanciesListViewHolder(
                 null
             )
             favoriteButtonTv.setTextColor(ContextCompat.getColor(context, R.color.red))
-            jobEntity.isFavorite = false
+//            flag = false
         }
     }
 }

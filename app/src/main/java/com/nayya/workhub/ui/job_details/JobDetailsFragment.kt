@@ -13,6 +13,8 @@ import com.nayya.workhub.R
 import com.nayya.workhub.databinding.FragmentJobDetailsBinding
 import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
+import com.nayya.workhub.domain.interactor.FavoriteCollectionVacanciesJobInteractor
+import com.nayya.workhub.domain.repo.OfferFavoriteRepo
 import com.nayya.workhub.ui.root.ViewBindingFragment
 import com.nayya.workhub.utils.bpDataFormatter
 
@@ -30,12 +32,24 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
         app.collectionVacanciesInteractor
     }
 
+    private val favoriteCollectionVacanciesJobInteractor:
+            FavoriteCollectionVacanciesJobInteractor by lazy {
+        app.favoriteCollectionVacanciesJobInteractor
+    }
+
+
+    private val offerFavoriteRepo: OfferFavoriteRepo by lazy {
+        app.myDiy.offerFavoriteRepo
+    }
+
     private val viewModel: JobDetailsViewModel by lazy {
         ViewModelProvider(
             this,
             JobDetailsViewModel.Factory(
-                collectionVacanciesInteractor,
-                requireArguments().getString(DETAILS_JPB_KEY)!!
+                collectionVacanciesInteractor = collectionVacanciesInteractor,
+                vacancyJobId = requireArguments().getString(DETAILS_JPB_KEY)!!,
+                favoriteCollectionVacanciesJobInteractor = favoriteCollectionVacanciesJobInteractor,
+                offerFavoriteRepo = offerFavoriteRepo
             )
         )[JobDetailsViewModel::class.java]
     }
@@ -46,13 +60,18 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
         viewModel.vacancyJobLiveData.observe(viewLifecycleOwner) {
             setJob(it)
         }
+
+        viewModel.favoriteVacancyJobLiveData.observe(viewLifecycleOwner) {
+
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun setJob(vacancyJobEntity: VacancyJobEntity) {
+        setColorFavoriteButtonTv(vacancyJobEntity.isFavorite)
 
         val valueFinancialProposal = vacancyJobEntity.financialProposalList
-            .first()?.financialProposal.toString().removeSurrounding("[", "]")
+            ?.first()?.financialProposal.toString().removeSurrounding("[", "]")
             .split(", ") // Разделение значений списка
             .joinToString(separator = "\n") // Объединение значений с новой строки
 
@@ -72,7 +91,7 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
             )
 
         val contractOption =
-            vacancyJobEntity.contractOptionList.first()?.contractOption.toString()
+            vacancyJobEntity.contractOptionList?.first()?.contractOption.toString()
                 .removeSurrounding("[", "]")
 
         val offerValid = vacancyJobEntity.offerValid
@@ -105,7 +124,8 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
             sendMessage()
         }
         binding.basicInformationInclude.favoriteButtonTextView.setOnClickListener {
-            setColorFavoriteButtonTv()
+            viewModel.onFavoriteChange(vacancyJobEntity)
+            setColorFavoriteButtonTv(!vacancyJobEntity.isFavorite)
         }
 
         VacancyJobParsingText(vacancyJobEntity)
@@ -195,13 +215,13 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
         startActivity(chooserIntent)
     }
 
-    private fun setColorFavoriteButtonTv() {
+    private fun setColorFavoriteButtonTv(isFavorite: Boolean) {
         val favoriteRedIcon =
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_emergency_red_24)
         val favoriteGrayIcon =
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_emergency_24)
 
-        if (!flag) {
+        if (!isFavorite) {
             binding.basicInformationInclude.favoriteButtonTextView.setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 favoriteGrayIcon,
@@ -215,7 +235,6 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
                 )
             )
 
-            flag = true
         } else {
             binding.basicInformationInclude.favoriteButtonTextView.setCompoundDrawablesWithIntrinsicBounds(
                 null,
@@ -229,7 +248,6 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
                     R.color.red
                 )
             )
-            flag = false
         }
     }
 
