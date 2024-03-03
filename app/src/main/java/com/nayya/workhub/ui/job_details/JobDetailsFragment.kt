@@ -11,12 +11,13 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.nayya.workhub.R
 import com.nayya.workhub.databinding.FragmentJobDetailsBinding
+import com.nayya.workhub.domain.entity.offer.OfferListItem
+import com.nayya.workhub.domain.entity.offer.repo.PracujPlOfferVacancyRepo
+import com.nayya.workhub.domain.entity.offer.vacansy_dto.VacancyHeadingEntity
+import com.nayya.workhub.domain.entity.offer.vacansy_dto.addition.VacancyAdditionEntity
 import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
-import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
-import com.nayya.workhub.domain.interactor.FavoriteCollectionVacanciesJobInteractor
-import com.nayya.workhub.domain.repo.OfferFavoriteRepo
 import com.nayya.workhub.ui.root.ViewBindingFragment
-import com.nayya.workhub.utils.bpDataFormatter
+import com.nayya.workhub.utils.image.GlideImageLoader
 
 private const val DETAILS_JPB_KEY = "DETAILS_JPB_KEY"
 private const val DAY_IN_MS = 24 * 60 * 60 * 1000L
@@ -26,30 +27,29 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
     FragmentJobDetailsBinding::inflate
 ) {
 
-    private var flag = true
-
-    private val collectionVacanciesInteractor: CollectionVacanciesInteractor by lazy {
-        app.collectionVacanciesInteractor
+    private val pracujPlOfferVacancyRepo: PracujPlOfferVacancyRepo by lazy {
+        app.pracujPlOfferVacancyRepo
     }
 
-    private val favoriteCollectionVacanciesJobInteractor:
-            FavoriteCollectionVacanciesJobInteractor by lazy {
-        app.favoriteCollectionVacanciesJobInteractor
-    }
-
-
-    private val offerFavoriteRepo: OfferFavoriteRepo by lazy {
-        app.myDiy.offerFavoriteRepo
-    }
+//    private val collectionVacanciesInteractor: CollectionVacanciesInteractor by lazy {
+//        app.collectionVacanciesInteractor
+//    }
+//    private val favoriteCollectionVacanciesJobInteractor:
+//            FavoriteCollectionVacanciesJobInteractor by lazy {
+//        app.favoriteCollectionVacanciesJobInteractor
+//    }
+//
+//
+//    private val offerFavoriteRepo: OfferFavoriteRepo by lazy {
+//        app.myDiy.offerFavoriteRepo
+//    }
 
     private val viewModel: JobDetailsViewModel by lazy {
         ViewModelProvider(
             this,
             JobDetailsViewModel.Factory(
-                collectionVacanciesInteractor = collectionVacanciesInteractor,
-                vacancyJobId = requireArguments().getString(DETAILS_JPB_KEY)!!,
-                favoriteCollectionVacanciesJobInteractor = favoriteCollectionVacanciesJobInteractor,
-                offerFavoriteRepo = offerFavoriteRepo
+                pracujPlOfferVacancyRepo = pracujPlOfferVacancyRepo,
+                offerListItem = arguments?.getParcelable(DETAILS_JPB_KEY) as? OfferListItem
             )
         )[JobDetailsViewModel::class.java]
     }
@@ -57,82 +57,189 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.vacancyJobLiveData.observe(viewLifecycleOwner) {
+        viewModel.vacancyJobHeadingLiveData.observe(viewLifecycleOwner) {
             setJob(it)
         }
 
-        viewModel.favoriteVacancyJobLiveData.observe(viewLifecycleOwner) {
-
+        viewModel.vacancyJobAdditionLiveData.observe(viewLifecycleOwner) {
+            setJobAddition(it)
         }
+
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun setJob(vacancyJobEntity: VacancyJobEntity) {
-        setColorFavoriteButtonTv(vacancyJobEntity.isFavorite)
+    private fun setJobAddition(vacancyAdditionEntity: VacancyAdditionEntity) {
 
-        val valueFinancialProposal = vacancyJobEntity.financialProposalList
-            ?.first()?.financialProposal.toString().removeSurrounding("[", "]")
-            .split(", ") // Разделение значений списка
-            .joinToString(separator = "\n") // Объединение значений с новой строки
+        val labelCompany = vacancyAdditionEntity.offerReducer?.offer?.style?.logo
 
-        val valueCountry =
-            vacancyJobEntity.countryList.first().country.toString().removeSurrounding(
-                "[", "]"
-            )
+        labelCompany?.let {
+            GlideImageLoader().loadInto(it, binding.basicInformationInclude.labelCompanyImage)
+        }
 
-        val valueCity =
-            vacancyJobEntity.cityList.first().city.toString().removeSurrounding(
-                "[", "]"
-            )
+        binding.basicInformationInclude.financialProposalTextView.text =
+            getSalaryInfoString(vacancyAdditionEntity)
 
-        val dateEnd =
-            bpDataFormatter.format(
-                (DAY_IN_MS * vacancyJobEntity.offerValid) + vacancyJobEntity.deadlineEndOffer
-            )
+        binding.basicInformationInclude.countryCityTextView.text =
+            getAddressString(vacancyAdditionEntity)
 
-        val contractOption =
-            vacancyJobEntity.contractOptionList?.first()?.contractOption.toString()
-                .removeSurrounding("[", "]")
-
-        val offerValid = vacancyJobEntity.offerValid
-
-        binding.basicInformationInclude.titleVacanciesTextView.text =
-            vacancyJobEntity.titleVacancies
-
-        binding.basicInformationInclude.nameCompanyTextView.text = vacancyJobEntity.nameCompany
-        binding.basicInformationInclude.financialProposalTextView.text = valueFinancialProposal
-        binding.basicInformationInclude.countryCityTextView.text = ("$valueCity, $valueCountry")
-        binding.basicInformationInclude.informationAboutEndOfferTextView.text =
-            "Really: $offerValid day"
-
-        binding.basicInformationInclude.informationAboutEndOfferDateTextView.text = "Do: $dateEnd"
-        binding.basicInformationInclude.contractOptionTextView.text = contractOption
         binding.basicInformationInclude.employmentRateTextView.text =
-            vacancyJobEntity.employmentRate
+            vacancyAdditionEntity.offerReducer?.offer?.workSchedules
 
         binding.basicInformationInclude.specialistLevelTextView.text =
-            vacancyJobEntity.specialistLevel
+            vacancyAdditionEntity.offerReducer?.offer?.positionLevelsName
 
-        binding.basicInformationInclude.typeWorkTextView.text = vacancyJobEntity.typeWork
+        binding.basicInformationInclude.typeWorkTextView.text =
+            getTypeWorkString(vacancyAdditionEntity)
+
         binding.basicInformationInclude.gettingStartedTextView.text =
-            vacancyJobEntity.gettingStarted
+            getStartedString(vacancyAdditionEntity)
+    }
 
-        binding.basicInformationInclude.informationAboutInterviewTextView.text =
-            vacancyJobEntity.interviewMethod
+    /** Преобразуем строку о найме (кого или/и когда нанимают) */
+    private fun getStartedString(vacancyAdditionEntity: VacancyAdditionEntity): String {
+        return vacancyAdditionEntity.offerReducer?.offer?.primaryAttributes?.mapNotNull {
+            it.label?.primaryTargetSiteText
+        }?.joinToString("\n") ?: ""
+    }
 
-        binding.basicInformationInclude.shareButtonTextView.setOnClickListener {
-            sendMessage()
+    /** Преобразуем строку о типе работы */
+    private fun getTypeWorkString(vacancyAdditionEntity: VacancyAdditionEntity): String {
+        return vacancyAdditionEntity.offerReducer?.offer?.workModes?.mapNotNull { it.text }
+            ?.joinToString("\n") ?: ""
+    }
+
+    /** Собираем строку по финансовому предложению (зарплата) */
+    private fun getSalaryInfoString(vacancyAdditionEntity: VacancyAdditionEntity): String {
+        val salaryList =
+            vacancyAdditionEntity.offerReducer?.offer?.typesOfContracts?.mapNotNull { it.salary }
+        val offerTitleList =
+            vacancyAdditionEntity.offerReducer?.offer?.typesOfContracts?.mapNotNull { it.name }
+
+        val salaryInfoList = salaryList?.mapIndexedNotNull { index, salary ->
+            val from = salary.from?.let {
+                String.format("%,d", it).replace(",", " ")
+            }
+            val to = salary.to?.let {
+                String.format("%,d", it).replace(",", " ")
+            }
+            val currency = salary.currency?.symbol
+            val timeUnit = salary.timeUnit?.shortForm?.name
+            val salaryKind = salary.salaryKind?.name
+
+            if (from != null && to != null) {
+                "$from - $to $currency. $salaryKind / $timeUnit"
+            } else {
+                null
+            }
         }
-        binding.basicInformationInclude.favoriteButtonTextView.setOnClickListener {
-            viewModel.onFavoriteChange(vacancyJobEntity)
-            setColorFavoriteButtonTv(!vacancyJobEntity.isFavorite)
-        }
 
-        VacancyJobParsingText(vacancyJobEntity)
+        /**  "zip" (соединение) между списками */
+        val combinedList =
+            offerTitleList?.zip(salaryInfoList ?: emptyList())
 
-        requirementsParsingText(vacancyJobEntity)
+        val salaryInfo =
+            combinedList?.joinToString("\n") { (offerTitle, salaryInfo) ->
+                "$offerTitle - $salaryInfo"
+            } ?: ""
 
-        optionalBenefitsParsingText(vacancyJobEntity)
+        return salaryInfo
+    }
+
+    /** Собираем строку по месту нахождению (Страна, регион, город) */
+    private fun getAddressString(vacancyAdditionEntity: VacancyAdditionEntity): String {
+        val countryTitle = vacancyAdditionEntity.offerReducer?.offer?.workplaces
+            ?.mapNotNull { it.country?.name }
+            ?.joinToString(", ")
+            ?.takeIf { it.isNotBlank() }
+
+        val regionTitle = vacancyAdditionEntity.offerReducer?.offer?.workplaces
+            ?.mapNotNull { it.region?.pracujPlName }
+            ?.joinToString(", ")
+            ?.takeIf { it.isNotBlank() }
+
+        val cityTitle = vacancyAdditionEntity.offerReducer?.offer?.workplaces
+            ?.mapNotNull { it.inlandLocation?.location?.name }
+            ?.joinToString(", ")
+            ?.takeIf { it.isNotBlank() }
+
+        val district = vacancyAdditionEntity.offerReducer?.offer?.workplaces
+            ?.mapNotNull { it.inlandLocation?.address?.district }
+            ?.joinToString(", ")
+            ?.takeIf { it.isNotBlank() }
+
+        return listOfNotNull(countryTitle, regionTitle, cityTitle, district)
+            .joinToString(", ")
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    private fun setJob(vacancyHeadingEntity: VacancyHeadingEntity) {
+
+//        setColorFavoriteButtonTv(vacancyJobDto.isFavorite)
+
+//        val valueFinancialProposal = vacancyJobEntity.financialProposalList
+//            ?.first()?.financialProposal.toString().removeSurrounding("[", "]")
+//            .split(", ") // Разделение значений списка
+//            .joinToString(separator = "\n") // Объединение значений с новой строки
+//
+//        val valueCountry =
+//            vacancyJobEntity.countryList.first().country.toString().removeSurrounding(
+//                "[", "]"
+//            )
+//
+//        val valueCity =
+//            vacancyJobEntity.cityList.first().city.toString().removeSurrounding(
+//                "[", "]"
+//            )
+//
+//        val dateEnd =
+//            bpDataFormatter.format(
+//                (DAY_IN_MS * vacancyJobEntity.offerValid) + vacancyJobEntity.deadlineEndOffer
+//            )
+//
+//        val contractOption =
+//            vacancyJobEntity.contractOptionList?.first()?.contractOption.toString()
+//                .removeSurrounding("[", "]")
+//
+//        val offerValid = vacancyJobEntity.offerValid
+
+        binding.basicInformationInclude.titleVacanciesTextView.text =
+            vacancyHeadingEntity.title
+
+        binding.basicInformationInclude.nameCompanyTextView.text =
+            vacancyHeadingEntity.hiringOrganization
+//        binding.basicInformationInclude.financialProposalTextView.text = valueFinancialProposal
+//        binding.basicInformationInclude.countryCityTextView.text = ("$valueCity, $valueCountry")
+//        binding.basicInformationInclude.informationAboutEndOfferTextView.text =
+//            "Really: $offerValid day"
+//
+//        binding.basicInformationInclude.informationAboutEndOfferDateTextView.text = "Do: $dateEnd"
+//        binding.basicInformationInclude.contractOptionTextView.text = contractOption
+//        binding.basicInformationInclude.employmentRateTextView.text =
+//            vacancyJobEntity.employmentRate
+//
+//        binding.basicInformationInclude.specialistLevelTextView.text =
+//            vacancyJobEntity.specialistLevel
+//
+//        binding.basicInformationInclude.typeWorkTextView.text = vacancyJobEntity.typeWork
+//        binding.basicInformationInclude.gettingStartedTextView.text =
+//            vacancyJobEntity.gettingStarted
+//
+//        binding.basicInformationInclude.informationAboutInterviewTextView.text =
+//            vacancyJobEntity.interviewMethod
+//
+//        binding.basicInformationInclude.shareButtonTextView.setOnClickListener {
+//            sendMessage()
+//        }
+//        binding.basicInformationInclude.favoriteButtonTextView.setOnClickListener {
+//            viewModel.onFavoriteChange(vacancyJobEntity)
+//            setColorFavoriteButtonTv(!vacancyJobEntity.isFavorite)
+//        }
+//
+//        VacancyJobParsingText(vacancyJobEntity)
+//
+//        requirementsParsingText(vacancyJobEntity)
+//
+//        optionalBenefitsParsingText(vacancyJobEntity)
     }
 
     @SuppressLint("NewApi")
@@ -265,11 +372,10 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
     companion object {
 
         @JvmStatic
-        fun newInstance(jobId: String) =
+        fun newInstance(offerListItem: OfferListItem) =
             JobDetailsFragment().apply {
                 arguments = Bundle().apply {
-                    putString(DETAILS_JPB_KEY, jobId)
-
+                    putParcelable(DETAILS_JPB_KEY, offerListItem)
                 }
             }
     }

@@ -7,10 +7,11 @@ import android.os.Looper
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.nayya.workhub.R
 import com.nayya.workhub.databinding.ActivityRootBinding
-import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
+import com.nayya.workhub.domain.entity.offer.OfferListItem
 import com.nayya.workhub.ui.VacanciesListFragment
 import com.nayya.workhub.ui.documents_user.DocumentsUserFragment
 import com.nayya.workhub.ui.job_details.JobDetailsFragment
@@ -127,9 +128,21 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
         swapFragmentBackStack(fragment)
     }
 
-    override fun openDetailsVacancyJob(vacancyJobEntity: VacancyJobEntity) {
-        val fragment = JobDetailsFragment.newInstance(vacancyJobEntity.key)
-        swapFragmentBackStack(fragment)
+    override fun openDetailsVacancyJob(offerListItem: OfferListItem) {
+
+        val value: Boolean = (offerListItem.offers?.size ?: 0) > 1
+
+        if (!value) {
+            val fragment = JobDetailsFragment.newInstance(offerListItem)
+            swapFragmentBackStack(fragment)
+        } else {
+            Toast.makeText(
+                this,
+                "Необходимо обработать множественные ссылки на вакансии. То-есть, имеются множество ссылок в зависимости от городов вакансий",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        /** !!! необходимо создать промежуточный фрагмент с выбором городов !!!*/
     }
 
     private fun movementSlaveDeviceBottomNavBar() {

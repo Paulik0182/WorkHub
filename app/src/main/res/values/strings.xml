@@ -37,10 +37,13 @@
     <string name="title_vacancies">Название вакансии</string>
     <string name="mame_company">Наименование фирмы</string>
     <string name="financial_proposal">Финансовое предложение</string>
+    <string name="work_schedules">График работы</string>
+    <string name="work_modes">Модель работы</string>
     <string name="country_city">Страна, город</string>
     <string name="information_about_end_offer">Действует еще 00 дней</string>
     <string name="information_about_end_offer_date">До: 20 февраля 2024</string>
     <string name="contract_option">Варианты контрактов</string>
+    <string name="position_levels">Позиция</string>
     <string name="employment_rate">Уровень занятости</string>
     <string name="specialist_level">Уровень специалиста</string>
     <string name="type_work">Вид работы (удаленно)</string>

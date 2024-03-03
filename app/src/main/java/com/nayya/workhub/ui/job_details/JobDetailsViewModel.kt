@@ -4,53 +4,66 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.nayya.workhub.domain.entity.favorite.FavoriteVacancyJobEntity
-import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
-import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
-import com.nayya.workhub.domain.interactor.FavoriteCollectionVacanciesJobInteractor
-import com.nayya.workhub.domain.repo.OfferFavoriteRepo
+import com.nayya.workhub.domain.entity.offer.OfferListItem
+import com.nayya.workhub.domain.entity.offer.repo.PracujPlOfferVacancyRepo
+import com.nayya.workhub.domain.entity.offer.vacansy_dto.VacancyHeadingEntity
+import com.nayya.workhub.domain.entity.offer.vacansy_dto.addition.VacancyAdditionEntity
 import com.nayya.workhub.utils.mutable
+import com.nayya.workhub.utils.toFormattedString
 
 class JobDetailsViewModel(
-    private val collectionVacanciesInteractor: CollectionVacanciesInteractor,
-    private val vacancyJobId: String,
-    private val favoriteCollectionVacanciesJobInteractor: FavoriteCollectionVacanciesJobInteractor,
-    private val offerFavoriteRepo: OfferFavoriteRepo
+//    private val collectionVacanciesInteractor: CollectionVacanciesInteractor,
+//    private val vacancyJobId: String,
+//    private val favoriteCollectionVacanciesJobInteractor: FavoriteCollectionVacanciesJobInteractor,
+//    private val offerFavoriteRepo: OfferFavoriteRepo,
+    private val pracujPlOfferVacancyRepo: PracujPlOfferVacancyRepo,
+    private val offerListItem: OfferListItem?
 ) : ViewModel() {
 
 
-    fun onFavoriteChange(vacancyJobEntity: VacancyJobEntity) {
-        collectionVacanciesInteractor.setFavorite(
-            vacancyJobEntity.key,
-            !vacancyJobEntity.isFavorite
-        )
-    }
+//    fun onFavoriteChange(vacancyJobEntity: VacancyJobEntity) {
+//        collectionVacanciesInteractor.setFavorite(
+//            vacancyJobEntity.key,
+//            !vacancyJobEntity.isFavorite
+//        )
+//    }
 
     class Factory(
-        private val collectionVacanciesInteractor: CollectionVacanciesInteractor,
-        private val vacancyJobId: String,
-        private val favoriteCollectionVacanciesJobInteractor: FavoriteCollectionVacanciesJobInteractor,
-        private val offerFavoriteRepo: OfferFavoriteRepo
+        private val pracujPlOfferVacancyRepo: PracujPlOfferVacancyRepo,
+        private val offerListItem: OfferListItem?
     ) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return JobDetailsViewModel(
-                collectionVacanciesInteractor,
-                vacancyJobId,
-                favoriteCollectionVacanciesJobInteractor,
-                offerFavoriteRepo
+                pracujPlOfferVacancyRepo,
+                offerListItem
             ) as T
         }
     }
 
-    val vacancyJobLiveData: LiveData<VacancyJobEntity> = MutableLiveData()
-    val favoriteVacancyJobLiveData: LiveData<FavoriteVacancyJobEntity> = MutableLiveData()
+    val vacancyJobHeadingLiveData: LiveData<VacancyHeadingEntity> = MutableLiveData()
+    val vacancyJobAdditionLiveData: LiveData<VacancyAdditionEntity> = MutableLiveData()
+//    val favoriteVacancyJobLiveData: LiveData<FavoriteVacancyJobEntity> = MutableLiveData()
 
     init {
-        if (vacancyJobLiveData.value == null) {
-            collectionVacanciesInteractor.getVacancyJob(vacancyJobId) {
+
+        val offerUrl = offerListItem?.offers?.map {
+            it.offerAbsoluteUri
+        }?.toFormattedString()
+
+
+        if (vacancyJobHeadingLiveData.value == null) {
+            pracujPlOfferVacancyRepo.extractOfferHeading(offerUrl!!) {
                 it.let {
-                    vacancyJobLiveData.mutable().postValue(it)
+                    vacancyJobHeadingLiveData.mutable().postValue(it)
+                }
+            }
+        }
+
+        if (vacancyJobAdditionLiveData.value == null) {
+            pracujPlOfferVacancyRepo.extractOfferAddition(offerUrl!!) {
+                it.let {
+                    vacancyJobAdditionLiveData.mutable().postValue(it)
                 }
             }
         }

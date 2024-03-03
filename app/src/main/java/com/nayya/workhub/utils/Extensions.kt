@@ -16,3 +16,8 @@ fun <T> LiveData<T>.mutable(): MutableLiveData<T> {
 
 @SuppressLint("SimpleDateFormat")
 var bpDataFormatter = SimpleDateFormat("dd MMMM yyyy")
+
+fun <T> List<T>.toFormattedString(): String {
+    return this.toString()
+        .removeSurrounding("[", "]")
+}

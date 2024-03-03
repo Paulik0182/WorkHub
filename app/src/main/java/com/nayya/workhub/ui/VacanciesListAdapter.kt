@@ -4,19 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.nayya.workhub.R
-import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
+import com.nayya.workhub.domain.entity.offer.OfferListItem
+import com.nayya.workhub.utils.image.ImageLoader
 
 class VacanciesListAdapter(
-    private var data: List<VacancyJobEntity> = mutableListOf(),
-    private var onDetailsJobListener: (VacancyJobEntity) -> Unit = {},
+    private var data: List<OfferListItem> = mutableListOf(),
+    private var onDetailsJobListener: (OfferListItem) -> Unit = {},
     val context: Context,
+    private val imageLoader: ImageLoader<ImageView>,
     private val viewModel: VacanciesListViewModel
 ) : RecyclerView.Adapter<VacanciesListViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(work: List<VacancyJobEntity>) {
+    fun setData(work: List<OfferListItem>) {
         data = work
         notifyDataSetChanged()
     }
@@ -29,6 +32,7 @@ class VacanciesListAdapter(
                 ),
             onDetailsJobListener,
             context,
+            imageLoader,
             viewModel
         )
     }
@@ -37,7 +41,7 @@ class VacanciesListAdapter(
         holder.bind(getItem(position))
     }
 
-    private fun getItem(position: Int): VacancyJobEntity {
+    private fun getItem(position: Int): OfferListItem {
         return data[position]
     }
 

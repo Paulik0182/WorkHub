@@ -49,8 +49,8 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     // Android X Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     // recyclerView
     implementation("androidx.recyclerview:recyclerview:1.3.2")
@@ -87,6 +87,10 @@ dependencies {
 
     // SharedPreferences
     implementation("androidx.preference:preference-ktx:1.2.1")
+
+    // glide
+    implementation("com.github.bumptech.glide:glide:4.14.2")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.13.2")
 
     // Test
     testImplementation("junit:junit:4.13.2")

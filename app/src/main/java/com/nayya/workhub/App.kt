@@ -6,7 +6,11 @@ import android.content.Context
 import com.nayya.workhub.data.CategorySelectionInteractorImpl
 import com.nayya.workhub.data.CollectionVacanciesInteractorImpl
 import com.nayya.workhub.data.favorite.FavoriteCollectionVacanciesJobInteractorImpl
+import com.nayya.workhub.data.filtered_offers.PracujPlOfferVacancyRepoImpl
+import com.nayya.workhub.data.filtered_offers.PracujPlOffersJobRepoImpl
 import com.nayya.workhub.data.retrofit.VacanciesRepoImpl
+import com.nayya.workhub.domain.entity.offer.repo.PracujPlOfferVacancyRepo
+import com.nayya.workhub.domain.entity.offer.repo.PracujPlOffersJobRepo
 import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
 import com.nayya.workhub.domain.interactor.FavoriteCollectionVacanciesJobInteractor
@@ -41,6 +45,18 @@ class App : Application() {
         FavoriteCollectionVacanciesJobInteractorImpl(
             collectionVacanciesInteractor = collectionVacanciesInteractor,
             offerFavoriteRepo = myDiy.offerFavoriteRepo
+        )
+    }
+
+    val pracujPlOffersJobRepo: PracujPlOffersJobRepo by lazy {
+        PracujPlOffersJobRepoImpl(
+            context = this
+        )
+    }
+
+    val pracujPlOfferVacancyRepo: PracujPlOfferVacancyRepo by lazy {
+        PracujPlOfferVacancyRepoImpl(
+            context = this
         )
     }
 

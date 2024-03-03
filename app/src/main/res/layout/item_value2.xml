@@ -98,6 +98,29 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/position_levels_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/position_levels_image"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/fragment_job_look" />
+
+                <TextView
+                    android:id="@+id/position_levels_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/position_levels"
+                    android:textSize="@dimen/for_lists_text" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/financial_proposal_upkeep_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,13 +144,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/getting_started_upkeep_layout"
+                android:id="@+id/work_schedules_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/getting_started_upkeep_image"
+                    android:id="@+id/work_schedules_image"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_gravity="center"
@@ -135,10 +158,33 @@
                     app:srcCompat="@drawable/fragment_job_look" />
 
                 <TextView
-                    android:id="@+id/getting_started_upkeep_text_view"
+                    android:id="@+id/work_schedules_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/getting_started"
+                    android:text="@string/work_schedules"
+                    android:textSize="@dimen/for_lists_text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/work_modes_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/work_modes_image"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/fragment_job_look" />
+
+                <TextView
+                    android:id="@+id/work_modes_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/work_modes"
                     android:textSize="@dimen/for_lists_text" />
 
             </LinearLayout>
@@ -164,12 +210,12 @@
             style="@style/MyButtonFilterFragmentJobLook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_close_24"
-            android:text="@string/close_element_bottom"
             android:clickable="true"
-            android:textColor="@color/gray"
+            android:drawableLeft="@drawable/ic_close_24"
             android:padding="@dimen/default_button_text_view_padding"
             android:paddingStart="@dimen/bottom_edit_text_padding"
+            android:text="@string/close_element_bottom"
+            android:textColor="@color/gray"
             android:textSize="@dimen/for_lists_text"
             app:layout_constraintBottom_toBottomOf="@+id/button_upkeep_layout"
             app:layout_constraintStart_toStartOf="@+id/button_upkeep_layout"
@@ -180,11 +226,11 @@
             style="@style/MyButtonFilterFragmentJobLook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_emergency_24"
-            android:text="@string/favorite_element_bottom"
             android:clickable="true"
+            android:drawableLeft="@drawable/ic_emergency_24"
             android:padding="@dimen/default_button_text_view_padding"
             android:paddingEnd="@dimen/bottom_edit_text_padding"
+            android:text="@string/favorite_element_bottom"
             android:textColor="@color/gray"
             android:textSize="@dimen/for_lists_text"
             app:layout_constraintBottom_toBottomOf="@+id/button_upkeep_layout"
