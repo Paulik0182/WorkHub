@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nayya.workhub.databinding.FragmentCityForWorkBinding
 import com.nayya.workhub.domain.entity.offer.OfferJob
+import com.nayya.workhub.domain.entity.offer.OfferListItem
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOffersJobRepo
 import com.nayya.workhub.ui.root.ViewBindingFragment
 
@@ -26,7 +27,7 @@ class CityForWorkFragment : ViewBindingFragment<FragmentCityForWorkBinding>(
             this,
             CityForWorkViewModel.Factory(
                 pracujPlOffersJobRepo = pracujPlOffersJobRepo,
-                groupId = arguments?.getString(OFFER_ID) ?: "" // todo возможна ошибка - обработать
+                offerListItem = arguments?.getParcelable(OFFER_ID)!! // todo возможна ошибка - обработать
             )
         )[CityForWorkViewModel::class.java]
     }
@@ -77,10 +78,10 @@ class CityForWorkFragment : ViewBindingFragment<FragmentCityForWorkBinding>(
 
         @JvmStatic
         fun newInstance(
-            groupId: String?
+            offerListItem: OfferListItem
         ) = CityForWorkFragment().apply {
             arguments = Bundle().apply {
-                putString(OFFER_ID, groupId)
+                putParcelable(OFFER_ID, offerListItem)
             }
         }
     }

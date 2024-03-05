@@ -19,6 +19,7 @@ import com.nayya.workhub.ui.job_details.city_for_work.CityForWorkFragment
 import com.nayya.workhub.ui.notification_offer.NotificationOfferFragment
 import com.nayya.workhub.ui.save_offer.SaveOfferFragment
 import com.nayya.workhub.ui.search_offer.SearchOfferFragment
+import com.nayya.workhub.ui.search_offer.distance_in_km.DistanceFromCityFragment
 import com.nayya.workhub.ui.search_offer.filter.FilterCategoryVacanciesFragment
 import com.nayya.workhub.ui.settings.SettingsFragment
 import com.nayya.workhub.ui.user_profile.UserProfileFragment
@@ -27,6 +28,7 @@ import java.util.Stack
 private const val TAG_ROOT_CONTAINER_FRAGMENT = "TAG_ROOT_CONTAINER_FRAGMENT"
 private const val TAG_CITY_FOR_WORK_FRAGMENT = "TAG_CITY_FOR_WORK_FRAGMENT"
 private const val TAG_JOB_DETAILS_FRAGMENT = "TAG_JOB_DETAILS_FRAGMENT"
+private const val TAG_DISTANCE_FORM_CITY_FRAGMENT = "TAG_DISTANCE_FORM_CITY_FRAGMENT"
 private const val ANIMATION_TIME_BOTTOM_NAV_BAR = 500L
 private const val CLOSING_DELAY_TIME_BOTTOM_NAV_BAR = 500L
 
@@ -43,7 +45,8 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
     SettingsFragment.Controller,
     FilterCategoryVacanciesFragment.Controller,
     JobDetailsFragment.Controller,
-    CityForWorkFragment.Controller {
+    CityForWorkFragment.Controller,
+    DistanceFromCityFragment.Controller {
 
     private var isSlaveBnbVisible = false
 
@@ -136,17 +139,22 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
         swapFragmentBackStack(fragment, TAG_ROOT_CONTAINER_FRAGMENT)
     }
 
+    override fun openDistanceFormCity() {
+        val fragment = DistanceFromCityFragment.newInstance()
+        swapFragmentBackStack(fragment, TAG_DISTANCE_FORM_CITY_FRAGMENT)
+    }
+
     override fun openDetailsVacancyJob(offerListItem: OfferListItem) {
         val manyCities: Boolean = (offerListItem.offers?.size ?: 0) > 1
 
-        val offers = offerListItem.offers?.firstOrNull()
+        val offer = offerListItem.offers?.firstOrNull()
 
         if (!manyCities) {
-            val fragment = JobDetailsFragment.newInstance(offers)
+            val fragment = JobDetailsFragment.newInstance(offer)
             swapFragmentBackStack(fragment, TAG_JOB_DETAILS_FRAGMENT)
         } else {
             val fragment = CityForWorkFragment.newInstance(
-                offerListItem.groupId
+                offerListItem
             )
             swapFragmentBackStack(fragment, TAG_CITY_FOR_WORK_FRAGMENT)
         }
@@ -252,7 +260,7 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
         menuItem.setTitle(R.string.close_two_nav)
     }
 
-    private fun deleteFragmentByTagFromBackStack(tegFragment: String) {
+    private fun deleteFragmentByTagFromBackStack(tagFragment: String) {
         val fragmentManager = supportFragmentManager
         val backStackCount = fragmentManager.backStackEntryCount
 
@@ -268,13 +276,12 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
         }
 
 // Удаление конкретного фрагмента из стека обратного вызова
-        val fragmentToRemove = fragmentList.firstOrNull {
-            it.tag == tegFragment
-        }
-        fragmentToRemove?.let {
-            val transaction = fragmentManager.beginTransaction()
-            transaction.remove(it)
-            transaction.commit()
+        fragmentList.filter {
+            it.tag == tagFragment
+        }.forEach {
+            fragmentManager.beginTransaction()
+                .remove(it)
+                .commit()
         }
     }
 

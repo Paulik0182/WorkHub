@@ -5,23 +5,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nayya.workhub.domain.entity.offer.OfferJob
+import com.nayya.workhub.domain.entity.offer.OfferListItem
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOffersJobRepo
 import com.nayya.workhub.utils.mutable
 
 class CityForWorkViewModel(
     private val pracujPlOffersJobRepo: PracujPlOffersJobRepo,
-    private val groupId: String
+    private val offerListItem: OfferListItem
 ) : ViewModel() {
 
     class Factory(
         private val pracujPlOffersJobRepo: PracujPlOffersJobRepo,
-        private val groupId: String
+        private val offerListItem: OfferListItem
     ) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return CityForWorkViewModel(
                 pracujPlOffersJobRepo,
-                groupId
+                offerListItem
             ) as T
         }
     }
@@ -29,11 +30,8 @@ class CityForWorkViewModel(
     val cityLiveData: LiveData<List<OfferJob>> = MutableLiveData()
     val selectedCityLiveData: LiveData<OfferJob> = MutableLiveData()
 
-
     init {
-        pracujPlOffersJobRepo.getCities(groupId) {
-            cityLiveData.mutable().postValue(it)
-        }
+        cityLiveData.mutable().postValue(offerListItem.offers)
     }
 
     fun onCityClick(cityListItem: OfferJob) {

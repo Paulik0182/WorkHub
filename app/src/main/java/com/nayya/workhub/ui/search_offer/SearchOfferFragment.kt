@@ -19,12 +19,17 @@ class SearchOfferFragment : ViewBindingFragment<FragmentSearchOfferBinding>(
         binding.filterCategoryButton.setOnClickListener {
             getController().openFilterCategoryVacancies()
         }
+
+        binding.distanceFromCityEditText.setOnClickListener {
+            getController().openDistanceFormCity()
+        }
     }
 
     private fun getController(): Controller = activity as Controller
 
     interface Controller {
         fun openFilterCategoryVacancies()
+        fun openDistanceFormCity()
     }
 
     override fun onAttach(context: Context) {

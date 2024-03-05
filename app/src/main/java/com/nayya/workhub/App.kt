@@ -6,9 +6,11 @@ import android.content.Context
 import com.nayya.workhub.data.CategorySelectionInteractorImpl
 import com.nayya.workhub.data.CollectionVacanciesInteractorImpl
 import com.nayya.workhub.data.favorite.FavoriteCollectionVacanciesJobInteractorImpl
+import com.nayya.workhub.data.filtered_offers.ConditionSelectionVacancyRepoImpl
 import com.nayya.workhub.data.filtered_offers.PracujPlOfferVacancyRepoImpl
 import com.nayya.workhub.data.filtered_offers.PracujPlOffersJobRepoImpl
 import com.nayya.workhub.data.retrofit.VacanciesRepoImpl
+import com.nayya.workhub.domain.entity.filter_category.filter_repo.ConditionSelectionVacancyRepo
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOfferVacancyRepo
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOffersJobRepo
 import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
@@ -58,6 +60,10 @@ class App : Application() {
         PracujPlOfferVacancyRepoImpl(
             context = this
         )
+    }
+
+    val conditionSelectionVacancyRepo: ConditionSelectionVacancyRepo by lazy {
+        ConditionSelectionVacancyRepoImpl()
     }
 
     override fun onCreate() {

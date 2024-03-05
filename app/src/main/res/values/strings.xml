@@ -62,7 +62,8 @@
     <!-- Name Fragment -->
     <string name="interesting_offers">Interesting offers</string>
     <string name="city_for_work">Ваберете город</string>
-
+    <string name="filter_job">Фильтр вакансий</string>
+    <string name="distance_from_city_km">Удаленность от города</string>
 
     <string name="recent_requests">Твои последнии запросы</string>
     <string name="title_fragment_job_look">Какую работу ты ищешь?</string>

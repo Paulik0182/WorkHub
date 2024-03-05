@@ -18,11 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/filter_job"
+            android:text="@string/distance_from_city_km"
             android:textSize="@dimen/for_list_header" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/category_vacancies_list_recycler_view"
+            android:id="@+id/distance_list_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp"
