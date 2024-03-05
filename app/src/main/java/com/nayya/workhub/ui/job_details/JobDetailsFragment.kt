@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.nayya.workhub.R
 import com.nayya.workhub.databinding.FragmentJobDetailsBinding
-import com.nayya.workhub.domain.entity.offer.OfferListItem
+import com.nayya.workhub.domain.entity.offer.OfferJob
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOfferVacancyRepo
 import com.nayya.workhub.domain.entity.offer.vacansy_dto.VacancyHeadingEntity
 import com.nayya.workhub.domain.entity.offer.vacansy_dto.addition.VacancyAdditionEntity
@@ -49,7 +49,7 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
             this,
             JobDetailsViewModel.Factory(
                 pracujPlOfferVacancyRepo = pracujPlOfferVacancyRepo,
-                offerListItem = arguments?.getParcelable(DETAILS_JPB_KEY) as? OfferListItem
+                offerListItem = arguments?.getParcelable(DETAILS_JPB_KEY) as? OfferJob
             )
         )[JobDetailsViewModel::class.java]
     }
@@ -372,7 +372,7 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
     companion object {
 
         @JvmStatic
-        fun newInstance(offerListItem: OfferListItem) =
+        fun newInstance(offerListItem: OfferJob?) =
             JobDetailsFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(DETAILS_JPB_KEY, offerListItem)

@@ -16,6 +16,9 @@ data class OfferListItem(
     @SerializedName("companyLogoUri")
     val companyLogoUri: String? = null,
 
+    @SerializedName("groupId")
+    val groupId: String? = "",
+
     @SerializedName("jobTitle")
     val jobTitle: String? = "",
 

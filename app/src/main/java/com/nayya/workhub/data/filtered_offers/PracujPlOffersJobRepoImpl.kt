@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.nayya.workhub.domain.entity.offer.OfferJob
 import com.nayya.workhub.domain.entity.offer.OfferListItem
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOffersJobRepo
 import okhttp3.Call
@@ -28,7 +29,7 @@ class PracujPlOffersJobRepoImpl(
 
     val handler: Handler = Handler(Looper.getMainLooper())
 
-    val offerListItem = mutableListOf<OfferListItem>()
+    var offerListItem = mutableListOf<OfferListItem>()
 
     override fun extractOffers(url: String, listener: (List<OfferListItem>) -> Unit) {
 
@@ -57,15 +58,32 @@ class PracujPlOffersJobRepoImpl(
                     tmpString =
                         tmpString.substringBefore(",\"offersTotalCount\"")
 
-                    val jobEntities: Array<OfferListItem> = gson.fromJson(
+                    offerListItem = gson.fromJson(
                         tmpString, Array<OfferListItem>::class.java
-                    )
+                    ).toMutableList()
 
                     handler.post {
-                        listener.invoke(jobEntities.toList())
+                        listener.invoke(offerListItem.toList())
                     }
                 }
             }
         })
+    }
+
+    override fun getCities(groupId: String, callback: (List<OfferJob>) -> Unit) {
+//        val city = offerListItem
+//            .filter { offerList ->
+//                offerList.groupId == groupId
+//            }
+//        callback(city)
+
+        val cities = offerListItem
+            .filter { offerList ->
+                offerList.groupId == groupId
+            }
+            .flatMap { offerList ->
+                offerList.offers ?: emptyList()
+            }
+        callback(cities)
     }
 }

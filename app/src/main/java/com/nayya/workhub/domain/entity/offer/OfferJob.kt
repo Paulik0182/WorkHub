@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class OfferJob(
+
     @SerializedName("partitionId")
     val partitionId: Int? = 0,
 
