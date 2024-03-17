@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profile_item"
+        android:icon="@drawable/profile_24"
+        android:title="@string/profile" />
+
+    <item
+        android:id="@+id/documents_item"
+        android:icon="@drawable/documents_24"
+        android:title="@string/documents" />
+
+    <item
+        android:id="@+id/notification_item"
+        android:icon="@drawable/notification_24"
+        android:title="@string/notification" />
+
+    <item
+        android:id="@+id/settings_item"
+        android:icon="@drawable/ic_settings_24"
+        android:title="@string/settings" />
+
+</menu>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fitCenter">
+
+    <fragment
+        android:id="@+id/fitCenter"
+        android:name="com.nayya.workhub.ui.search_offer.filter.FilterCategoryVacanciesFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_filter_category_vacancies" />
+
+    <!-- Другие фрагменты -->
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/anotherFragment"-->
+    <!--        android:name="com.example.AnotherFragment"-->
+    <!--        android:label="fragment_another"-->
+    <!--        tools:layout="@layout/fragment_another" />-->
+</navigation>

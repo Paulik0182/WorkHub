@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title_about_project_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:background="@color/blue_white"
+        android:gravity="start"
+        android:padding="@dimen/for_header"
+        android:text="@string/title_about_project"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_headlines_text"
+        android:textStyle="bold">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/about_project_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:gravity="start"
+            android:text="@string/text_duties_employee"
+            android:textSize="@dimen/default_text">
+
+        </androidx.appcompat.widget.AppCompatTextView>
+    </LinearLayout>
+
+</LinearLayout>
