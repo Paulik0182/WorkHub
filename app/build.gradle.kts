@@ -7,6 +7,8 @@ plugins {
 //    id("com.google.devtools.ksp")
 }
 
+var GOOGLE_MAPS_API_KEY_VALUE = "GOOGLE_MAPS_API_KEY"
+
 android {
     namespace = "com.nayya.workhub"
     compileSdk = 34
@@ -19,6 +21,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+//        val localProps = Properties()
+//        localProps.load(FileInputStream(file("../local.properties")))
+//
+//        val apiKey = localProps.getProperty("apiKey")
+//        buildConfigField("String", "API_KEY", apiKey)
+        //BuildConfig.API_KEY - в код
+
+
+//        manifestPlaceholders.put("GOOGLE_MAPS_API_KEY",
+//            localProps.getProperty("GOOGLE_MAPS_API_KEY")
+//        )
+
+        resValue("string", "GOOGLE_MAPS_API_KEY", GOOGLE_MAPS_API_KEY_VALUE)
     }
 
     buildTypes {
@@ -91,6 +107,18 @@ dependencies {
     // glide
     implementation("com.github.bumptech.glide:glide:4.14.2")
     annotationProcessor("com.github.bumptech.glide:compiler:4.13.2")
+
+    // FlexboxLayout
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
+
+    // Google maps
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    // Gson
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
 
     // Test
     testImplementation("junit:junit:4.13.2")

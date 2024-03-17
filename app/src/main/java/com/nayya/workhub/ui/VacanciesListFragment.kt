@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nayya.workhub.databinding.FragmentWorkHubBinding
 import com.nayya.workhub.domain.entity.offer.OfferListItem
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOffersJobRepo
+import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.interactor.PracujPlCollectionVacanciesInteractor
+import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.repo.PracujPlCategoryFilterRepo
 import com.nayya.workhub.ui.root.ViewBindingFragment
 import com.nayya.workhub.utils.image.GlideImageLoader
 
@@ -20,11 +22,21 @@ class VacanciesListFragment : ViewBindingFragment<FragmentWorkHubBinding>(
         app.pracujPlOffersJobRepo
     }
 
+    private val pracujPlCategoryFilterRepo: PracujPlCategoryFilterRepo by lazy {
+        app.pracujPlCategoryFilterRepo
+    }
+
+    private val pracujPlCollectionVacanciesInteractor: PracujPlCollectionVacanciesInteractor by lazy {
+        app.pracujPlCollectionVacanciesInteractor
+    }
+
     private val viewModel: VacanciesListViewModel by lazy {
         ViewModelProvider(
             this,
             VacanciesListViewModel.Factory(
                 pracujPlOffersJobRepo = pracujPlOffersJobRepo,
+                pracujPlCategoryFilterRepo = pracujPlCategoryFilterRepo,
+                pracujPlCollectionVacanciesInteractor = pracujPlCollectionVacanciesInteractor,
                 context = requireContext()
             )
         )[VacanciesListViewModel::class.java]
@@ -38,6 +50,12 @@ class VacanciesListFragment : ViewBindingFragment<FragmentWorkHubBinding>(
         initView()
 
         dataView()
+
+        viewModel.selectedСategoryJobLiveData.observe(viewLifecycleOwner) {
+            it.mapNotNull {
+                it.name
+            }
+        }
     }
 
     private fun initView() {

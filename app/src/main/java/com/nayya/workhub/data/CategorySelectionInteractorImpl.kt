@@ -19,7 +19,7 @@ class CategorySelectionInteractorImpl(
             categorySelectionRepo.getCategorySelectionIds { selectionIdList ->
                 selectionIdList.forEach { selectionId ->
                     list = list.map { categoryPair ->
-                        if (categoryPair.first.id == selectionId) {
+                        if (categoryPair.first.id.toString() == selectionId) {
                             categoryPair.copy(second = true)
                         } else {
                             categoryPair

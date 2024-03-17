@@ -7,8 +7,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.nayya.workhub.R
 import com.nayya.workhub.domain.entity.offer.OfferListItem
+import com.nayya.workhub.utils.UsedConst
 import com.nayya.workhub.utils.image.ImageLoader
 import com.nayya.workhub.utils.toFormattedString
 
@@ -83,9 +85,16 @@ class VacanciesListViewHolder(
 
         val positionLevels = work.positionLevels?.toFormattedString()
 
-        labelCompany?.let {
-            imageLoader.loadInto(it, labelCompanyUpkeepImage)
-        }
+//        labelCompany?.let {
+//            imageLoader.loadInto(it, labelCompanyUpkeepImage)
+//        } // todo из за этой конструкции перемешивались Лейбл фирм (странно!!! Уточнить)
+
+        Glide.with(labelCompanyUpkeepImage)
+            .asBitmap()
+            .placeholder(UsedConst.ImageConst.getDefaultImageResourceId())
+            .load(labelCompany)
+//            .circleCrop() // Делает отображение в круглой форме
+            .into(labelCompanyUpkeepImage)
 
         mameCompanyUpkeepTv.text = work.companyName
         titleVacanciesUpkeepTv.text = work.jobTitle

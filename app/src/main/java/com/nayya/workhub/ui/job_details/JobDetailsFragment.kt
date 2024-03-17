@@ -1,14 +1,29 @@
 package com.nayya.workhub.ui.job_details
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.util.Log
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.flexbox.FlexboxLayout
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.nayya.workhub.R
 import com.nayya.workhub.databinding.FragmentJobDetailsBinding
 import com.nayya.workhub.domain.entity.offer.OfferJob
@@ -18,6 +33,7 @@ import com.nayya.workhub.domain.entity.offer.vacansy_dto.addition.VacancyAdditio
 import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
 import com.nayya.workhub.ui.root.ViewBindingFragment
 import com.nayya.workhub.utils.image.GlideImageLoader
+import com.nayya.workhub.utils.toFormattedString
 
 private const val DETAILS_JPB_KEY = "DETAILS_JPB_KEY"
 private const val DAY_IN_MS = 24 * 60 * 60 * 1000L
@@ -25,7 +41,11 @@ private const val MESSAGE_KEY = "Отправить вакансию через"
 
 class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
     FragmentJobDetailsBinding::inflate
-) {
+), OnMapReadyCallback {
+
+    private val valueNull = ""
+
+    private lateinit var googleMap: GoogleMap
 
     private val pracujPlOfferVacancyRepo: PracujPlOfferVacancyRepo by lazy {
         app.pracujPlOfferVacancyRepo
@@ -64,8 +84,14 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
         viewModel.vacancyJobAdditionLiveData.observe(viewLifecycleOwner) {
             setJobAddition(it)
         }
+        enableLocation()
+//        val mapFragment =
+//            childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+//
+//        mapFragment.getMapAsync(this)
 
     }
+
 
     private fun setJobAddition(vacancyAdditionEntity: VacancyAdditionEntity) {
 
@@ -92,6 +118,371 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
 
         binding.basicInformationInclude.gettingStartedTextView.text =
             getStartedString(vacancyAdditionEntity)
+
+//        if (getResponsibilitiesString(vacancyAdditionEntity).second !in listOf(null, valueNull)) {
+        binding.dutiesEmployeeInclude.titleDutiesEmployeeTextView.text =
+            getResponsibilitiesString(
+                vacancyAdditionEntity,
+                "responsibilities"
+            ).first
+        binding.dutiesEmployeeInclude.dutiesEmployeeTextView.text =
+            getResponsibilitiesString(
+                vacancyAdditionEntity,
+                "responsibilities",
+                "@"
+            ).second
+//        } else {
+//            binding.dutiesEmployeeLayout.visibility = View.GONE
+//        }
+
+//        if (getRequirementsString(vacancyAdditionEntity).second !in listOf(null, valueNull)) {
+        binding.requirementsInclude.titleRequirementsTextView.text =
+            getRequirementsString(vacancyAdditionEntity).first
+
+        binding.requirementsInclude.ourRequirementsTextView.text =
+            getRequirementsString(vacancyAdditionEntity).second
+//        } else {
+//            binding.requirementsLayout.visibility = View.GONE
+//        }
+
+//        if (getRequirementsOptionalString(vacancyAdditionEntity).second !in listOf(
+//                null,
+//                valueNull
+//            )
+//        ) {
+        binding.requirementsInclude.titleOptionalBenefitsTextView.text =
+            getRequirementsOptionalString(vacancyAdditionEntity).first
+
+        binding.requirementsInclude.optionalBenefitsTextView.text =
+            getRequirementsOptionalString(vacancyAdditionEntity).second
+//        } else {
+//            binding.requirementsInclude.optionalBenefitsLayout.visibility = View.GONE
+//        }
+
+        binding.aboutProjectInclude.titleAboutProjectTextView.text =
+            getResponsibilitiesString(
+                vacancyAdditionEntity,
+                "about-project"
+            ).first
+        binding.aboutProjectInclude.aboutProjectTextView.text =
+            getResponsibilitiesString(
+                vacancyAdditionEntity,
+                "about-project"
+            ).second
+
+        // для разметки Технологии
+        binding.technologiesInclude.titleTechnologiesTextView.text =
+            getTechnologiesString(vacancyAdditionEntity, "technologies").first[0]
+        binding.technologiesInclude.titleTechnologiesExpectedTextView.text =
+            getTechnologiesString(vacancyAdditionEntity, "technologies-expected").first[1]
+        binding.technologiesInclude.titleTechnologiesOptionalTextView.text =
+            getTechnologiesString(vacancyAdditionEntity, "technologies-optional").first[1]
+        generateTextViewTechnologiesAndSetValues(
+            binding.technologiesInclude.technologiesExpectedContainer as FlexboxLayout,
+            vacancyAdditionEntity,
+            "technologies-expected"
+        )
+        generateTextViewTechnologiesAndSetValues(
+            binding.technologiesInclude.technologiesOptionalContainer as FlexboxLayout,
+            vacancyAdditionEntity,
+            "technologies-optional"
+        )
+
+        setGoogleMap(
+            getAbroadAddress(vacancyAdditionEntity).first,
+            getAbroadAddress(vacancyAdditionEntity).second,
+        )
+    }
+
+    /** Преобразуем строку Требования */
+    private fun getAbroadAddress(
+        vacancyAdditionEntity: VacancyAdditionEntity
+    ): Pair<String, LatLng?> {
+
+        var addressString: String = ""
+        var coordinates: LatLng? = null
+
+        vacancyAdditionEntity.offerReducer?.offer?.workplaces?.mapNotNull { addressCoordinates ->
+            val country = addressCoordinates.country?.name
+            val region = ", " + addressCoordinates.region?.pracujPlName
+            val city = ", " + addressCoordinates.inlandLocation?.location?.name
+            val basicAddress = addressCoordinates.inlandLocation?.address
+            val zipCode = ", " + basicAddress?.zipCode
+            val street = ", " + basicAddress?.street
+            val buildingNumber = ", " + basicAddress?.buildingNumber
+            val flatNumber = ", " + basicAddress?.flatNumber
+            val additionalInfo = ", " + basicAddress?.additionalInfo
+            val coordinatesLatitude = basicAddress?.coordinates?.latitude ?: 0.0
+            val coordinatesLongitude = basicAddress?.coordinates?.longitude ?: 0.0
+
+            addressString =
+                "$country$region$city$zipCode$street$buildingNumber$flatNumber$additionalInfo"
+            coordinates = LatLng(coordinatesLatitude, coordinatesLongitude)
+        }?.toFormattedString() ?: ""
+
+        return Pair(addressString, coordinates)
+    }
+
+    override fun onMapReady(map: GoogleMap) {
+        googleMap = map
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun setGoogleMap(
+        address: String,
+        coordinates: LatLng?
+    ) {
+
+        binding.googleMapInclude.titleAddressTextView.text = address
+//        val isParis = LatLng(48.85769609115522, 2.3638554986231695)
+        var toMarker: MarkerOptions? = null
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+
+        mapFragment.getMapAsync(
+            OnMapReadyCallback { gMap ->
+                try {
+                    googleMap = gMap
+
+                    googleMap.apply {
+                        clear()
+                        addMarker(
+                            MarkerOptions().position(coordinates!!).title(address)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                        )
+                        moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 12f))
+
+                        uiSettings.isZoomControlsEnabled = true // плюс и минус
+                        isMyLocationEnabled = true
+                        isTrafficEnabled = true
+//                        isBuildingsEnabled = true
+                        uiSettings.isScrollGesturesEnabled = true // движения карты
+                        uiSettings.isZoomGesturesEnabled = true // разрешить зумирование
+                        uiSettings.isMapToolbarEnabled = true // отображение названий мест на карте
+                    }
+
+                } catch (e: Exception) {
+                    Log.e("@@@", "Ошибка при настройке карты: ${e.message}", e)
+                }
+            }
+        )
+    }
+
+    private fun enableLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                0
+            )
+            return
+        }
+    }
+
+    private fun generateTextViewTechnologiesAndSetValues(
+        flexboxLayout: FlexboxLayout,
+        vacancyAdditionEntity: VacancyAdditionEntity,
+        sectionType: String
+    ) {
+        // FlexboxLayout - библиотека позволила переносить элементы на новую строчку
+        // при отсутствии места в строке
+        val technologiesList = getTechnologiesString(
+            vacancyAdditionEntity,
+            sectionType
+        ).second
+
+        // Очищаем контейнер перед добавлением новых TextView
+        flexboxLayout.removeAllViews()
+
+        // Создаем и добавляем TextView для каждого значения в списке
+        for (technology in technologiesList) {
+            val textView = TextView(context).apply {
+                val layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                )
+                layoutParams.leftMargin = resources.getDimensionPixelSize(R.dimen.default_margin)
+                layoutParams.rightMargin = resources.getDimensionPixelSize(R.dimen.default_margin)
+                layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.default_margin)
+                setLayoutParams(layoutParams)
+
+                setPadding(
+                    resources.getDimensionPixelSize(R.dimen.default_text_padding),
+                    resources.getDimensionPixelSize(R.dimen.default_text_padding),
+                    resources.getDimensionPixelSize(R.dimen.default_text_padding),
+                    resources.getDimensionPixelSize(R.dimen.default_text_padding)
+                )
+
+                gravity = Gravity.START
+                setBackgroundResource(R.drawable.my_radius_light_blue_200)
+                text = technology
+                setTextSize(
+                    TypedValue.COMPLEX_UNIT_PX,
+                    resources.getDimensionPixelSize(R.dimen.default_text).toFloat()
+                )
+            }
+            flexboxLayout.addView(textView)
+        }
+    }
+
+    /** Преобразуем строки -Технологии*/
+    private fun getTechnologiesString(
+        vacancyAdditionEntity: VacancyAdditionEntity,
+        titleSectionType: String
+    ): Pair<List<String>, List<String>> {
+
+        val title = vacancyAdditionEntity.offerReducer?.offer?.sections?.mapNotNull { sections ->
+            if (sections.sectionType == titleSectionType) {
+                sections.title
+            } else {
+                null
+            }
+        }?.toFormattedString() ?: ""
+
+        val titleExpectedAndOptional =
+            vacancyAdditionEntity.offerReducer?.offer?.sections?.flatMap { sections ->
+                if (sections.sectionType == "technologies") {
+                    sections.subSections?.mapNotNull { subSections ->
+                        if (subSections.sectionType == titleSectionType) {
+                            subSections.title ?: ""
+                        } else {
+                            null
+                        }
+                    }
+                } else {
+                    emptyList()
+                } ?: emptyList()
+            }?.toFormattedString() ?: ""
+
+        val textTechnologiesList =
+            vacancyAdditionEntity.offerReducer?.offer?.sections?.flatMap { sections ->
+                if (sections.sectionType == "technologies") {
+                    sections.subSections?.flatMap { subSections ->
+                        if (subSections.sectionType == titleSectionType) {
+                            subSections.model?.customItems?.mapNotNull { customItems ->
+                                "${customItems.name}"
+                            } ?: emptyList()
+                        } else {
+                            emptyList()
+                        }
+                    }
+                } else {
+                    emptyList()
+                } ?: emptyList()
+            } ?: emptyList()
+        return Pair(listOf(title, titleExpectedAndOptional), textTechnologiesList)
+    }
+
+    /** Преобразуем строку Требования - Опционально*/
+    private fun getRequirementsOptionalString(
+        vacancyAdditionEntity: VacancyAdditionEntity
+    ): Pair<String, String> {
+        var title = vacancyAdditionEntity.offerReducer?.offer?.sections?.mapNotNull {
+            if (it.sectionType == "requirements") {
+                it.subSections?.mapNotNull { requirementsOptional ->
+                    if (requirementsOptional.sectionType == "requirements-optional") {
+                        requirementsOptional.title
+                    } else {
+                        null
+                    }
+                }
+            } else {
+                null
+            }
+        }?.toFormattedString() ?: ""
+
+        val textRequirements = vacancyAdditionEntity.offerReducer?.offer?.sections?.flatMap {
+            if (it.sectionType == "requirements") {
+                it.subSections?.flatMap { subSections ->
+                    if (subSections.sectionType == "requirements-optional") {
+                        title = subSections.title ?: ""
+                        subSections.model?.bullets?.mapNotNull { bullet ->
+                            "@ $bullet"
+                        } ?: emptyList()
+                    } else {
+                        emptyList()
+                    }
+                }
+            } else {
+                emptyList()
+            } ?: emptyList()
+        }?.joinToString("\n\n") ?: ""
+        return Pair(title, textRequirements)
+    }
+
+    /** Преобразуем строку Требования */
+    private fun getRequirementsString(
+        vacancyAdditionEntity: VacancyAdditionEntity
+    ): Pair<String, String> {
+        val title = vacancyAdditionEntity.offerReducer?.offer?.sections?.mapNotNull {
+            if (it.sectionType == "requirements") {
+                it.title
+            } else {
+                null
+            }
+        }?.toFormattedString() ?: ""
+
+        val textRequirements =
+            vacancyAdditionEntity.offerReducer?.offer?.sections?.flatMap { sections ->
+                if (sections.sectionType == "requirements") {
+                    if (sections.subSections != null) {
+                        sections.subSections?.flatMap { requirements ->
+                            if (requirements.sectionType == "requirements-expected") {
+                                requirements.model?.bullets?.mapNotNull { bullet ->
+                                    "@ $bullet"
+                                }
+                            } else {
+                                null
+                            } ?: emptyList()
+                        }
+                    } else {
+                        sections.model?.paragraphs
+                    }
+                } else {
+                    null
+                } ?: emptyList()
+            }?.joinToString("\n\n")?.toList()?.joinToString("") ?: ""
+        return Pair(title, textRequirements)
+    }
+
+    /** Преобразуем строки:
+     * 1. Обязанности
+     * 2. О проекте */
+    private fun getResponsibilitiesString(
+        vacancyAdditionEntity: VacancyAdditionEntity,
+        sectionType: String,
+        lineDesignation: String = ""
+    ): Pair<String, String> {
+        val title = vacancyAdditionEntity.offerReducer?.offer?.sections?.mapNotNull {
+            if (it.sectionType == sectionType) {
+                it.title
+            } else {
+                null
+            }
+        }?.toFormattedString() ?: ""
+
+        val textResponsibilities =
+            vacancyAdditionEntity.offerReducer?.offer?.sections?.flatMap { sections ->
+                if (sections.sectionType == sectionType) {
+                    /** Из-за то что от источника приходят разные названия полей,
+                     * заведена переменная bullets*/
+                    val bullets = sections.model?.bullets ?: sections.model?.paragraphs
+                    bullets?.mapNotNull { bullet ->
+                        "$lineDesignation $bullet"
+                    }
+                } else {
+                    null
+                } ?: emptyList()
+            }?.joinToString("\n\n")?.toList()?.joinToString("") ?: ""
+
+        return Pair(title, textResponsibilities)
     }
 
     /** Преобразуем строку о найме (кого или/и когда нанимают) */
@@ -297,6 +688,7 @@ class JobDetailsFragment : ViewBindingFragment<FragmentJobDetailsBinding>(
         )
     }
 
+    /** Разбиение текста по символам. С "точки" начинаем красную строку */
     @SuppressLint("NewApi")
     private fun parsingText(
         fullText: String,

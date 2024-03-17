@@ -19,7 +19,7 @@ class FilterCategoryVacanciesViewHolder(
         checkBox.isChecked = categoryVacancies.second
 
         checkBox.setOnCheckedChangeListener { _, isChecked ->
-            listener(categoryVacancies.first.id, isChecked)
+            listener(categoryVacancies.first.id.toString(), isChecked)
         }
     }
 }

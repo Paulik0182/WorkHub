@@ -17,9 +17,11 @@
     <!-- Padding -->
     <dimen name="bottom_edit_text_padding">20dp</dimen>
     <dimen name="default_headlines_text_padding">10dp</dimen>
+    <dimen name="default_text_padding">8dp</dimen>
     <dimen name="top_edit_text_padding">20dp</dimen>
     <dimen name="button_text_view_padding">25dp</dimen>
     <dimen name="default_button_text_view_padding">6dp</dimen>
+    <dimen name="for_header">8sp</dimen>
 
     <!-- Button-->
     <dimen name="perform_search_top_button_margin">150dp</dimen>

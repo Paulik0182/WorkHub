@@ -1,31 +1,34 @@
 package com.nayya.workhub.data.filtered_offers
 
-import com.nayya.workhub.domain.entity.filter_category.DistanceInKmEntity
-import com.nayya.workhub.domain.entity.filter_category.filter_repo.ConditionSelectionVacancyRepo
+import android.content.Context
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.ConditionSelectionVacancyRepo
 
-class ConditionSelectionVacancyRepoImpl : ConditionSelectionVacancyRepo {
+private const val DISTANCE_SHARED_PREFERENCES = "DISTANCE_SHARED_PREFERENCES"
+private const val DISTANCE_FROM_CITY_KEY = "DISTANCE_FROM_CITY_KEY"
 
-    private var data: MutableList<DistanceInKmEntity> = mutableListOf()
+class ConditionSelectionVacancyRepoImpl(
+    private val context: Context
+) : ConditionSelectionVacancyRepo {
 
-    override fun getAllDistance(callback: (List<DistanceInKmEntity>) -> Unit) {
-        callback(ArrayList(data))
+    override fun getConditionSelectionIds(callback: (String) -> Unit) {
+        val data = getDistance()
+        callback(data)
     }
 
-    override fun getDistance(callback: (List<Pair<DistanceInKmEntity, Boolean>>) -> Unit) {
-        TODO("Not yet implemented")
+    override fun setDistance(id: String) {
+        val sharedPreferencesDistance =
+            context.getSharedPreferences(DISTANCE_SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        sharedPreferencesDistance.edit()
+            .putString(
+                DISTANCE_FROM_CITY_KEY,
+                id
+            ).apply()
     }
 
-    override fun setSelectionDistance(id: String, selection: Boolean) {
-        TODO("Not yet implemented")
-    }
+    override fun getDistance(): String {
+        val sharedPreferencesDistance =
+            context.getSharedPreferences(DISTANCE_SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
-    init {
-        data.add(DistanceInKmEntity("0", 0))
-        data.add(DistanceInKmEntity("1", 10))
-        data.add(DistanceInKmEntity("2", 20))
-        data.add(DistanceInKmEntity("3", 30))
-        data.add(DistanceInKmEntity("4", 40))
-        data.add(DistanceInKmEntity("5", 50))
+        return sharedPreferencesDistance.getString(DISTANCE_FROM_CITY_KEY, "0") ?: "0"
     }
-
 }

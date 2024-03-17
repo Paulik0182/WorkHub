@@ -20,31 +20,50 @@ class DistanceFromCityAdapter(
         notifyDataSetChanged()
     }
 
+    var selectedPosition: Int = RecyclerView.NO_POSITION
+    var checkedId: String? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DistanceFromCityViewHolder {
-        return DistanceFromCityViewHolder(
+        val viewHolder = DistanceFromCityViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(
                     R.layout.item_check_box, parent, false
                 ),
             onClickDistanceListener
         )
+        viewHolder.bindData(this)
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: DistanceFromCityViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), position)
+        holder.itemView.setOnClickListener {
+            onCheckBoxClicked(holder.adapterPosition)
+        }
     }
 
     private fun getItem(position: Int): Pair<DistanceInKmEntity, Boolean> {
-//        val entries = data.entries.toList()
-//        val entry = entries[position]
-//        val hashMap = HashMap<String, DistanceInKmEntity>()
-//        hashMap[entry.key] = entry.value
-//        return hashMap
         return data[position]
     }
 
     override fun getItemCount(): Int = data.size
 
+    fun onCheckBoxClicked(position: Int) {
+        if (position == selectedPosition) {
+            return
+        }
+
+        val previousPosition = selectedPosition
+        selectedPosition = position
+
+        notifyItemChanged(previousPosition)
+        notifyItemChanged(selectedPosition)
+
+        checkedId = data[selectedPosition].first.id
+//        onClickDistanceListener(data[selectedPosition].first.id, false)
+
+        notifyDataSetChanged()
+    }
 }
 
 class DistanceFromCityViewHolder(
@@ -53,14 +72,35 @@ class DistanceFromCityViewHolder(
 ) : RecyclerView.ViewHolder(initView) {
 
     private val checkBox = initView.findViewById<CheckBox>(R.id.check_box)
+    private lateinit var adapter: DistanceFromCityAdapter
 
-    fun bind(distanceInKm: Pair<DistanceInKmEntity, Boolean>) {
+    fun bindData(adapter: DistanceFromCityAdapter) {
+        this.adapter = adapter
+    }
+
+    fun bind(distanceInKm: Pair<DistanceInKmEntity, Boolean>, position: Int) {
         checkBox.text = distanceInKm.first.distanceFromCityInKm.toString()
         checkBox.setOnCheckedChangeListener(null)
         checkBox.isChecked = distanceInKm.second
 
+
         checkBox.setOnCheckedChangeListener { _, isChecksd ->
             onClickDistanceListener(distanceInKm.first.id, isChecksd)
+//            adapter.onCheckBoxClicked(position)
         }
+
+        if (position == adapter.selectedPosition) {
+            selectCheckBox()
+        } else {
+            deselectCheckBox()
+        }
+    }
+
+    private fun selectCheckBox() {
+        itemView.isSelected = true
+    }
+
+    private fun deselectCheckBox() {
+        itemView.isSelected = false
     }
 }

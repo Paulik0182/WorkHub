@@ -6,13 +6,17 @@ import android.content.Context
 import com.nayya.workhub.data.CategorySelectionInteractorImpl
 import com.nayya.workhub.data.CollectionVacanciesInteractorImpl
 import com.nayya.workhub.data.favorite.FavoriteCollectionVacanciesJobInteractorImpl
-import com.nayya.workhub.data.filtered_offers.ConditionSelectionVacancyRepoImpl
+import com.nayya.workhub.data.filtered_offers.ConditionSelectionVacancyInteractorImpl
+import com.nayya.workhub.data.filtered_offers.PracujPlCategoryFilterRepoImpl
+import com.nayya.workhub.data.filtered_offers.PracujPlCollectionVacanciesInteractorImpl
 import com.nayya.workhub.data.filtered_offers.PracujPlOfferVacancyRepoImpl
 import com.nayya.workhub.data.filtered_offers.PracujPlOffersJobRepoImpl
 import com.nayya.workhub.data.retrofit.VacanciesRepoImpl
-import com.nayya.workhub.domain.entity.filter_category.filter_repo.ConditionSelectionVacancyRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.ConditionSelectionVacancyInteractor
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOfferVacancyRepo
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOffersJobRepo
+import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.interactor.PracujPlCollectionVacanciesInteractor
+import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.repo.PracujPlCategoryFilterRepo
 import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
 import com.nayya.workhub.domain.interactor.FavoriteCollectionVacanciesJobInteractor
@@ -43,6 +47,12 @@ class App : Application() {
         )
     }
 
+    val conditionSelectionVacancyInteractor: ConditionSelectionVacancyInteractor by lazy {
+        ConditionSelectionVacancyInteractorImpl(
+            conditionSelectionVacancyRepo = myDiy.conditionSelectionVacancyRepo
+        )
+    }
+
     val favoriteCollectionVacanciesJobInteractor: FavoriteCollectionVacanciesJobInteractor by lazy {
         FavoriteCollectionVacanciesJobInteractorImpl(
             collectionVacanciesInteractor = collectionVacanciesInteractor,
@@ -62,9 +72,18 @@ class App : Application() {
         )
     }
 
-    val conditionSelectionVacancyRepo: ConditionSelectionVacancyRepo by lazy {
-        ConditionSelectionVacancyRepoImpl()
+    val pracujPlCategoryFilterRepo: PracujPlCategoryFilterRepo by lazy {
+        PracujPlCategoryFilterRepoImpl()
     }
+
+    val pracujPlCollectionVacanciesInteractor: PracujPlCollectionVacanciesInteractor by lazy {
+        PracujPlCollectionVacanciesInteractorImpl(
+            context = this,
+            categorySelectionInteractor = categorySelectionInteractor,
+            pracujPlCategoryFilterRepo = pracujPlCategoryFilterRepo
+        )
+    }
+
 
     override fun onCreate() {
         super.onCreate()

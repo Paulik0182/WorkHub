@@ -6,7 +6,9 @@ import com.nayya.workhub.data.CategorySelectionRepoImpl
 import com.nayya.workhub.data.CategoryVacanciesRepoImpl
 import com.nayya.workhub.data.VacanciesTypeRepoImpl
 import com.nayya.workhub.data.favorite.OfferFavoriteRepoImpl
+import com.nayya.workhub.data.filtered_offers.ConditionSelectionVacancyRepoImpl
 import com.nayya.workhub.data.retrofit.ApiService
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.ConditionSelectionVacancyRepo
 import com.nayya.workhub.domain.repo.CategorySelectionRepo
 import com.nayya.workhub.domain.repo.CategoryVacanciesRepo
 import com.nayya.workhub.domain.repo.OfferFavoriteRepo
@@ -37,6 +39,10 @@ class MyDiy(
 
     val categorySelectionRepo: CategorySelectionRepo by lazy {
         CategorySelectionRepoImpl(context)
+    }
+
+    val conditionSelectionVacancyRepo: ConditionSelectionVacancyRepo by lazy {
+        ConditionSelectionVacancyRepoImpl(context)
     }
 
     val offerFavoriteRepo: OfferFavoriteRepo = OfferFavoriteRepoImpl()

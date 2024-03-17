@@ -1,14 +1,14 @@
-package com.nayya.workhub.domain.entity.filter_category.filter_repo
+package com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor
 
 import com.nayya.workhub.domain.entity.filter_category.DistanceInKmEntity
 
-interface ConditionSelectionVacancyRepo {
+interface ConditionSelectionVacancyInteractor {
 
     //    fun getAllDistance(): HashMap<String, DistanceInKmEntity>
 //    fun getAllDistance(): List<DistanceInKmEntity>
     fun getAllDistance(callback: (List<DistanceInKmEntity>) -> Unit)
 
-    fun getDistance(callback: (List<Pair<DistanceInKmEntity, Boolean>>) -> Unit)
+    fun getDistance(callback: (DistanceInKmEntity) -> Unit)
 
-    fun setSelectionDistance(id: String, selection: Boolean)
+    fun setSelectionDistance(id: String)
 }

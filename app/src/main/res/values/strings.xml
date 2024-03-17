@@ -56,8 +56,13 @@
 
     <!-- Name Fragment - Include  -->
     <string name="title_duties_employee">Твои обязанности</string>
+    <string name="title_about_project">О проекте</string>
+    <string name="title_technologies">Технологии</string>
     <string name="title_requirements">Наши требования</string>
     <string name="title_optional_benefits">Будет приемуществом</string>
+    <string name="title_expected">Ожидание</string>
+    <string name="title_optional">Опционально</string>
+    <string name="title_google_map">Адрес</string>
 
     <!-- Name Fragment -->
     <string name="interesting_offers">Interesting offers</string>

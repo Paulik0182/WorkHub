@@ -14,13 +14,23 @@ data class CategoryVacanciesEntity(
 
     @Expose
     @PrimaryKey
-    @SerializedName("id")
     @ColumnInfo(name = "id")
-    val id: String,
+    @SerializedName("id")
+    val id: Int,
 
     @Expose
-    @SerializedName("category_name")
+    @ColumnInfo(name = "level")
+    @SerializedName("level")
+    val level: Int?,
+
+    @Expose
     @ColumnInfo(name = "category_name")
+    @SerializedName("category_name")
     val categoryName: String,
 
-    ) : Parcelable
+    @Expose
+    @ColumnInfo(name = "parentId")
+    @SerializedName("parentId")
+    val parentId: Int?
+
+) : Parcelable

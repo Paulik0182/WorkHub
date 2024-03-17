@@ -92,7 +92,7 @@ data class Offer(
     val oneClickApply: Boolean?,
 
     @SerializedName("phone")
-    val phone: String?,
+    val phone: PhoneX?,
 
     @SerializedName("positionLevelsName")
     val positionLevelsName: String?,
