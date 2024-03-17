@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Фильтр" />
+            android:text="@string/filter_job"
+            android:textSize="@dimen/for_list_header" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/category_vacancies_list_recycler_view"

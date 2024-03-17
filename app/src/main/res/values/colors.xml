@@ -4,14 +4,20 @@
     <color name="gray">#989494</color>
     <color name="gray_white">#EDEAEA</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_red">#FFEBEB</color>
     <color name="red">#AC0606</color>
     <color name="blue">#114AF3</color>
+    <color name="blue_white">#4B85FB</color>
 
     <!-- bottom nav menu -->
     <color name="item_icon_tint">#670A20</color>
     <color name="item_text">#670A20</color>
     <color name="bnv_default">#059EE4</color>
 
+    <color name="light_blue_radius">#C2E6F6</color>
+    <color name="light_gray_radius">#E8E7E7</color>
+
+    <color name="line_horizontal_gray">#E8E7E7</color>
 
     <!-- bottom -->
     <color name="not_significantly_red">#51AC0606</color>

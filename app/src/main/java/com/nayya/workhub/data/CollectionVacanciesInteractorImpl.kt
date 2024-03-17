@@ -64,6 +64,12 @@ class CollectionVacanciesInteractorImpl(
         }
     }
 
+    override fun setFavorite(offerId: String, isFavorite: Boolean) {
+        fakeData.first {
+            it.key == offerId
+        }.isFavorite = !isFavorite
+    }
+
     override fun getVacancyJob(id: String, callback: (VacancyJobEntity?) -> Unit) {
         if (isConnected()) {
 
@@ -105,7 +111,14 @@ class CollectionVacanciesInteractorImpl(
                 nameCompany = "LTE Mobail",
                 labelCompany = null,
                 titleVacancies = "Android Developer",
-                categoryVacanciesList = listOf(CategoryVacanciesEntity("1", "IT")),
+                categoryVacanciesList = listOf(
+                    CategoryVacanciesEntity(
+                        id = 5015001,
+                        level = 2,
+                        categoryName = "Administrowanie bazami danych i storage",
+                        parentId = 5015
+                    )
+                ),
                 financialProposalList = listOf(
                     FinancialProposalEntity(
                         "1",
@@ -150,7 +163,14 @@ class CollectionVacanciesInteractorImpl(
                 nameCompany = "Super star",
                 labelCompany = null,
                 titleVacancies = "Android",
-                categoryVacanciesList = listOf(CategoryVacanciesEntity("2", "Android")),
+                categoryVacanciesList = listOf(
+                    CategoryVacanciesEntity(
+                        id = 5018001,
+                        level = 2,
+                        categoryName = "Badania marketingowe",
+                        parentId = 5018
+                    )
+                ),
                 financialProposalList = listOf(
                     FinancialProposalEntity(
                         "2",
@@ -199,7 +219,14 @@ class CollectionVacanciesInteractorImpl(
                 nameCompany = "Secret Code",
                 labelCompany = null,
                 titleVacancies = "Programmer",
-                categoryVacanciesList = listOf(CategoryVacanciesEntity("3", "Java")),
+                categoryVacanciesList = listOf(
+                    CategoryVacanciesEntity(
+                        id = 5017003,
+                        level = 2,
+                        categoryName = "Planowanie / Prognozowanie",
+                        parentId = 5017
+                    )
+                ),
                 financialProposalList = listOf(
                     FinancialProposalEntity(
                         "3",
@@ -249,7 +276,14 @@ class CollectionVacanciesInteractorImpl(
                 nameCompany = "Service services",
                 labelCompany = null,
                 titleVacancies = "Programmer - designer",
-                categoryVacanciesList = listOf(CategoryVacanciesEntity("4", "UX/UI")),
+                categoryVacanciesList = listOf(
+                    CategoryVacanciesEntity(
+                        id = 5016005,
+                        level = 2,
+                        categoryName = "Zarządzanie projektem/produktem",
+                        parentId = 5016
+                    )
+                ),
                 financialProposalList = listOf(
                     FinancialProposalEntity(
                         "4",
@@ -300,8 +334,7 @@ class CollectionVacanciesInteractorImpl(
                 titleVacancies = "Administrator DataBase",
                 categoryVacanciesList = listOf(
                     CategoryVacanciesEntity(
-                        "5",
-                        "Administrator DataBase"
+                        id = 5016002, level = 2, categoryName = "Architektura", parentId = 5016
                     )
                 ),
                 financialProposalList = listOf(
@@ -352,7 +385,14 @@ class CollectionVacanciesInteractorImpl(
                 nameCompany = "Great guys",
                 labelCompany = null,
                 titleVacancies = "Security Administrator",
-                categoryVacanciesList = listOf(CategoryVacanciesEntity("6", "Administrator")),
+                categoryVacanciesList = listOf(
+                    CategoryVacanciesEntity(
+                        id = 5016003,
+                        level = 2,
+                        categoryName = "Programowanie",
+                        parentId = 5016
+                    )
+                ),
                 financialProposalList = listOf(
                     FinancialProposalEntity(
                         "6",

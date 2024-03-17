@@ -7,22 +7,38 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nayya.workhub.databinding.FragmentWorkHubBinding
-import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
-import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
+import com.nayya.workhub.domain.entity.offer.OfferListItem
+import com.nayya.workhub.domain.entity.offer.repo.PracujPlOffersJobRepo
+import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.interactor.PracujPlCollectionVacanciesInteractor
+import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.repo.PracujPlCategoryFilterRepo
 import com.nayya.workhub.ui.root.ViewBindingFragment
+import com.nayya.workhub.utils.image.GlideImageLoader
 
 class VacanciesListFragment : ViewBindingFragment<FragmentWorkHubBinding>(
     FragmentWorkHubBinding::inflate
 ) {
 
-    private val collectionVacanciesInteractor: CollectionVacanciesInteractor by lazy {
-        app.collectionVacanciesInteractor
+    private val pracujPlOffersJobRepo: PracujPlOffersJobRepo by lazy {
+        app.pracujPlOffersJobRepo
+    }
+
+    private val pracujPlCategoryFilterRepo: PracujPlCategoryFilterRepo by lazy {
+        app.pracujPlCategoryFilterRepo
+    }
+
+    private val pracujPlCollectionVacanciesInteractor: PracujPlCollectionVacanciesInteractor by lazy {
+        app.pracujPlCollectionVacanciesInteractor
     }
 
     private val viewModel: VacanciesListViewModel by lazy {
         ViewModelProvider(
             this,
-            VacanciesListViewModel.Factory(collectionVacanciesInteractor)
+            VacanciesListViewModel.Factory(
+                pracujPlOffersJobRepo = pracujPlOffersJobRepo,
+                pracujPlCategoryFilterRepo = pracujPlCategoryFilterRepo,
+                pracujPlCollectionVacanciesInteractor = pracujPlCollectionVacanciesInteractor,
+                context = requireContext()
+            )
         )[VacanciesListViewModel::class.java]
     }
 
@@ -33,10 +49,12 @@ class VacanciesListFragment : ViewBindingFragment<FragmentWorkHubBinding>(
         super.onViewCreated(view, savedInstanceState)
         initView()
 
-        updateView()
+        dataView()
 
-        viewModel.selectedVacancyJobLiveData.observe(viewLifecycleOwner) {
-            getController().openDetailsVacancyJob(it)
+        viewModel.selectedСategoryJobLiveData.observe(viewLifecycleOwner) {
+            it.mapNotNull {
+                it.name
+            }
         }
     }
 
@@ -49,21 +67,45 @@ class VacanciesListFragment : ViewBindingFragment<FragmentWorkHubBinding>(
                 viewModel.onVacancyJobClick(it)
             },
             context = requireContext(),
+            imageLoader = GlideImageLoader(),
             viewModel = viewModel
         )
         recyclerView.adapter = adapter
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val visibleItemCount = recyclerView.layoutManager?.childCount ?: 0
+                val totalItemCount = recyclerView.layoutManager?.itemCount ?: 0
+                val firstVisibleItemPosition =
+                    (recyclerView.layoutManager as?
+                            LinearLayoutManager)?.findFirstVisibleItemPosition()
+
+                val threshold = 15 // элементов до конца прокрутки
+
+                if (totalItemCount - visibleItemCount <= (firstVisibleItemPosition
+                        ?: 0) + threshold && newState == RecyclerView.SCROLL_STATE_IDLE
+                ) {
+                    viewModel.onScrollFinish()
+                }
+            }
+        })
     }
 
-    private fun updateView() {
+    private fun dataView() {
         viewModel.vacanciesLiveData.observe(viewLifecycleOwner) {
             adapter.setData(it)
+        }
+
+        viewModel.selectedVacancyJobLiveData.observe(viewLifecycleOwner) {
+            getController().openDetailsVacancyJob(it)
         }
     }
 
     private fun getController(): Controller = activity as Controller
 
     interface Controller {
-        fun openDetailsVacancyJob(vacancyJobEntity: VacancyJobEntity)
+        fun openDetailsVacancyJob(offerListItem: OfferListItem)
     }
 
     override fun onAttach(context: Context) {

@@ -24,7 +24,7 @@ data class VacancyJobEntity(
     val categoryVacanciesList: List<CategoryVacanciesEntity>,
 
     @SerializedName("financial_proposal_list")
-    val financialProposalList: List<FinancialProposalEntity?>,
+    val financialProposalList: List<FinancialProposalEntity>?,
 
     @SerializedName("country_list")
     val countryList: List<CountryEntity>,
@@ -39,7 +39,7 @@ data class VacancyJobEntity(
     val deadlineEndOffer: Long,
 
     @SerializedName("contract_option_list")
-    val contractOptionList: List<ContractOptionEntity?>,
+    val contractOptionList: List<ContractOptionEntity>?,
 
     @SerializedName("employment_rate")
     val employmentRate: String,
@@ -60,6 +60,8 @@ data class VacancyJobEntity(
     val dutiesEmployee: String?,
 
     @SerializedName("contract_option_list")
-    val requirementsEntityList: List<RequirementsEntity>?
+    val requirementsEntityList: List<RequirementsEntity>?,
+
+    var isFavorite: Boolean = false
 
 ) : Parcelable

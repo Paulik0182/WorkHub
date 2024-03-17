@@ -16,3 +16,17 @@ fun <T> LiveData<T>.mutable(): MutableLiveData<T> {
 
 @SuppressLint("SimpleDateFormat")
 var bpDataFormatter = SimpleDateFormat("dd MMMM yyyy")
+
+fun <T> List<T>.toFormattedString(): String {
+    return this.toString()
+        .removeSurrounding("[", "]")
+}
+
+fun <T> List<T>.toFormattedFoBigListString(): String {
+    val stringBuilder = StringBuilder()
+    for (item in this) {
+        stringBuilder.append(item.toString())
+        stringBuilder.append("\n")
+    }
+    return stringBuilder.toString().trim()
+}

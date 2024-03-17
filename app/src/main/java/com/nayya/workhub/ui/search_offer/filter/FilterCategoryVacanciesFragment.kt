@@ -3,7 +3,6 @@ package com.nayya.workhub.ui.search_offer.filter
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,14 +18,11 @@ class FilterCategoryVacanciesFragment : ViewBindingFragment<FragmentFilterCatego
         app.categorySelectionInteractor
     }
 
-    private val savedStateHandle = SavedStateHandle()
-
     private val viewModel: FilterCategoryVacanciesViewModel by lazy {
         ViewModelProvider(
             this,
             FilterCategoryVacanciesViewModel.Factory(
-                categorySelectionInteractor,
-                savedStateHandle
+                categorySelectionInteractor
             )
         )[FilterCategoryVacanciesViewModel::class.java]
     }

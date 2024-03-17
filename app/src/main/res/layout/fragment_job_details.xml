@@ -22,6 +22,31 @@
                 layout="@layout/include_basic_information" />
 
             <LinearLayout
+                android:id="@+id/technologies_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <include
+                    android:id="@+id/technologies_include"
+                    layout="@layout/include_technologies" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/about_project_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <include
+                    android:id="@+id/about_project_include"
+                    layout="@layout/include_about_project" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/duties_employee_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin">
@@ -33,6 +58,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/requirements_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin">
@@ -40,6 +66,18 @@
                 <include
                     android:id="@+id/requirements_include"
                     layout="@layout/include_requirements" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/google_map_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <include
+                    android:id="@+id/google_map_include"
+                    layout="@layout/include_google_map" />
 
             </LinearLayout>
         </LinearLayout>
