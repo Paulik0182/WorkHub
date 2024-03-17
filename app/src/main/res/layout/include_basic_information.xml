@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/label_company_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <View
+            android:id="@+id/line_vertical_view"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_vacancies_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_vacancies"
+                android:textSize="@dimen/default_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/name_company_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/mame_company"
+                android:textSize="@dimen/default_text" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_horizontal_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/financial_proposal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/financial_proposal_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/financial_proposal_layout"
+            app:layout_constraintEnd_toStartOf="@+id/financial_proposal_text_view"
+            app:layout_constraintStart_toStartOf="@+id/financial_proposal_layout"
+            app:layout_constraintTop_toTopOf="@+id/financial_proposal_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/financial_proposal_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_vertical"
+            android:text="@string/financial_proposal"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintBottom_toBottomOf="@+id/financial_proposal_layout"
+            app:layout_constraintEnd_toEndOf="@+id/financial_proposal_layout"
+            app:layout_constraintStart_toEndOf="@+id/financial_proposal_image"
+            app:layout_constraintTop_toTopOf="@+id/financial_proposal_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/country_city_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/country_city_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/country_city_layout"
+            app:layout_constraintEnd_toStartOf="@+id/country_city_text_view"
+            app:layout_constraintStart_toStartOf="@+id/country_city_layout"
+            app:layout_constraintTop_toTopOf="@+id/country_city_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/country_city_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_vertical"
+            android:text="@string/country_city"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintBottom_toBottomOf="@+id/country_city_layout"
+            app:layout_constraintEnd_toEndOf="@+id/country_city_layout"
+            app:layout_constraintStart_toEndOf="@+id/country_city_image"
+            app:layout_constraintTop_toTopOf="@+id/country_city_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/information_about_end_offer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/information_about_end_offer_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/information_about_end_offer_layout"
+            app:layout_constraintEnd_toStartOf="@+id/information_full_about_end_offer_layout"
+            app:layout_constraintStart_toStartOf="@+id/information_about_end_offer_layout"
+            app:layout_constraintTop_toTopOf="@+id/information_about_end_offer_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/information_full_about_end_offer_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/information_about_end_offer_layout"
+            app:layout_constraintEnd_toEndOf="@+id/information_about_end_offer_layout"
+            app:layout_constraintStart_toEndOf="@+id/information_about_end_offer_image"
+            app:layout_constraintTop_toTopOf="@+id/information_about_end_offer_layout">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/information_about_end_offer_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/information_about_end_offer"
+                android:textSize="@dimen/default_text"
+                app:layout_constraintBottom_toTopOf="@+id/information_about_end_offer_date_text_view"
+                app:layout_constraintEnd_toEndOf="@+id/information_full_about_end_offer_layout"
+                app:layout_constraintStart_toStartOf="@+id/information_full_about_end_offer_layout"
+                app:layout_constraintTop_toTopOf="@+id/information_full_about_end_offer_layout" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/information_about_end_offer_date_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/information_about_end_offer_date"
+                android:textSize="@dimen/default_text"
+                app:layout_constraintBottom_toBottomOf="@+id/information_full_about_end_offer_layout"
+                app:layout_constraintEnd_toEndOf="@+id/information_full_about_end_offer_layout"
+                app:layout_constraintStart_toStartOf="@+id/information_full_about_end_offer_layout"
+                app:layout_constraintTop_toBottomOf="@+id/information_about_end_offer_text_view" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contract_option_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/contract_option_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/contract_option_layout"
+            app:layout_constraintEnd_toStartOf="@+id/contract_option_text_view"
+            app:layout_constraintStart_toStartOf="@+id/contract_option_layout"
+            app:layout_constraintTop_toTopOf="@+id/contract_option_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contract_option_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_vertical"
+            android:text="@string/contract_option"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintBottom_toBottomOf="@+id/contract_option_layout"
+            app:layout_constraintEnd_toEndOf="@+id/contract_option_layout"
+            app:layout_constraintStart_toEndOf="@+id/contract_option_image"
+            app:layout_constraintTop_toTopOf="@+id/contract_option_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/employment_rate_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/employment_rate_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/employment_rate_layout"
+            app:layout_constraintEnd_toStartOf="@+id/employment_rate_text_view"
+            app:layout_constraintStart_toStartOf="@+id/employment_rate_layout"
+            app:layout_constraintTop_toTopOf="@+id/employment_rate_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/employment_rate_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_vertical"
+            android:text="@string/employment_rate"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintBottom_toBottomOf="@+id/employment_rate_layout"
+            app:layout_constraintEnd_toEndOf="@+id/employment_rate_layout"
+            app:layout_constraintStart_toEndOf="@+id/employment_rate_image"
+            app:layout_constraintTop_toTopOf="@+id/employment_rate_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/specialist_level_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/specialist_level_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_level_layout"
+            app:layout_constraintEnd_toStartOf="@+id/specialist_level_text_view"
+            app:layout_constraintStart_toStartOf="@+id/specialist_level_layout"
+            app:layout_constraintTop_toTopOf="@+id/specialist_level_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/specialist_level_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_vertical"
+            android:text="@string/specialist_level"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintBottom_toBottomOf="@+id/specialist_level_layout"
+            app:layout_constraintEnd_toEndOf="@+id/specialist_level_layout"
+            app:layout_constraintStart_toEndOf="@+id/specialist_level_image"
+            app:layout_constraintTop_toTopOf="@+id/specialist_level_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/type_work_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/type_work_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/type_work_layout"
+            app:layout_constraintEnd_toStartOf="@+id/type_work_text_view"
+            app:layout_constraintStart_toStartOf="@+id/type_work_layout"
+            app:layout_constraintTop_toTopOf="@+id/type_work_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/type_work_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_vertical"
+            android:text="@string/type_work"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintBottom_toBottomOf="@+id/type_work_layout"
+            app:layout_constraintEnd_toEndOf="@+id/type_work_layout"
+            app:layout_constraintStart_toEndOf="@+id/type_work_image"
+            app:layout_constraintTop_toTopOf="@+id/type_work_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/getting_started_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/getting_started_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/getting_started_layout"
+            app:layout_constraintEnd_toStartOf="@+id/getting_started_text_view"
+            app:layout_constraintStart_toStartOf="@+id/getting_started_layout"
+            app:layout_constraintTop_toTopOf="@+id/getting_started_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/getting_started_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_vertical"
+            android:text="@string/getting_started"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintBottom_toBottomOf="@+id/getting_started_layout"
+            app:layout_constraintEnd_toEndOf="@+id/getting_started_layout"
+            app:layout_constraintStart_toEndOf="@+id/getting_started_image"
+            app:layout_constraintTop_toTopOf="@+id/getting_started_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/information_about_interview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/information_about_interview_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/default_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/information_about_interview_layout"
+            app:layout_constraintEnd_toStartOf="@+id/information_about_interview_text_view"
+            app:layout_constraintStart_toStartOf="@+id/information_about_interview_layout"
+            app:layout_constraintTop_toTopOf="@+id/information_about_interview_layout"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/information_about_interview_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center_vertical"
+            android:text="@string/information_about_interview"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintBottom_toBottomOf="@+id/information_about_interview_layout"
+            app:layout_constraintEnd_toEndOf="@+id/information_about_interview_layout"
+            app:layout_constraintStart_toEndOf="@+id/information_about_interview_image"
+            app:layout_constraintTop_toTopOf="@+id/information_about_interview_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/share_button_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:background="@drawable/my_radius_5"
+            android:drawableTop="@drawable/ic_share_24"
+            android:gravity="center"
+            android:padding="@dimen/default_button_text_view_padding"
+            android:paddingEnd="@dimen/bottom_edit_text_padding"
+            android:text="@string/share_element_bottom"
+            android:textColor="@color/black"
+            android:textSize="@dimen/for_lists_text" />
+
+        <TextView
+            android:id="@+id/favorite_button_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_emergency_24"
+            android:background="@drawable/my_radius_5"
+            android:gravity="center"
+            android:padding="@dimen/default_button_text_view_padding"
+            android:paddingEnd="@dimen/bottom_edit_text_padding"
+            android:text="@string/favorite_element_bottom"
+            android:textColor="@color/black"
+            android:textSize="@dimen/for_lists_text" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,3 +1,77 @@
 <resources>
     <string name="app_name">WorkHub</string>
+
+    <!-- bottom nav menu -->
+    <string name="settings">Настройки</string>
+    <string name="my_offer">Предложения</string>
+    <string name="filter">Фильтер</string>
+    <string name="saved">Сохранено</string>
+    <string name="documents">Документы</string>
+    <string name="profile">Пользователь</string>
+    <string name="notification">Уведомление</string>
+    <string name="more">Больше</string>
+    <string name="close_two_nav">Закрыть</string>
+
+    <!-- bottom  -->
+    <string name="filter_category_bottom">Фильтер</string>
+    <string name="perform_search_bottom">Искать</string>
+    <!-- bottom TextView -->
+    <string name="close_element_bottom">Не интересует</string>
+    <string name="favorite_element_bottom">В изброное</string>
+    <string name="share_element_bottom">Поделится</string>
+
+
+    <string name="search_offer_fragment">Search Offer Fragment</string>
+    <string name="save_offer_fragment">Save Offer Fragment</string>
+    <string name="documents_user_fragment">Documents User Fragment</string>
+    <string name="notification_offer_fragment">Notification Offer Fragment</string>
+    <string name="settings_fragment">Settings Fragment</string>
+    <string name="user_profile_fragment">User Profile Fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- The value of the stub  -->
+    <string name="city">Город</string>
+    <string name="search_context">Контекст поиска</string>
+    <string name="distance_from_city">+ 0 km</string>
+    <string name="title_vacancies">Название вакансии</string>
+    <string name="mame_company">Наименование фирмы</string>
+    <string name="financial_proposal">Финансовое предложение</string>
+    <string name="work_schedules">График работы</string>
+    <string name="work_modes">Модель работы</string>
+    <string name="country_city">Страна, город</string>
+    <string name="information_about_end_offer">Действует еще 00 дней</string>
+    <string name="information_about_end_offer_date">До: 20 февраля 2024</string>
+    <string name="contract_option">Варианты контрактов</string>
+    <string name="position_levels">Позиция</string>
+    <string name="employment_rate">Уровень занятости</string>
+    <string name="specialist_level">Уровень специалиста</string>
+    <string name="type_work">Вид работы (удаленно)</string>
+    <string name="getting_started">Набор от: </string>
+    <string name="information_about_interview">Собеседование удаленно</string>
+    <string name="elements">Элемент</string>
+    <string name="text_duties_employee">Текст обязанностей</string>
+    <string name="text_requirements">Текст требований</string>
+    <string name="text_optional_benefits">Текст приемущества</string>
+
+    <!-- Name Fragment - Include  -->
+    <string name="title_duties_employee">Твои обязанности</string>
+    <string name="title_about_project">О проекте</string>
+    <string name="title_technologies">Технологии</string>
+    <string name="title_requirements">Наши требования</string>
+    <string name="title_optional_benefits">Будет приемуществом</string>
+    <string name="title_expected">Ожидание</string>
+    <string name="title_optional">Опционально</string>
+    <string name="title_google_map">Адрес</string>
+
+    <!-- Name Fragment -->
+    <string name="interesting_offers">Interesting offers</string>
+    <string name="city_for_work">Ваберете город</string>
+    <string name="filter_job">Фильтр вакансий</string>
+    <string name="distance_from_city_km">Удаленность от города</string>
+
+    <string name="recent_requests">Твои последнии запросы</string>
+    <string name="title_fragment_job_look">Какую работу ты ищешь?</string>
+
+
 </resources>

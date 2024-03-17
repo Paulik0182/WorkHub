@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.search_offer.SearchOfferFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/title_fragment_job_look"
+            android:textSize="@dimen/default_headlines_text" />
+
+        <EditText
+            android:id="@+id/search_context_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/top_edit_text_padding"
+            android:paddingBottom="@dimen/bottom_edit_text_padding"
+            android:text="@string/search_context"
+            android:textColor="@color/black"
+            android:textSize="@dimen/default_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/city_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/top_edit_text_padding"
+                android:paddingBottom="@dimen/bottom_edit_text_padding"
+                android:text="@string/city"
+                android:textColor="@color/black"
+                android:textSize="@dimen/default_text" />
+
+            <EditText
+                android:id="@+id/distance_from_city_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:clickable="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:paddingTop="@dimen/top_edit_text_padding"
+                android:paddingBottom="@dimen/bottom_edit_text_padding"
+                android:text="@string/distance_from_city"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@android:color/transparent"
+                android:textSize="@dimen/default_text" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/filter_image"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            app:srcCompat="@drawable/fragment_job_look" />
+
+        <Button
+            android:id="@+id/filter_category_button"
+            style="@style/MyButtonFilterFragmentJobLook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="@dimen/filter_category_button_top_button_margin"
+            android:layout_marginEnd="70dp"
+            android:text="@string/filter_category_bottom"
+            android:textSize="@dimen/default_text" />
+
+        <Button
+            android:id="@+id/perform_search_button"
+            style="@style/MyButtonPerformSearchFragmentJobLook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="@dimen/perform_search_top_button_margin"
+            android:layout_marginEnd="100dp"
+            android:text="@string/perform_search_bottom"
+            android:textSize="@dimen/default_text" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/recent_requests"
+            android:textSize="@dimen/default_headlines_text" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/past_search_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="horizontal"
+            tools:listitem="@layout/item_past_search" />
+
+    </LinearLayout>
+
+</LinearLayout>
