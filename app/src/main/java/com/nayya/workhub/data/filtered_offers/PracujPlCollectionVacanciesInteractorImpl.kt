@@ -5,10 +5,10 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategorySelectionInteractor
 import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.CategoryX
 import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.interactor.PracujPlCollectionVacanciesInteractor
 import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.repo.PracujPlCategoryFilterRepo
-import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
 import com.nayya.workhub.utils.UsedConst
 
 class PracujPlCollectionVacanciesInteractorImpl(

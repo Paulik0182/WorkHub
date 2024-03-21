@@ -1,4 +1,4 @@
-package com.nayya.workhub.domain.interactor
+package com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor
 
 import com.nayya.workhub.domain.entity.filter_category.CategoryVacanciesEntity
 

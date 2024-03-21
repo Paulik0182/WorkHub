@@ -1,14 +1,14 @@
-package com.nayya.workhub.data.filtered_offers
+package com.nayya.workhub.data.filtered_offers.distance
 
 import android.content.Context
-import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.ConditionSelectionVacancyRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.DistanceConditionSelectionVacancyRepo
 
 private const val DISTANCE_SHARED_PREFERENCES = "DISTANCE_SHARED_PREFERENCES"
 private const val DISTANCE_FROM_CITY_KEY = "DISTANCE_FROM_CITY_KEY"
 
-class ConditionSelectionVacancyRepoImpl(
+class DistanceDistanceConditionSelectionVacancyRepoImpl(
     private val context: Context
-) : ConditionSelectionVacancyRepo {
+) : DistanceConditionSelectionVacancyRepo {
 
     override fun getConditionSelectionIds(callback: (String) -> Unit) {
         val data = getDistance()

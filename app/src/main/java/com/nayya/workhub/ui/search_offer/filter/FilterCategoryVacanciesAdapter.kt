@@ -1,6 +1,7 @@
 package com.nayya.workhub.ui.search_offer.filter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,7 @@ import com.nayya.workhub.domain.entity.filter_category.CategoryVacanciesEntity
 
 class FilterCategoryVacanciesAdapter(
     private var data: List<Pair<CategoryVacanciesEntity, Boolean>> = mutableListOf(),
+    private var context: Context,
     val listener: (String, Boolean) -> Unit
 ) : RecyclerView.Adapter<FilterCategoryVacanciesViewHolder>() {
 
@@ -27,6 +29,7 @@ class FilterCategoryVacanciesAdapter(
                 .inflate(
                     R.layout.item_check_box, parent, false
                 ),
+            context,
             listener
         )
     }

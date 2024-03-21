@@ -21,6 +21,6 @@ data class DistanceInKmEntity(
     @Expose
     @SerializedName("distanceFromCityInKm")
     @ColumnInfo(name = "distanceFromCityInKm")
-    val distanceFromCityInKm: Int,
+    val distanceFromCityInKm: Int
 
-    ) : Parcelable
+) : Parcelable

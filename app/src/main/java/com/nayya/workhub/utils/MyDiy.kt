@@ -2,15 +2,19 @@ package com.nayya.workhub.utils
 
 import android.content.Context
 import com.google.gson.GsonBuilder
-import com.nayya.workhub.data.CategorySelectionRepoImpl
-import com.nayya.workhub.data.CategoryVacanciesRepoImpl
 import com.nayya.workhub.data.VacanciesTypeRepoImpl
 import com.nayya.workhub.data.favorite.OfferFavoriteRepoImpl
-import com.nayya.workhub.data.filtered_offers.ConditionSelectionVacancyRepoImpl
+import com.nayya.workhub.data.filtered_offers.category.CategorySelectionRepoImpl
+import com.nayya.workhub.data.filtered_offers.category.CategoryVacanciesRepoImpl
+import com.nayya.workhub.data.filtered_offers.distance.DistanceDistanceConditionSelectionVacancyRepoImpl
+import com.nayya.workhub.data.filtered_offers.location.LocationRepoImpl
+import com.nayya.workhub.data.filtered_offers.location.LocationSelectionRepoImpl
 import com.nayya.workhub.data.retrofit.ApiService
-import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.ConditionSelectionVacancyRepo
-import com.nayya.workhub.domain.repo.CategorySelectionRepo
-import com.nayya.workhub.domain.repo.CategoryVacanciesRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategorySelectionRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategoryVacanciesRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.DistanceConditionSelectionVacancyRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.LocationRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.LocationSelectionRepo
 import com.nayya.workhub.domain.repo.OfferFavoriteRepo
 import com.nayya.workhub.domain.repo.VacanciesTypeRepo
 import okhttp3.OkHttpClient
@@ -41,8 +45,16 @@ class MyDiy(
         CategorySelectionRepoImpl(context)
     }
 
-    val conditionSelectionVacancyRepo: ConditionSelectionVacancyRepo by lazy {
-        ConditionSelectionVacancyRepoImpl(context)
+    val distanceConditionSelectionVacancyRepo: DistanceConditionSelectionVacancyRepo by lazy {
+        DistanceDistanceConditionSelectionVacancyRepoImpl(context)
+    }
+
+    val locationRepo: LocationRepo by lazy {
+        LocationRepoImpl()
+    }
+
+    val locationSelectionRepo: LocationSelectionRepo by lazy {
+        LocationSelectionRepoImpl(context)
     }
 
     val offerFavoriteRepo: OfferFavoriteRepo = OfferFavoriteRepoImpl()

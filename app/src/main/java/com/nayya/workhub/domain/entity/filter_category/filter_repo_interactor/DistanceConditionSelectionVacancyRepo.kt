@@ -1,6 +1,6 @@
 package com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor
 
-interface ConditionSelectionVacancyRepo {
+interface DistanceConditionSelectionVacancyRepo {
 
     fun getConditionSelectionIds(callback: (String) -> Unit)
 

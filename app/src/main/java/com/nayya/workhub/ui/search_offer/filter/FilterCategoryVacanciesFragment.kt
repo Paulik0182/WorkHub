@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nayya.workhub.databinding.FragmentFilterCategoryVacanciesBinding
-import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategorySelectionInteractor
 import com.nayya.workhub.ui.root.ViewBindingFragment
 
 class FilterCategoryVacanciesFragment : ViewBindingFragment<FragmentFilterCategoryVacanciesBinding>(
@@ -32,8 +32,8 @@ class FilterCategoryVacanciesFragment : ViewBindingFragment<FragmentFilterCatego
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
 
+        initView()
 
         viewModel.categoryVacanciesLiveData.observe(viewLifecycleOwner) {
             adapter.setData(it)
@@ -45,6 +45,7 @@ class FilterCategoryVacanciesFragment : ViewBindingFragment<FragmentFilterCatego
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         adapter = FilterCategoryVacanciesAdapter(
+            context = requireActivity(),
             listener = { id, selection ->
                 categorySelectionInteractor.setSelection(id, selection)
                 viewModel.refresh()

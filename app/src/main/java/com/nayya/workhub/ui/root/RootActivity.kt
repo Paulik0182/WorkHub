@@ -21,6 +21,7 @@ import com.nayya.workhub.ui.save_offer.SaveOfferFragment
 import com.nayya.workhub.ui.search_offer.SearchOfferFragment
 import com.nayya.workhub.ui.search_offer.distance_in_km.DistanceFromCityFragment
 import com.nayya.workhub.ui.search_offer.filter.FilterCategoryVacanciesFragment
+import com.nayya.workhub.ui.search_offer.location.LocationFragment
 import com.nayya.workhub.ui.settings.SettingsFragment
 import com.nayya.workhub.ui.user_profile.UserProfileFragment
 import java.util.Stack
@@ -29,6 +30,7 @@ private const val TAG_ROOT_CONTAINER_FRAGMENT = "TAG_ROOT_CONTAINER_FRAGMENT"
 private const val TAG_CITY_FOR_WORK_FRAGMENT = "TAG_CITY_FOR_WORK_FRAGMENT"
 private const val TAG_JOB_DETAILS_FRAGMENT = "TAG_JOB_DETAILS_FRAGMENT"
 private const val TAG_DISTANCE_FORM_CITY_FRAGMENT = "TAG_DISTANCE_FORM_CITY_FRAGMENT"
+private const val TEG_LOCATION_FRAGMENT = "TEG_LOCATION_FRAGMENT"
 private const val ANIMATION_TIME_BOTTOM_NAV_BAR = 500L
 private const val CLOSING_DELAY_TIME_BOTTOM_NAV_BAR = 500L
 
@@ -46,7 +48,8 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
     FilterCategoryVacanciesFragment.Controller,
     JobDetailsFragment.Controller,
     CityForWorkFragment.Controller,
-    DistanceFromCityFragment.Controller {
+    DistanceFromCityFragment.Controller,
+    LocationFragment.Controller {
 
     private var isSlaveBnbVisible = false
 
@@ -122,7 +125,7 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
     private fun swapFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
-            .add(binding.container.id, fragment, TAG_ROOT_CONTAINER_FRAGMENT)
+            .replace(binding.container.id, fragment, TAG_ROOT_CONTAINER_FRAGMENT)
             .commit()
     }
 
@@ -142,6 +145,11 @@ class RootActivity : ViewBindingActivity<ActivityRootBinding>(
     override fun openDistanceFormCity() {
         val fragment = DistanceFromCityFragment.newInstance()
         swapFragmentBackStack(fragment, TAG_DISTANCE_FORM_CITY_FRAGMENT)
+    }
+
+    override fun openLocation() {
+        val fragment = LocationFragment.newInstance()
+        swapFragmentBackStack(fragment, TEG_LOCATION_FRAGMENT)
     }
 
     override fun openDetailsVacancyJob(offerListItem: OfferListItem) {

@@ -1,9 +1,9 @@
-package com.nayya.workhub.data
+package com.nayya.workhub.data.filtered_offers.category
 
 import com.nayya.workhub.domain.entity.filter_category.CategoryVacanciesEntity
-import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
-import com.nayya.workhub.domain.repo.CategorySelectionRepo
-import com.nayya.workhub.domain.repo.CategoryVacanciesRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategorySelectionInteractor
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategorySelectionRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategoryVacanciesRepo
 
 class CategorySelectionInteractorImpl(
     private val categoryVacanciesRepo: CategoryVacanciesRepo,

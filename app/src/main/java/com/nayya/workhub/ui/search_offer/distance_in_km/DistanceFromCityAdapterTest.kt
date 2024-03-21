@@ -1,5 +1,6 @@
 package com.nayya.workhub.ui.search_offer.distance_in_km
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +17,13 @@ class DistanceFromCityAdapterTest(
     var selectedPosition: Int = RecyclerView.NO_POSITION
     var checkedId: String? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(distance: List<DistanceInKmEntity>) {
         data = distance
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setSelection(selectedId: String) {
         checkedId = selectedId
         notifyDataSetChanged()
@@ -46,6 +49,7 @@ class DistanceFromCityAdapterTest(
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun onCheckBoxClicked(position: Int) {
         if (position == selectedPosition) {
             return

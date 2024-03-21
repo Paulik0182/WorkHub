@@ -5,21 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nayya.workhub.domain.entity.filter_category.DistanceInKmEntity
-import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.ConditionSelectionVacancyInteractor
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.DistanceConditionSelectionVacancyInteractor
 import com.nayya.workhub.utils.mutable
 
 class DistanceFromCityViewModel(
-    private val conditionSelectionVacancyInteractor: ConditionSelectionVacancyInteractor
+    private val distanceConditionSelectionVacancyInteractor: DistanceConditionSelectionVacancyInteractor
 ) : ViewModel() {
 
     class Factory(
-        private val conditionSelectionVacancyInteractor: ConditionSelectionVacancyInteractor
+        private val distanceConditionSelectionVacancyInteractor: DistanceConditionSelectionVacancyInteractor
 
     ) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return DistanceFromCityViewModel(
-                conditionSelectionVacancyInteractor
+                distanceConditionSelectionVacancyInteractor
             ) as T
         }
     }
@@ -34,11 +34,11 @@ class DistanceFromCityViewModel(
     }
 
     fun refresh() {
-        conditionSelectionVacancyInteractor.getAllDistance {
+        distanceConditionSelectionVacancyInteractor.getAllDistance {
             distanceFromCityLiveData.mutable().postValue(it)
         }
 
-        conditionSelectionVacancyInteractor.getDistance {
+        distanceConditionSelectionVacancyInteractor.getDistance {
             selectedDistanceFromCityLiveData.mutable().postValue(it.id)
         }
     }

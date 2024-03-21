@@ -7,6 +7,7 @@
     <dimen name="for_lists_text">14sp</dimen>
     <dimen name="default_headlines_text">23sp</dimen>
     <dimen name="default_subtitle_text">18sp</dimen>
+    <dimen name="from_flexbox_layout_hint_text">28sp</dimen>
 
     <!-- Margin-->
     <dimen name="default_margin">10dp</dimen>
@@ -17,6 +18,7 @@
     <!-- Padding -->
     <dimen name="bottom_edit_text_padding">20dp</dimen>
     <dimen name="default_headlines_text_padding">10dp</dimen>
+    <dimen name="super_max_text_padding">230dp</dimen>
     <dimen name="default_text_padding">8dp</dimen>
     <dimen name="top_edit_text_padding">20dp</dimen>
     <dimen name="button_text_view_padding">25dp</dimen>

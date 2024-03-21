@@ -1,4 +1,4 @@
-package com.nayya.workhub.domain.repo
+package com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor
 
 interface CategorySelectionRepo {
 

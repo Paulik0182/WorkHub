@@ -7,13 +7,13 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import com.nayya.workhub.domain.entity.filter_category.CategoryVacanciesEntity
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategorySelectionInteractor
 import com.nayya.workhub.domain.entity.vacancy.CityEntity
 import com.nayya.workhub.domain.entity.vacancy.ContractOptionEntity
 import com.nayya.workhub.domain.entity.vacancy.CountryEntity
 import com.nayya.workhub.domain.entity.vacancy.FinancialProposalEntity
 import com.nayya.workhub.domain.entity.vacancy.RequirementsEntity
 import com.nayya.workhub.domain.entity.vacancy.VacancyJobEntity
-import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
 import com.nayya.workhub.domain.repo.VacanciesRepo
 import com.nayya.workhub.domain.repo.VacanciesTypeRepo

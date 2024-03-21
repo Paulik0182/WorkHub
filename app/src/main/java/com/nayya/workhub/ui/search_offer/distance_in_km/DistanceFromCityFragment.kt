@@ -7,22 +7,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nayya.workhub.databinding.FragmentDistanceFromCityBinding
-import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.ConditionSelectionVacancyInteractor
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.DistanceConditionSelectionVacancyInteractor
 import com.nayya.workhub.ui.root.ViewBindingFragment
 
 class DistanceFromCityFragment : ViewBindingFragment<FragmentDistanceFromCityBinding>(
     FragmentDistanceFromCityBinding::inflate
 ) {
 
-    private val conditionSelectionVacancyInteractor: ConditionSelectionVacancyInteractor by lazy {
-        app.conditionSelectionVacancyInteractor
+    private val distanceConditionSelectionVacancyInteractor: DistanceConditionSelectionVacancyInteractor by lazy {
+        app.distanceConditionSelectionVacancyInteractor
     }
 
     private val viewModel: DistanceFromCityViewModel by lazy {
         ViewModelProvider(
             this,
             DistanceFromCityViewModel.Factory(
-                conditionSelectionVacancyInteractor
+                distanceConditionSelectionVacancyInteractor
             )
         )[DistanceFromCityViewModel::class.java]
     }
@@ -49,7 +49,7 @@ class DistanceFromCityFragment : ViewBindingFragment<FragmentDistanceFromCityBin
         adapter = DistanceFromCityAdapterTest(
             data = emptyList(),
             onClickDistanceListener = { id ->
-                conditionSelectionVacancyInteractor.setSelectionDistance(id)
+                distanceConditionSelectionVacancyInteractor.setSelectionDistance(id)
             }
         )
         recyclerView.adapter = adapter

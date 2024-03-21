@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nayya.workhub.domain.entity.filter_category.CategoryVacanciesEntity
-import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategorySelectionInteractor
 import com.nayya.workhub.utils.mutable
 
 class FilterCategoryVacanciesViewModel(

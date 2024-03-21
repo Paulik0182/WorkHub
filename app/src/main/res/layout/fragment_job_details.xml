@@ -19,7 +19,9 @@
 
             <include
                 android:id="@+id/basic_information_include"
-                layout="@layout/include_basic_information" />
+                layout="@layout/include_basic_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:id="@+id/technologies_layout"
@@ -29,7 +31,9 @@
 
                 <include
                     android:id="@+id/technologies_include"
-                    layout="@layout/include_technologies" />
+                    layout="@layout/include_technologies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -41,7 +45,9 @@
 
                 <include
                     android:id="@+id/about_project_include"
-                    layout="@layout/include_about_project" />
+                    layout="@layout/include_about_project"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -53,7 +59,9 @@
 
                 <include
                     android:id="@+id/duties_employee_include"
-                    layout="@layout/include_duties_employee" />
+                    layout="@layout/include_duties_employee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -65,7 +73,9 @@
 
                 <include
                     android:id="@+id/requirements_include"
-                    layout="@layout/include_requirements" />
+                    layout="@layout/include_requirements"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -77,7 +87,9 @@
 
                 <include
                     android:id="@+id/google_map_include"
-                    layout="@layout/include_google_map" />
+                    layout="@layout/include_google_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
         </LinearLayout>

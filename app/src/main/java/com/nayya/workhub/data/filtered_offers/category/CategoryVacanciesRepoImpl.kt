@@ -1,44 +1,15 @@
-package com.nayya.workhub.data
+package com.nayya.workhub.data.filtered_offers.category
 
 import com.nayya.workhub.domain.entity.filter_category.CategoryVacanciesEntity
-import com.nayya.workhub.domain.repo.CategoryVacanciesRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategoryVacanciesRepo
 
 class CategoryVacanciesRepoImpl : CategoryVacanciesRepo {
     override fun getCategoryVacancies(callback: (List<CategoryVacanciesEntity>) -> Unit) {
-        val fakeData = getCategory1()
+        val fakeData = getCategory()
         callback(fakeData)
     }
 
-//    private fun getCategory(): List<CategoryVacanciesEntity> {
-//        return listOf(
-//            CategoryVacanciesEntity(1, level = 1, categoryName = "IT", parentId = null),
-//            CategoryVacanciesEntity(2, level = 2, categoryName = "Android", parentId = null),
-//            CategoryVacanciesEntity(3, level = 2, categoryName = "Java", parentId = null),
-//            CategoryVacanciesEntity(
-//                4,
-//                level = 2,
-//                categoryName = "Analiza biznesowa i systemowa",
-//                parentId = null
-//            ),
-//            CategoryVacanciesEntity(5, level = 2, categoryName = "Architektura", parentId = null),
-//            CategoryVacanciesEntity(
-//                6,
-//                level = 2,
-//                categoryName = "Kontrola jakości",
-//                parentId = null
-//            ),
-//            CategoryVacanciesEntity(7, level = 2, categoryName = "Programowanie", parentId = null),
-//            CategoryVacanciesEntity(8, level = 2, categoryName = "Testowanie", parentId = null),
-//            CategoryVacanciesEntity(
-//                9,
-//                level = 2,
-//                categoryName = "Zarządzanie projektem/produktem",
-//                parentId = null
-//            ),
-//        )
-//    }
-
-    private fun getCategory1(): List<CategoryVacanciesEntity> {
+    private fun getCategory(): List<CategoryVacanciesEntity> {
         return listOf(
             CategoryVacanciesEntity(
                 id = 5001,
@@ -436,7 +407,12 @@ class CategoryVacanciesRepoImpl : CategoryVacanciesRepo {
                 categoryName = "Human Resources / Zasoby ludzkie",
                 parentId = null
             ),
-            CategoryVacanciesEntity(id = 5011001, level = 2, categoryName = "BHP", parentId = 5011),
+            CategoryVacanciesEntity(
+                id = 5011001,
+                level = 2,
+                categoryName = "BHP",
+                parentId = 5011
+            ),
             CategoryVacanciesEntity(
                 id = 5011002,
                 level = 2,
@@ -893,7 +869,12 @@ class CategoryVacanciesRepoImpl : CategoryVacanciesRepo {
                 categoryName = "Pracownicy gastronomii",
                 parentId = 5022
             ),
-            CategoryVacanciesEntity(id = 5023, level = 1, categoryName = "Prawo", parentId = null),
+            CategoryVacanciesEntity(
+                id = 5023,
+                level = 1,
+                categoryName = "Prawo",
+                parentId = null
+            ),
             CategoryVacanciesEntity(
                 id = 5023001,
                 level = 2,
@@ -1182,7 +1163,12 @@ class CategoryVacanciesRepoImpl : CategoryVacanciesRepo {
                 categoryName = "Ubezpieczenia na życie",
                 parentId = 5032
             ),
-            CategoryVacanciesEntity(id = 5033, level = 1, categoryName = "Zakupy", parentId = null),
+            CategoryVacanciesEntity(
+                id = 5033,
+                level = 1,
+                categoryName = "Zakupy",
+                parentId = null
+            ),
             CategoryVacanciesEntity(
                 id = 5033001,
                 level = 2,
@@ -1399,7 +1385,12 @@ class CategoryVacanciesRepoImpl : CategoryVacanciesRepo {
                 categoryName = "Inne",
                 parentId = 5008
             ),
-            CategoryVacanciesEntity(id = 5012, level = 1, categoryName = "Inne", parentId = null),
+            CategoryVacanciesEntity(
+                id = 5012,
+                level = 1,
+                categoryName = "Inne",
+                parentId = null
+            ),
             CategoryVacanciesEntity(
                 id = 5014004,
                 level = 2,

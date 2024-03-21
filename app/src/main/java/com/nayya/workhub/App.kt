@@ -3,21 +3,23 @@ package com.nayya.workhub
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import com.nayya.workhub.data.CategorySelectionInteractorImpl
 import com.nayya.workhub.data.CollectionVacanciesInteractorImpl
 import com.nayya.workhub.data.favorite.FavoriteCollectionVacanciesJobInteractorImpl
-import com.nayya.workhub.data.filtered_offers.ConditionSelectionVacancyInteractorImpl
 import com.nayya.workhub.data.filtered_offers.PracujPlCategoryFilterRepoImpl
 import com.nayya.workhub.data.filtered_offers.PracujPlCollectionVacanciesInteractorImpl
 import com.nayya.workhub.data.filtered_offers.PracujPlOfferVacancyRepoImpl
 import com.nayya.workhub.data.filtered_offers.PracujPlOffersJobRepoImpl
+import com.nayya.workhub.data.filtered_offers.category.CategorySelectionInteractorImpl
+import com.nayya.workhub.data.filtered_offers.distance.DistanceDistanceConditionSelectionVacancyInteractorImpl
+import com.nayya.workhub.data.filtered_offers.location.LocationSelectionInteractorImpl
 import com.nayya.workhub.data.retrofit.VacanciesRepoImpl
-import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.ConditionSelectionVacancyInteractor
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategorySelectionInteractor
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.DistanceConditionSelectionVacancyInteractor
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.LocationSelectionInteractor
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOfferVacancyRepo
 import com.nayya.workhub.domain.entity.offer.repo.PracujPlOffersJobRepo
 import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.interactor.PracujPlCollectionVacanciesInteractor
 import com.nayya.workhub.domain.entity.pracuj_pl_for_filter.repo.PracujPlCategoryFilterRepo
-import com.nayya.workhub.domain.interactor.CategorySelectionInteractor
 import com.nayya.workhub.domain.interactor.CollectionVacanciesInteractor
 import com.nayya.workhub.domain.interactor.FavoriteCollectionVacanciesJobInteractor
 import com.nayya.workhub.domain.repo.VacanciesRepo
@@ -47,9 +49,9 @@ class App : Application() {
         )
     }
 
-    val conditionSelectionVacancyInteractor: ConditionSelectionVacancyInteractor by lazy {
-        ConditionSelectionVacancyInteractorImpl(
-            conditionSelectionVacancyRepo = myDiy.conditionSelectionVacancyRepo
+    val distanceConditionSelectionVacancyInteractor: DistanceConditionSelectionVacancyInteractor by lazy {
+        DistanceDistanceConditionSelectionVacancyInteractorImpl(
+            distanceConditionSelectionVacancyRepo = myDiy.distanceConditionSelectionVacancyRepo
         )
     }
 
@@ -84,6 +86,12 @@ class App : Application() {
         )
     }
 
+    val locationSelectionInteractor: LocationSelectionInteractor by lazy {
+        LocationSelectionInteractorImpl(
+            locationRepo = myDiy.locationRepo,
+            locationSelectionRepo = myDiy.locationSelectionRepo
+        )
+    }
 
     override fun onCreate() {
         super.onCreate()

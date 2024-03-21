@@ -1,7 +1,7 @@
-package com.nayya.workhub.data
+package com.nayya.workhub.data.filtered_offers.category
 
 import android.content.Context
-import com.nayya.workhub.domain.repo.CategorySelectionRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.CategorySelectionRepo
 
 private const val CATEGORY_VACANCIES_PREFERENCES_KEY = "CATEGORY_VACANCIES_PREFERENCES_KEY"
 

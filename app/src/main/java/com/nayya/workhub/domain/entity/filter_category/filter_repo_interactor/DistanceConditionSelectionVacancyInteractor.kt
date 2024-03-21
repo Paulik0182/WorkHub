@@ -2,7 +2,7 @@ package com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor
 
 import com.nayya.workhub.domain.entity.filter_category.DistanceInKmEntity
 
-interface ConditionSelectionVacancyInteractor {
+interface DistanceConditionSelectionVacancyInteractor {
 
     //    fun getAllDistance(): HashMap<String, DistanceInKmEntity>
 //    fun getAllDistance(): List<DistanceInKmEntity>

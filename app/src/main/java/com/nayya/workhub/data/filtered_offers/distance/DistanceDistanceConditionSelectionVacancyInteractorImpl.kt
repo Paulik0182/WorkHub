@@ -1,12 +1,12 @@
-package com.nayya.workhub.data.filtered_offers
+package com.nayya.workhub.data.filtered_offers.distance
 
 import com.nayya.workhub.domain.entity.filter_category.DistanceInKmEntity
-import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.ConditionSelectionVacancyInteractor
-import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.ConditionSelectionVacancyRepo
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.DistanceConditionSelectionVacancyInteractor
+import com.nayya.workhub.domain.entity.filter_category.filter_repo_interactor.DistanceConditionSelectionVacancyRepo
 
-class ConditionSelectionVacancyInteractorImpl(
-    private val conditionSelectionVacancyRepo: ConditionSelectionVacancyRepo
-) : ConditionSelectionVacancyInteractor {
+class DistanceDistanceConditionSelectionVacancyInteractorImpl(
+    private val distanceConditionSelectionVacancyRepo: DistanceConditionSelectionVacancyRepo
+) : DistanceConditionSelectionVacancyInteractor {
 
     private var data: MutableList<DistanceInKmEntity> = mutableListOf()
 
@@ -16,7 +16,7 @@ class ConditionSelectionVacancyInteractorImpl(
 
     override fun getDistance(callback: (DistanceInKmEntity) -> Unit) {
 
-        conditionSelectionVacancyRepo.getConditionSelectionIds {
+        distanceConditionSelectionVacancyRepo.getConditionSelectionIds {
             getAllDistance { distanceList ->
                 callback(distanceList.first { distance ->
                     distance.id == it
@@ -26,7 +26,7 @@ class ConditionSelectionVacancyInteractorImpl(
     }
 
     override fun setSelectionDistance(id: String) {
-        conditionSelectionVacancyRepo.setDistance(id)
+        distanceConditionSelectionVacancyRepo.setDistance(id)
     }
 
     init {

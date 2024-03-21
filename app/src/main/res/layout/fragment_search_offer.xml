@@ -34,18 +34,59 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/city_edit_text"
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/location_filter_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingTop="@dimen/top_edit_text_padding"
-                android:paddingBottom="@dimen/bottom_edit_text_padding"
-                android:text="@string/city"
-                android:textColor="@color/black"
-                android:textSize="@dimen/default_text" />
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/hint_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_text_padding"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:hint="@string/search_city"
+                    android:maxLines="1"
+                    android:paddingTop="@dimen/default_headlines_text_padding"
+                    android:paddingEnd="@dimen/super_max_text_padding"
+                    android:paddingBottom="@dimen/default_headlines_text_padding"
+                    android:textColor="@color/gray_white"
+                    android:textSize="@dimen/default_subtitle_text"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <!-- При выпуске проекта, удалить элемент из разметке. он генерируется
+                 через код автоматически по количеству элементов в List с помощью FlexboxLayout-->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/location_filter_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:background="@drawable/my_radius_light_blue_200"
+                    android:drawableEnd="@drawable/icon_close_24"
+                    android:drawablePadding="10dp"
+                    android:gravity="start"
+                    android:hint="@string/city"
+                    android:padding="@dimen/default_text_padding"
+                    android:textSize="@dimen/default_text"
+                    android:visibility="gone">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <View
+                android:id="@+id/selection_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black" />
 
             <EditText
                 android:id="@+id/distance_from_city_edit_text"
